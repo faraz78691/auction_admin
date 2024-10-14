@@ -23,18 +23,10 @@ export class ChatSocketService {
   
     }
   
-    connectSocket(){
-      const authToken = localStorage.getItem('fbToken');
-  
-  
-      this.socket.on('connect_error', (err:any) => {
-        console.error('Connection Error:', err);
-      });
-  
-      this.socket.on('connect', () => {
-        console.log('Connected to Socket.IO server');
-      });
-    };
+   // Emit event when user is online
+   userOnline(userId: string) {
+    this.socket.emit('userOnline', userId);
+  }
 
     sendMessage(message: string): Promise<any> {
       console.log("sendBid",message);
