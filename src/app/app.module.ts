@@ -19,6 +19,8 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,11 @@ import { HeaderComponent } from './components/shared/header/header.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

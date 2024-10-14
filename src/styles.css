@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.error_message {
+      font-size: smaller;
+      color: red;
+      font-weight: 600;
+      margin: 3px;
+}

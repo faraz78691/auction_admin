@@ -19,11 +19,11 @@ export class AuthService {
   constructor(private http: HttpClient, private route: Router) { }
   
   setToken(token: string) {
-    localStorage.setItem('token', token)
+    localStorage.setItem('adminToken', token)
   }
 
   getToken() {
-    return localStorage.getItem('token')
+    return localStorage.getItem('adminToken')
   }
 
   isLogedIn() {
