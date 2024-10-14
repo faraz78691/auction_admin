@@ -1,77 +1,47 @@
-<main>
-      <div class="ct_side_bar">
-            <div class="ct_close_menu">
-                  <i class="fa-solid fa-xmark"></i>
-            </div>
-            <div class="ct_logo">
-                  <img src="assets/img/logo.svg" alt="">
-            </div>
-            <p class="mb-3 mt-4 ct_clr_48484880">NAVIGATION</p>
-            <ul class="ct_side_menu">
-                  <li>
-                        <a routerLink="/dashboard">
-                              <img src="assets/img/dashboard_icon.svg" alt="">
-                              Dashboard</a>
-                  </li>
-                  <li class="ct_dropdown">
-                        <a href="javascripr:void(0)" class="active"><img src="assets/img/user_icon.svg" alt="">User
-                              Management <i class="fa-solid fa-angle-down ms-auto"></i></a>
-                        <div class="ct_dropdown_menu">
-                              <ul>
-                                    <li>
-                                          <a routerLink="/user-list">User list </a>
-                                    </li>
-                                    <li>
-                                          <a routerLink="/user-offer">User`s offers </a>
-                                    </li>
-                                    <li>
-                                          <a routerLink="/boosted-offers">Boosted offers</a>
-                                    </li>
-                              </ul>
-                        </div>
-                  </li>
-                  <li>
-                        <a routerLink="/order-management"><img src="assets/img/orders_icon.svg" alt="">Orders
-                              Management</a>
-                  </li>
-                  <li>
-                        <a routerLink="/category-management"><img src="assets/img/category_icon.svg" alt="">Category
-                              Management</a>
-                  </li>
-
-                  <li>
-                        <a routerLink="/custom-support"><img src="assets/img/customer_support_icon.svg" alt="">Customer
-                              Support</a>
-                  </li>
-
-            </ul>
+<div class="ct_side_bar">
+      <div class="ct_close_menu">
+            <i class="fa-solid fa-xmark"></i>
       </div>
-      <div class="ct_right_content">
-            <div class="ct_right_header">
-                  <div class="ct_right_header_left">
-                        <div class="ct_toggle_bar">
-                              <i class="fa-solid fa-bars"></i>
-                        </div>
-                  </div>
-                  <div class="ct_right_header_right">
-                        <div class="ct_user_profile_head">
-                              <a href="profile.html">
-                                    <div>
-                                          <h6 class="ct_fs_14 ct_fw_700 mb-0 ct_ff_roboto mb-0">Hello, Samantha</h6>
-                                    </div>
-                                    <img src="assets/img/user_profile.png" alt="" class="ct_img_44">
-                              </a>
-                        </div>
-                        <div>
-                              <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ct_logout_modal">
-                                    <img src="assets/img/logout_icon.svg" alt="">
-                              </a>
-                        </div>
-                  </div>
-            </div>
-
-            <div class="ct_inner_dashbaord_main">
-                  <router-outlet />
-            </div>
+      <div class="ct_logo">
+            <img src="assets/img/logo.svg" alt="">
       </div>
-</main>
+      <p class="mb-3 mt-4 ct_clr_48484880">NAVIGATION</p>
+      <ul class="ct_side_menu">
+            <li>
+                  <a routerLink="/dashboard">
+                        <img src="assets/img/dashboard_icon.svg" alt="">
+                        Dashboard</a>
+            </li>
+            <li class="ct_dropdown">
+                  <a href="javascripr:void(0)" class="active"><img src="assets/img/user_icon.svg" alt="">User
+                        Management <i class="fa-solid fa-angle-down ms-auto"></i></a>
+                  <div class="ct_dropdown_menu">
+                        <ul>
+                              <li>
+                                    <a routerLink="/user-list">User list </a>
+                              </li>
+                              <li>
+                                    <a routerLink="/user-offer">User`s offers </a>
+                              </li>
+                              <li>
+                                    <a routerLink="/boosted-offers">Boosted offers</a>
+                              </li>
+                        </ul>
+                  </div>
+            </li>
+            <li>
+                  <a routerLink="/order-management"><img src="assets/img/orders_icon.svg" alt="">Orders
+                        Management</a>
+            </li>
+            <li>
+                  <a routerLink="/category-management"><img src="assets/img/category_icon.svg" alt="">Category
+                        Management</a>
+            </li>
+
+            <li>
+                  <a routerLink="/custom-support"><img src="assets/img/customer_support_icon.svg" alt="">Customer
+                        Support</a>
+            </li>
+
+      </ul>
+</div>

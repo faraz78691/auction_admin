@@ -1023,7 +1023,7 @@ button:focus {
     }
     .form-check-input:checked[type=radio]{
       
-        background-image: url(../img/blue_dot.png);
+        background-image: url('../img/blue_dot.png');
     }
     .form-check-input{
         background-size: 10px 10px;
@@ -1098,4 +1098,47 @@ button:focus {
         background-color: var(--blue);
     }
 
+.ct_login_bg{
+    background-image: url('../img/Admin_Login.png');
+    height: 100vh;
+    background-position: center;
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
+}
+
+.ct_login_inner_bg {
+    background-color: #fff;
+    max-width: 600px;
+    width: 100%;
+    padding: 50px 50px 50px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.ct_login_inner_bg input{
+    background-color: #F5F5F5;
+    border-color: #f5f5f5;
+}
+.ct_forgot_link{
+    text-align: end;
+    margin-top: 10px;
+}
+.ct_forgot_link a{
+    color: #999999;
+    transition: 0.4s ease all;
+}
+.ct_forgot_link a:hover{
+    color: var(--blue);
+}
+
+.ct_show_eye{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    right: 15px;
+}

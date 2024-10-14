@@ -1,1 +1,17 @@
- <app-sidebar /> 
+<main *ngIf="!isLoginPage">
+    <app-sidebar></app-sidebar>
+    
+    <div class="ct_right_content">
+        <app-header></app-header>
+        <div class="ct_inner_dashbaord_main">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+ </main>
+ 
+ @if (isLoginPage) {
+     <router-outlet/>
+
+ }
+
+ 

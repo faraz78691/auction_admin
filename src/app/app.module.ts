@@ -16,6 +16,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserOfferComponent } from './components/user-offer/user-offer.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+import { HeaderComponent } from './components/shared/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
     ProductListComponent,
     UserListComponent,
     UserOfferComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
