@@ -34,7 +34,7 @@ const routes: Routes = [
     path: 'message', component: MessageComponent
   },
   {
-    path: 'attribute', component: AttributeComponent
+    path: 'attribute/:cat_id/:pro_id', component: AttributeComponent
   },
   {
     path: 'boosted-offers', component: BoostedOffersComponent
@@ -49,7 +49,7 @@ const routes: Routes = [
     path: 'order-management', component: OrderManagementComponent
   },
   {
-    path: 'product-list', component: ProductListComponent
+    path: 'product-list/:id', component: ProductListComponent
   },
   {
     path: 'user-list', component: UserListComponent
