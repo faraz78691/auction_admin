@@ -16,6 +16,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserOfferComponent } from './components/user-offer/user-offer.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/shared/header/header.component';
 
 @NgModule({
@@ -39,7 +41,10 @@ import { HeaderComponent } from './components/shared/header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
