@@ -13,10 +13,11 @@ export class AuthService {
 
   private authState = new BehaviorSubject<{
     isLoggedIn: boolean
-  }>({isLoggedIn: this.isLogedIn()})
+  }>({ isLoggedIn: this.isLogedIn() })
   authState$ = this.authState.asObservable()
 
   constructor(private http: HttpClient, private route: Router) { }
+  
   setToken(token: string) {
     localStorage.setItem('token', token)
   }
