@@ -1,0 +1,4 @@
+.msg-body {
+    max-height: 400px;  /* Set the maximum height */
+    overflow-y: auto;   /* Enable vertical scrolling */
+  }

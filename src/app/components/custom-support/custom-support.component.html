@@ -32,192 +32,28 @@
                                           <!-- chat-list -->
                                           <div class="chat-lists">
                                                 <div class="chat-list">
-                                                      <a href="#" class="ct_chat_user ct_user_active">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                                  <span class="active"></span>
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-                                                            </div>
-                                                            <div class="ct_mesg_num_1 ms-auto">
-                                                                  <span>1</span>
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
+                                                      @for (item of userList; track $index) {
+                                                            <a  class="ct_chat_user ct_user_active" (click)="openChat(item.user_id, item.user_name)">
+                                                                  <div class="flex-shrink-0 position-relative ct_img_44">
+                                                                        <!-- <img class="ct_img_44" src="assets/img/user_1.png"
+                                                                              alt="user img"> -->
+                                                                              <i class="ct_img_44 fa-solid fa-user"></i>
+                                                                        <!-- <span class="active"></span> -->
+                                                                  </div>
+                                                                  <div class="flex-grow-1">
+                                                                        <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
+                                                                              {{item.user_name}}</h3>
+                                                                        <p class="mb-0 ct_fs_12 ct_ff_roboto"
+                                                                              style="color: #21212180;">
+                                                                              {{item.messages[0].message}}</p>
+                                                                  </div>
+                                                                  <!-- <div class="ct_mesg_num_1 ms-auto">
+                                                                        <span>1</span>
+                                                                  </div> -->
+                                                            </a>
 
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-                                                      <a href="#" class="ct_chat_user">
-                                                            <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                        alt="user img">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                        Ms. Lynda Bradtke</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
-                                                            </div>
-                                                      </a>
-
+                                                      }
+                                                   
                                                 </div>
 
                                           </div>
@@ -247,7 +83,7 @@
                                                             </div>
                                                             <div class="flex-grow-1 ms-3">
                                                                   <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600">
-                                                                        Mehedi Hasan</h3>
+                                                                        {{username}}</h3>
                                                                   <p class="mb-0 ct_fs_12 ct_ff_roboto"
                                                                         style="color: #21212180;">
                                                                         Online</p>
@@ -275,49 +111,38 @@
 
 
                                     <div class="modal-body">
-                                          <div class="msg-body">
+                                          <div class="msg-body"  #scrollMe>
                                                 <ul>
-                                                      <li class="sender">
-                                                            <img src="assets/img/user_profile.png" alt=""
-                                                                  class="ct_img_30">
-                                                            <div>
-                                                                  <p>Lorem Ipsum has been the
-                                                                        industry's standard dummy text
-                                                                        ever since the 1500s, </p>
-                                                                  <span class="time">10:06 am</span>
-                                                            </div>
-                                                      </li>
-                                                      <li class="repaly">
-                                                            <div>
-                                                                  <p>Lorem Ipsum has been the
-                                                                        industry's standard dummy text
-                                                                        ever since the 1500s,</p>
-                                                                  <span class="time">10:20 am</span>
-                                                            </div>
-                                                            <img src="assets/img/user_profile.png" alt=""
-                                                                  class="ct_img_30">
-                                                      </li>
-                                                      <li class="sender">
-                                                            <img src="assets/img/user_profile.png" alt=""
-                                                                  class="ct_img_30">
-                                                            <div>
-                                                                  <p>Lorem Ipsum has been the
-                                                                        industry's standard dummy text
-                                                                        ever since the 1500s, </p>
-                                                                  <span class="time">10:06 am</span>
-                                                            </div>
-                                                      </li>
-                                                      <li class="repaly">
-                                                            <div>
-                                                                  <p>Lorem Ipsum has been the
-                                                                        industry's standard dummy text
-                                                                        ever since the 1500s,</p>
-                                                                  <span class="time">10:20 am</span>
-                                                            </div>
-                                                            <img src="assets/img/user_profile.png" alt=""
-                                                                  class="ct_img_30">
-                                                      </li>
-                                                      <li>
+                                                    @for (item of chats; track $index) {
+                                                      @if(item.sender_id !== adminId){
+                                                            <li class="sender">
+                                                                  <!-- <img src="assets/img/user_profile.png" alt=""
+                                                                        class="ct_img_30"> -->
+                                                                  <div>
+                                                                        <p>{{item.message}} </p>
+                                                                        <span class="time">{{ item.created_at | date: 'dd MMM, hh:mm a' }}</span>
+
+
+                                                                  </div>
+                                                            </li>
+
+                                                      }@else {
+                                                            <li class="repaly">
+                                                                  <div>
+                                                                        <p>{{item.message}}</p>
+                                                                        <span class="time">{{ item.created_at | date: 'dd MMM, hh:mm a' }}</span>
+
+
+                                                                  </div>
+                                                                  <!-- <img src="assets/img/user_profile.png" alt=""
+                                                                        class="ct_img_30"> -->
+                                                            </li>
+
+                                                      }
+
+                                                    }
+                                             
+                                                      <!-- <li>
                                                             <div class="divider">
                                                                   <h6>Today</h6>
                                                             </div>
@@ -342,7 +167,7 @@
                                                             </div>
                                                             <img src="assets/img/user_profile.png" alt=""
                                                                   class="ct_img_30">
-                                                      </li>
+                                                      </li> -->
 
                                                 </ul>
                                           </div>
@@ -352,7 +177,7 @@
                                     <div class="send-box">
                                           <form  class="position-relative">
                                                 <input type="text" class="form-control ct_text_indent_15 w-100"
-                                                      aria-label="message…" placeholder="Type message" [(ngModel)]="senderMessage">
+                                                      aria-label="message…" placeholder="Type message" [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}">
                                                 <div class="d-flex align-items-center ct_send_btn_position">
                                                       <div class="send-btns">
                                                             <div class="attach">

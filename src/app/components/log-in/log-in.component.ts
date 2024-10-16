@@ -39,7 +39,8 @@ export class LogInComponent {
     formData.set('password', form.value.password)
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
-        this.service.setToken(res.token)
+        this.service.setToken(res.token);
+        localStorage.setItem('auctionAdminID',res.userinfo.user_id);
         this.toastr.success(res.message)
         this.router.navigate(['/dashboard'])
         this.loading = false
