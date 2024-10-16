@@ -177,7 +177,7 @@
                                     <div class="send-box">
                                           <form  class="position-relative">
                                                 <input type="text" class="form-control ct_text_indent_15 w-100"
-                                                      aria-label="message…" placeholder="Type message" [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}">
+                                                      aria-label="message…" placeholder="Type message" [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}"   (keydown)="onKeyDown($event)">
                                                 <div class="d-flex align-items-center ct_send_btn_position">
                                                       <div class="send-btns">
                                                             <div class="attach">

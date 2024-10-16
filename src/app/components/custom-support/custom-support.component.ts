@@ -17,8 +17,8 @@ export class CustomSupportComponent {
   userId!: number;
   username!:string;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
-  // apiUrl = 'http://192.168.29.44:5000/';
-  apiUrl = 'http://localhost:5000/';
+  apiUrl = 'http://192.168.29.44:5000/';
+  // apiUrl = 'http://localhost:5000/';
   // apiUrl = 'http://98.80.36.64:5000/';
   private socket: Socket;
   constructor(private _chatService: ChatSocketService, private apiService: SharedService, private authService: AuthService) {
@@ -34,7 +34,6 @@ export class CustomSupportComponent {
       this.chats.push(chats)
       this.scrollToBottom();
       console.log(this.chats);
-
 
     });
   };
@@ -65,10 +64,13 @@ export class CustomSupportComponent {
   }
 
   sendMessage() {
+    if(this.senderMessage.trim().length == 0){
+      return
+    }
     const msg = {
       user_id: this.userId,
       admin_id: this.adminId,
-      message: this.senderMessage,
+      message: this.senderMessage.trim(),
       sender_id: this.adminId
     }
     this._chatService.sendMessage(msg).then(() => {
@@ -84,6 +86,14 @@ export class CustomSupportComponent {
     });
     this.senderMessage = ''
   };
+
+    // Function to handle keydown events
+    onKeyDown(event: KeyboardEvent) {
+   
+      if (event.key === 'Enter' && this.senderMessage.trim()) {
+        this.sendMessage();
+      }
+    }
 
 
   openChat(userId: any, username:string) {
