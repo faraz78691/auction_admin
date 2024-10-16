@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductAttributeComponent } from './components/product-attribute/product-attribute.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserListComponent,
     UserOfferComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProductAttributeComponent
   ],
   imports: [
     BrowserModule,

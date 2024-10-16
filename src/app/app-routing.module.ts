@@ -13,6 +13,7 @@ import { OrderManagementComponent } from './components/order-management/order-ma
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserOfferComponent } from './components/user-offer/user-offer.component';
+import { ProductAttributeComponent } from './components/product-attribute/product-attribute.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,9 @@ const routes: Routes = [
   },
   {
     path: 'attribute/:cat_id/:pro_id', component: AttributeComponent
+  },
+  {
+    path: 'product-attribute/:pro_id/:attr_id', component: ProductAttributeComponent
   },
   {
     path: 'boosted-offers', component: BoostedOffersComponent
