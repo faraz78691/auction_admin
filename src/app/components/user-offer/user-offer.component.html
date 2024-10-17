@@ -25,10 +25,12 @@
                         <th>Category </th>
                         <th>Product</th>
                         <th>Auction Type</th>
-                        <th>Price</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Seller Name</th>
+                        <th>Start Price (CHF)</th>
+                        <th>Buy it now (CHF)</th>
+                        <th>Fixed Price (CHF)</th>
+                        <th>Start date</th>
+                        <th>End Date</th>
+                        <th>Seller</th>
                         <!-- <th>Action</th> -->
                   </tr>
             </thead>
@@ -36,15 +38,18 @@
                   @for (offer of userOfferData; track $index) {
                   <tr>
                         <td>
-                              {{$index+ 1}}
+                        {{$index+ 1}}
                         </td>
                         <td>{{offer.title}}</td>
                         <td>{{offer.category_name}}</td>
                         <td>{{offer.product_name}}</td>
-                        <td>Buy Now</td>
-                        <td>{{offer.price | currency:'USD'}}</td>
-                        <td>{{offer.start_date}}</td>
-                        <td>{{offer.end_date}}</td>
+                        <td>{{offer.is_bid_or_fixed == 1 ? 'Auction' : 'Fixed'}}</td>
+                        <td>{{offer.is_bid_or_fixed == 1 ? offer.start_price : '-' }}</td>
+                        <td>{{offer.is_bid_or_fixed == 1 ? offer.buyto_price : '-'}}</td>
+                        <td>{{offer.is_bid_or_fixed == 0 ? offer.fixed_offer_price : '-'}}</td>
+                        <td>{{offer.offerStart}}</td>
+                        <td>{{ offer.end_date | date :'yyyy-MM-dd HH:mm:ss' : 'UTC'}}</td>
+
                         <td>{{offer.seller_name}}</td>
 
                         <!-- <td>

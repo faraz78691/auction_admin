@@ -2,7 +2,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import 'jquery';
+import 'datatables.net-bs5'; 
+declare var $: any; // Declare jQuery globally
 @Component({
   selector: 'app-category-management',
   templateUrl: './category-management.component.html',
@@ -22,6 +24,20 @@ export class CategoryManagementComponent {
 
   ngOnInit() {
     this.getCategories()
+  };
+
+  ngAfterViewInit(): void {
+    // Initialize DataTable with Bootstrap 5 styling
+    $('#example').DataTable({
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true,
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf'
+      ],
+      // Optional: Specify your custom options here
+    });
   }
 
   getCategories() {
