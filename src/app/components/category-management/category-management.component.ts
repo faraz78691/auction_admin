@@ -2,20 +2,19 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import 'jquery';
-import 'datatables.net-bs5'; 
-declare var $: any; // Declare jQuery globally
+
 @Component({
   selector: 'app-category-management',
   templateUrl: './category-management.component.html',
   styleUrl: './category-management.component.css'
 })
 export class CategoryManagementComponent {
-  @ViewChild('closeModal') closeModal: ElementRef | undefined
+  @ViewChild('closeModal') closeModal: ElementRef | undefined;
+  @ViewChild('closeModal2') closeModal2: ElementRef | undefined;
   categoryData: any[] = []
   categoryForm!: FormGroup;
   loading: boolean = false;
-
+  categoryId: number | undefined;
   constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder,) {
     this.categoryForm = this.fb.group({
       cat_name: ['', [Validators.required]]
@@ -26,19 +25,7 @@ export class CategoryManagementComponent {
     this.getCategories()
   };
 
-  ngAfterViewInit(): void {
-    // Initialize DataTable with Bootstrap 5 styling
-    $('#example').DataTable({
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      processing: true,
-      dom: 'Bfrtip',
-      buttons: [
-        'copy', 'csv', 'excel', 'pdf'
-      ],
-      // Optional: Specify your custom options here
-    });
-  }
+
 
   getCategories() {
     let apiUrl = 'admin/getAllCategory'
@@ -51,23 +38,40 @@ export class CategoryManagementComponent {
     }, (err: any) => {
       this.toastr.error(err)
     })
-  }
+  };
 
-  onSubmit(form: any) {
+  onClickUpdate(item: any) {
+    this.categoryId = item.id;
+    this.categoryForm.patchValue({
+      cat_name: item.cat_name
+    });
+  };
+
+  onSubmit(form: any, formType: number) {
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {
       this.loading = false
       return
+    };
+
+    let formData = new URLSearchParams()
+    if (formType == 1) {
+      var apiUrl = `admin/addCategory`
+      formData.set('cat_name', form.value.cat_name)
+    } else {
+      var apiUrl = `admin/updateCategoryById`
+      formData.set('category_id', Number(this.categoryId).toString())
+      formData.set('cat_name', form.value.cat_name)
     }
 
-    let apiUrl = `admin/addCategory`
-    let formData = new URLSearchParams()
-    formData.set('cat_name', form.value.cat_name)
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
-        this.toastr.success(res.message)
-        this.closeModal?.nativeElement.click()
+        this.toastr.success(res.message);
+        this.categoryForm.reset();
+        this.closeModal?.nativeElement.click();
+        this.closeModal2?.nativeElement.click();
+        this.categoryId = undefined;
         this.getCategories()
         this.loading = false
       } else {

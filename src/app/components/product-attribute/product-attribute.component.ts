@@ -18,7 +18,7 @@ export class ProductAttributeComponent {
   productName: any;
   pro_id: any;
 
-  constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.attr_id = params['attr_id'];

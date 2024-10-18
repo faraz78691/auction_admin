@@ -11,10 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductListComponent {
   @ViewChild('closeModal') closeModal: ElementRef | undefined
+  @ViewChild('closeModal2') closeModal2: ElementRef | undefined
   productData: any[] = []
   productForm!: FormGroup;
   loading: boolean = false;
   cat_id: any;
+  productId:any;
   categoryName: any;
 
   constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
@@ -36,17 +38,27 @@ export class ProductListComponent {
     let apiUrl = `admin/getProductByCategoryId?category_id=${this.cat_id}`
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.categoryName = res.productList.category
-        this.productData = res.productList.products
+        console.log(res);
+        this.categoryName = res.productList.category?.cat_name;
+        this.productData = res.productList.products;
+        this.service.setCategoryData(res.productList.category.id ,res.productList.category.cat_name)
       } else {
+        this.categoryName = res.category.cat_name
         this.toastr.error(res.message)
       }
     }, (err: any) => {
       this.toastr.error(err)
     })
-  }
+  };
 
-  onSubmit(form: any) {
+  onClickUpdate(item: any) {
+    this.productId = item.id;
+    this.productForm.patchValue({
+      name: item.name
+    });
+  };
+
+  onSubmit(form: any, formType:number) {
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {
@@ -54,18 +66,27 @@ export class ProductListComponent {
       return
     }
 
-    let apiUrl = `admin/addProduct`
+
     let formData = new URLSearchParams()
-    formData.set('name', form.value.name)
-    formData.set('category_id', this.cat_id)
+    if (formType == 1) {
+      var apiUrl = `admin/addProduct`
+      formData.set('name', form.value.name)
+      formData.set('category_id', this.cat_id)
+    } else {
+      var apiUrl = `admin/updateProductByProductId`
+      formData.set('product_id', Number(this.productId).toString())
+      formData.set('name', form.value.name)
+    }
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.toastr.success(res.message)
-        this.closeModal?.nativeElement.click()
+        this.closeModal?.nativeElement.click();
+        this.closeModal2?.nativeElement.click();
+        this.productForm.reset()
         this.getCategories()
         this.loading = false
       } else {
-        this.toastr.error(res.message)
+        this.toastr.error("No Products found")
         this.loading = false
       }
     })

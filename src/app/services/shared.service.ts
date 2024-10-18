@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,7 +8,15 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class SharedService {
+  categoryData = signal<{ id: number | null, name: string | null }>({
+    id: null,
+    name: null
+  });
 
+
+  setCategoryData(id: number, name: string) {
+    this.categoryData.set({ id, name });
+  }
 
   constructor(
     private http: HttpClient,

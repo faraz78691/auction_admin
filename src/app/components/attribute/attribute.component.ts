@@ -24,6 +24,7 @@ export class AttributeComponent {
     { type: 'Brand', input: [{ type: 'select' }] },
     { type: 'Material option', input: [{ type: 'select' }] },
     { type: 'Color', input: [{ type: 'checkbox' }] },
+    { type: 'Country', input: [{ type: 'select' }] },
     { type: 'Compatibility', input: [{ type: 'select' }] },
     {
       type: 'Miscellaneous', input: [
@@ -35,8 +36,8 @@ export class AttributeComponent {
     }
   ]
 
-  constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
-
+  constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
+console.log(this.service.categoryData());
     this.route.params.subscribe(params => {
       this.cat_id = params['cat_id'];
       this.pro_id = params['pro_id'];
@@ -60,7 +61,7 @@ export class AttributeComponent {
         this.productName = res.product.name
         this.attributeData = res.typeAttributes
       } else {
-        this.toastr.error(res.message)
+        this.toastr.error("No Attribute Found")
       }
     }, (err: any) => {
       this.toastr.error(err)
