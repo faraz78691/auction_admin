@@ -1,4 +1,12 @@
-.msg-body {
-    max-height: 400px;  /* Set the maximum height */
-    overflow-y: auto;   /* Enable vertical scrolling */
-  }
+/* .msg-body {
+    max-height: 400px;  
+    overflow-y: auto;  
+  } */
+
+  .ct_chat_area_scroll {
+    height: calc(100vh - 304px);
+    max-height: calc(100vh - 304px);
+    overflow: auto;
+    overflow-x: hidden;
+    padding-inline: 5px;
+}

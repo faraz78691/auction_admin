@@ -70,26 +70,22 @@
 @media screen and (max-width:991px){
 
   
-   
-   
-   
-
     .ct_side_bar{
         left: -100%;
     }
     .ct_right_content{
-        width: calc(100% - 0px);
-        margin-left: 0px;
+        width: calc(100% - 0px) !important;
+        margin-left: 0px !important;
     }
     .ct_collapsed_sidebar .ct_side_bar {
-        left: 0%;
+        left: 0% !important;
     }
     .ct_collapsed_sidebar .ct_right_content{
-        width: calc(100% - 0px);
+        width: calc(100% - 0px) !important;
         /* margin-left: 260px; */
     }
     .ct_close_menu{
-        display: flex;
+        display: flex !important;
     }
     
 }

@@ -35,12 +35,13 @@ export class LogInComponent {
 
     let apiUrl = `admin/login`
     let formData = new URLSearchParams()
-    formData.set('email', form.value.email)
+    formData.set('email', form.value.email);
     formData.set('password', form.value.password)
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
+        console.log(res);
         this.service.setToken(res.token);
-        localStorage.setItem('auctionAdminID',res.userinfo.user_id);
+        localStorage.setItem('auctionAdminID',res.userinfo.id);
         this.toastr.success(res.message)
         this.router.navigate(['/dashboard'])
         this.loading = false

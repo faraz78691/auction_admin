@@ -16,7 +16,53 @@
 </div>
 
 <div class="table-responsive ct_mt_40">
-      <table class="table ct_custom_table">
+      <div class="card">
+            <p-table #dt2 [value]="userData" dataKey="id" [rows]="10" [rowHover]="true"
+            [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+            [globalFilterFields]="['id', 'cat_name']" [tableStyle]="{ 'min-width': '75rem' }">
+            <ng-template pTemplate="caption">
+                  <div class="flex">
+                        <!-- <p-iconField iconPosition="left" class="ml-auto">
+                  <p-inputIcon>
+                      <i class="pi pi-search"></i>
+                  </p-inputIcon>
+                  <input 
+                      pInputText 
+                      type="text" 
+                      (input)="dt2.filterGlobal($event.target.value, 'contains')" 
+                      placeholder="Search keyword" />
+              </p-iconField> -->
+                  </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                  <tr>
+                        <th style="width:25%" pSortableColumn="id">S.no <p-sortIcon field="id" /></th>
+                        <th style="width:25%" pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
+                        <th style="width:25%">Action</th>
+
+                  </tr>
+
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                  <tr>
+                        <td>
+                              {{ customer.id }}
+                        </td>
+
+                        <td>
+                              {{ customer.cat_name }}
+                        </td>
+                      
+                  </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                  <tr>
+                        <td colspan="5">No customers found.</td>
+                  </tr>
+            </ng-template>
+      </p-table>
+      </div>
+      <!-- <table class="table ct_custom_table">
             <thead>
                   <tr>
                         <th>S.No.</th>
@@ -24,7 +70,7 @@
                         <th>Email id</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <!-- <th>Action</th> -->
+                       
                   </tr>
             </thead>
             <tbody>
@@ -37,15 +83,12 @@
                         <td>{{user.email}}</td>
                         <td>{{user.phone_number}}</td>
                         <td>{{user.address}}</td>
-                        <!-- <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td> -->
+                       
                   </tr>
                   }
             </tbody>
 
-      </table>
+      </table> -->
 
 </div>
 

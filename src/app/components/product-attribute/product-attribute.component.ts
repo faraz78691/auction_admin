@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-attribute',
   templateUrl: './product-attribute.component.html',
@@ -41,6 +41,7 @@ export class ProductAttributeComponent {
         this.productName = res.attributeName
         this.attributeData = res.typeAttributes
       } else {
+        this.productName = res.attributeName
         this.toastr.error(res.message)
       }
     }, (err: any) => {
@@ -84,5 +85,39 @@ export class ProductAttributeComponent {
       return 'This field cannot be empty'
     }
     return ''
+  };
+
+
+  deleteTypeATR(id:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+ 
+        const formURlData = new URLSearchParams();
+
+        formURlData.set('product_attribute_id', id.toString());
+      
+      this.service.post('admin/deleteProductAttributeMapping', formURlData.toString()).subscribe({
+        next: (resp) => {
+  
+          if (resp.success == true) {
+     this.getProAttributes()
+        }
+      },
+        error: (error) => {
+          //this.loading = false;
+        
+          console.error('Login error:', error.message);
+        }
+      });
+      }
+    })
   }
 }

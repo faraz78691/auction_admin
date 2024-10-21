@@ -10,6 +10,7 @@ import { Socket, io } from 'socket.io-client';
   styleUrl: './custom-support.component.css'
 })
 export class CustomSupportComponent {
+  isChatboxVisible: boolean = false;
   senderMessage!: string;
   userList: any[] = [];
   chats: any[] = [];
@@ -17,9 +18,9 @@ export class CustomSupportComponent {
   userId!: number;
   username!:string;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
-  apiUrl = 'http://192.168.29.44:5000/';
+  // apiUrl = 'http://192.168.29.44:5000/';
   // apiUrl = 'http://localhost:5000/';
-  // apiUrl = 'http://98.80.36.64:5000/';
+  apiUrl = 'http://98.80.36.64:5000/';
   private socket: Socket;
   constructor(private _chatService: ChatSocketService, private apiService: SharedService, private authService: AuthService) {
     this.socket = io(this.apiUrl);
@@ -28,9 +29,11 @@ export class CustomSupportComponent {
 
   ngOnInit() {
     this.adminId = localStorage.getItem('auctionAdminID');
+    console.log(this.adminId);
     this._chatService.sendAdminLogin(this.adminId);
     this.getUsersChats();
     this._chatService.getMessage().subscribe((chats) => {
+      console.log("subcirve called");
       this.chats.push(chats)
       this.scrollToBottom();
       console.log(this.chats);
@@ -47,6 +50,17 @@ export class CustomSupportComponent {
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
     }
+  }
+
+
+  // Method to show the chatbox
+  showChatbox(): void {
+    this.isChatboxVisible = true;
+  }
+
+  // Method to hide the chatbox
+  hideChatbox(): void {
+    this.isChatboxVisible = false;
   }
 
 
@@ -97,6 +111,7 @@ export class CustomSupportComponent {
 
 
   openChat(userId: any, username:string) {
+    this.isChatboxVisible = true;
     this.userId = userId;
     const formData = new URLSearchParams();
     formData.set('user_id', userId)

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
+import { Table } from 'primeng/table';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserListComponent {
   userData: any[] = []
-
+  loading: boolean = false;
   constructor(private service: SharedService, private toastr: ToastrService) {
 
   }
@@ -25,7 +25,7 @@ export class UserListComponent {
       if (res.success) {
         this.userData = res.data
       } else {
-        this.toastr.error(res.message)
+        this.toastr.warning(res.message)
       }
     }, (err: any) => {
       this.toastr.error(err)

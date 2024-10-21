@@ -19,10 +19,16 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/shared/header/header.component';
-import { ToastrModule } from 'ngx-toastr';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductAttributeComponent } from './components/product-attribute/product-attribute.component';
-
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastrModule } from 'ngx-toastr';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,10 +55,11 @@ import { ProductAttributeComponent } from './components/product-attribute/produc
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    SweetAlert2Module,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 2000,
-    })
+    IconFieldModule, InputTextModule, InputIconModule, DropdownModule,
+    TableModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

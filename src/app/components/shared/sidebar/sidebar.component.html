@@ -8,38 +8,38 @@
       <p class="mb-3 mt-4 ct_clr_48484880">NAVIGATION</p>
       <ul class="ct_side_menu">
             <li>
-                  <a routerLink="/dashboard">
+                  <a routerLink="/dashboard" routerLinkActive="active">
                         <img src="assets/img/dashboard_icon.svg" alt="">
                         Dashboard</a>
             </li>
-            <li class="ct_dropdown">
-                  <a href="javascripr:void(0)" class="active"><img src="assets/img/user_icon.svg" alt="">User
+            <li class="ct_dropdown" [ngClass]="{'ct_drop_show': isDropdownVisible}">
+                  <a href="javascripr:void(0)" (click)="toggleDropdown()" routerLinkActive="active"><img src="assets/img/user_icon.svg" alt="">User
                         Management <i class="fa-solid fa-angle-down ms-auto"></i></a>
                   <div class="ct_dropdown_menu mt-3">
                         <ul>
                               <li>
-                                    <a routerLink="/user-list">User list </a>
+                                    <a routerLink="/user-list" routerLinkActive="active">User list </a>
                               </li>
                               <li>
-                                    <a routerLink="/user-offer">User`s offers </a>
+                                    <a routerLink="/user-offer" routerLinkActive="active">User`s offers </a>
                               </li>
                               <li>
-                                    <a routerLink="/boosted-offers">Boosted offers</a>
+                                    <a routerLink="/boosted-offers" routerLinkActive="active">Boosted offers</a>
                               </li>
                         </ul>
                   </div>
             </li>
             <li>
-                  <a routerLink="/order-management"><img src="assets/img/orders_icon.svg" alt="">Orders
+                  <a routerLink="/order-management" routerLinkActive="active"><img src="assets/img/orders_icon.svg" alt="">Orders
                         Management</a>
             </li>
             <li>
-                  <a routerLink="/category-management"><img src="assets/img/category_icon.svg" alt="">Category
+                  <a routerLink="/category-management" routerLinkActive="active"><img src="assets/img/category_icon.svg" alt="">Category
                         Management</a>
             </li>
 
             <li>
-                  <a routerLink="/custom-support"><img src="assets/img/customer_support_icon.svg" alt="">Customer
+                  <a routerLink="/custom-support" routerLinkActive="active"><img src="assets/img/customer_support_icon.svg" alt="">Customer
                         Support</a>
             </li>
 

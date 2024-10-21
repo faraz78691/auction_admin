@@ -14,6 +14,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserOfferComponent } from './components/user-offer/user-offer.component';
 import { ProductAttributeComponent } from './components/product-attribute/product-attribute.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -29,37 +30,37 @@ const routes: Routes = [
     path: 'change-password', component: ChangePasswordComponent
   },
   {
-    path: 'dashboard', component: DashboardComponent
+    path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]
   },
   {
-    path: 'message', component: MessageComponent
+    path: 'message', component: MessageComponent, canActivate: [authGuard]
   },
   {
-    path: 'attribute/:cat_id/:pro_id', component: AttributeComponent
+    path: 'attribute/:cat_id/:pro_id', component: AttributeComponent, canActivate: [authGuard]
   },
   {
-    path: 'product-attribute/:pro_id/:attr_id', component: ProductAttributeComponent
+    path: 'product-attribute/:pro_id/:attr_id', component: ProductAttributeComponent , canActivate: [authGuard]
   },
   {
-    path: 'boosted-offers', component: BoostedOffersComponent
+    path: 'boosted-offers', component: BoostedOffersComponent , canActivate: [authGuard]
   },
   {
-    path: 'category-management', component: CategoryManagementComponent
+    path: 'category-management', component: CategoryManagementComponent, canActivate: [authGuard]
   },
   {
-    path: 'custom-support', component: CustomSupportComponent
+    path: 'custom-support', component: CustomSupportComponent, canActivate: [authGuard]
   },
   {
-    path: 'order-management', component: OrderManagementComponent
+    path: 'order-management', component: OrderManagementComponent, canActivate: [authGuard]
   },
   {
-    path: 'product-list/:id', component: ProductListComponent
+    path: 'product-list/:id', component: ProductListComponent, canActivate: [authGuard]
   },
   {
-    path: 'user-list', component: UserListComponent
+    path: 'user-list', component: UserListComponent, canActivate: [authGuard]
   },
   {
-    path: 'user-offer', component: UserOfferComponent
+    path: 'user-offer', component: UserOfferComponent, canActivate: [authGuard]
   },
 ];
 

@@ -10,6 +10,9 @@
                         <h6 class="mb-0">Category - {{service.categoryData().name}} <i class="fa-solid fa-angle-right ms-2"></i></h6>
                   </li>
                   <li>
+                        <h6 class="mb-0">Product - {{service.productData().name}} <i class="fa-solid fa-angle-right ms-2"></i></h6>
+                  </li>
+                  <li>
                         <h6 class="mb-0">{{productName}}<i class="fa-solid fa-angle-right ms-2"></i></h6>
                   </li>
             </ul>
@@ -38,6 +41,8 @@
                               <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
                                     data-bs-target="#ct_edit_user"><i
                                           class="fa-solid fa-pen-to-square text-dark"></i></button>
+                              <button class="ct_edit_btn py-1 ct_border_radius_10" (click)="deleteTypeATR(item.id)"><i
+                                          class="fa-solid fa-trash text-danger"></i></button>
                         </td>
                   </tr>
                   }

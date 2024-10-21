@@ -65,6 +65,7 @@ main{
     width: 300px;
     padding: 30px 30px 30px 30px;
     height: 100vh;
+    /* left: 0px; */
     overflow-y: auto;
     border-right: 1px solid #E9E9E9;
     transition: 0.4s ease all;
@@ -278,7 +279,7 @@ main{
     color: #000;
 }
 .ct_inner_dashbaord_main {
-    padding: 33px 20px;
+    padding: 17px 20px;
     overflow-y: auto;
     height: calc(100vh - 80px);
 }
@@ -329,7 +330,7 @@ main{
     border-radius: 0px 15px 15px 0px;
 }
 .ct_custom_table tbody tr td {
-    padding: 16px 50px;
+    padding: 9px 50px;
     border-bottom: 1px solid transparent;
     background-color: transparent;
     
@@ -621,7 +622,7 @@ a.add img {
     padding: 25px 18px;
     /* border-bottom: 1px solid #ccc; */
     background-color: #fff;
-    border: 1px solid #DFE0EB;
+    border-bottom: 1px solid #DFE0EB;
 }
 
 .moreoption {
@@ -662,7 +663,8 @@ a.add img {
 
 .msg-body ul {
     overflow: hidden;
-    padding-inline: 15px;
+    padding-right: 15px;
+    padding-left: 28px;
 }
 .msg-body ul li {
     list-style: none;

@@ -12,10 +12,17 @@ export class SharedService {
     id: null,
     name: null
   });
+  productData = signal<{ id: number | null, name: string | null }>({
+    id: null,
+    name: null
+  });
 
 
   setCategoryData(id: number, name: string) {
     this.categoryData.set({ id, name });
+  }
+  setProductData(id: number, name: string) {
+    this.productData.set({ id, name });
   }
 
   constructor(

@@ -2,7 +2,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Table } from 'primeng/table';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 @Component({
   selector: 'app-category-management',
   templateUrl: './category-management.component.html',
@@ -25,6 +27,10 @@ export class CategoryManagementComponent {
     this.getCategories()
   };
 
+
+ 
+  // Column Definitions: Defines the columns to be displayed.
+ 
 
 
   getCategories() {

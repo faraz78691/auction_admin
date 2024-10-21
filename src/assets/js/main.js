@@ -23,13 +23,13 @@ jQuery(document).ready(function() {
 });
 
 
-jQuery(document).ready(function() {
-  jQuery('.ct_loader_main').fadeOut();
+// jQuery(document).ready(function() {
+//   jQuery('.ct_loader_main').fadeOut();
 
-  $('.ct_dropdown a').click(function(){
-    $('.ct_dropdown').toggleClass('ct_drop_show')
-  })
-});
+//   $('.ct_dropdown a').click(function(){
+//     $('.ct_dropdown').toggleClass('ct_drop_show')
+//   })
+// });
 
 AOS.init();
 

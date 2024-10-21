@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+
+  ngOnInit(): void {
+    // Initialize AOS or any other libraries here
+    // AOS.init();
+  }
+
+  isSidebarCollapsed: boolean = false;
+  isLoginPage: boolean = false; // Handle login page logic as needed
+
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
 }

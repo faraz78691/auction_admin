@@ -1,8 +1,8 @@
-<main *ngIf="!isLoginPage">
+<main *ngIf="!isLoginPage" [class.ct_collapsed_sidebar]="isSidebarCollapsed">
     <app-sidebar></app-sidebar>
     
     <div class="ct_right_content">
-        <app-header></app-header>
+        <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
         <div class="ct_inner_dashbaord_main">
             <router-outlet></router-outlet>
         </div>

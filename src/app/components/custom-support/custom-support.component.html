@@ -68,7 +68,7 @@
 
             <div class=" col-xl-9">
                   <!-- chatbox -->
-                  <div class="chatbox ">
+                  <div class="chatbox " [ngClass]="{'showbox': isChatboxVisible}">
                         <div class="modal-dialog-scrollable">
                               <div class="modal-content">
                                     <div class="msg-head">
@@ -110,11 +110,11 @@
                                     </div>
 
 
-                                    <div class="modal-body">
-                                          <div class="msg-body"  #scrollMe>
+                                    <div class="modal-body " #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                                          <div class="msg-body "  >
                                                 <ul>
                                                     @for (item of chats; track $index) {
-                                                      @if(item.sender_id !== adminId){
+                                                      @if(item.sender_id !== item.admin_id){
                                                             <li class="sender">
                                                                   <!-- <img src="assets/img/user_profile.png" alt=""
                                                                         class="ct_img_30"> -->

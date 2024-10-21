@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-attribute',
@@ -37,7 +38,7 @@ export class AttributeComponent {
   ]
 
   constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
-console.log(this.service.categoryData());
+    console.log(this.service.categoryData());
     this.route.params.subscribe(params => {
       this.cat_id = params['cat_id'];
       this.pro_id = params['pro_id'];
@@ -58,9 +59,12 @@ console.log(this.service.categoryData());
     let apiUrl = `admin/getTypeAttributesByProductId?product_id=${this.pro_id}`
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.productName = res.product.name
+        this.productName = res.product.name;
+        this.service.setProductData(res.product.id , res.product.name)
         this.attributeData = res.typeAttributes
       } else {
+        this.productName = res.product.name;
+        this.service.setProductData(res.product.id , res.product.name)
         this.toastr.error("No Attribute Found")
       }
     }, (err: any) => {
@@ -113,5 +117,39 @@ console.log(this.service.categoryData());
     const selectedAttribute = event.target.value
     const selectedOption = this.selectBoxData.find(item => item.type === selectedAttribute);
     this.selectedInputs = selectedOption ? selectedOption.input : [];
+  };
+
+
+  deleteTypeATR(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        const formURlData = new URLSearchParams();
+
+        formURlData.set('product_type_id', id.toString());
+
+        this.service.post('admin/deleteProductTypeAttribute', formURlData.toString()).subscribe({
+          next: (resp) => {
+
+            if (resp.success == true) {
+              this.getAttributes()
+            }
+          },
+          error: (error) => {
+            //this.loading = false;
+
+            console.error('Login error:', error.message);
+          }
+        });
+      }
+    })
   }
 }

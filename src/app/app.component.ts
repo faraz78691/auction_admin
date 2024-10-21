@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'auction-admin';
   isLoginPage: boolean = false;
+  isSidebarCollapsed =false;
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -17,5 +18,13 @@ export class AppComponent {
       // Check if the current URL is '/login'
       this.isLoginPage = this.router.url === '/log-in';
     });
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+
+  closeSidebar(): void {
+    this.isSidebarCollapsed = true;
   }
 }
