@@ -13,6 +13,7 @@ export class CustomSupportComponent {
   isChatboxVisible: boolean = false;
   senderMessage!: string;
   userList: any[] = [];
+  alluserData: any[] = [];
   chats: any[] = [];
   adminId!: any;
   userId!: number;
@@ -21,6 +22,7 @@ export class CustomSupportComponent {
   // apiUrl = 'http://192.168.29.44:5000/';
   // apiUrl = 'http://localhost:5000/';
   apiUrl = 'http://98.80.36.64:5000/';
+  searchQuery:string | undefined;
   private socket: Socket;
   constructor(private _chatService: ChatSocketService, private apiService: SharedService, private authService: AuthService) {
     this.socket = io(this.apiUrl);
@@ -29,6 +31,7 @@ export class CustomSupportComponent {
 
   ngOnInit() {
     this.adminId = localStorage.getItem('auctionAdminID');
+    this.getUserList();
     console.log(this.adminId);
     this._chatService.sendAdminLogin(this.adminId);
     this.getUsersChats();
@@ -50,6 +53,21 @@ export class CustomSupportComponent {
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
     }
+  };
+
+  getUserList() {
+    let apiUrl = 'admin/getAllUsers'
+
+    this.apiService.get(apiUrl).subscribe((res: any) => {
+      if (res.success) {
+        this.alluserData = res.data;
+        console.log(this.alluserData);
+      } else {
+        // this.toastr.warning(res.message)
+      }
+    }, (err: any) => {
+      // this.toastr.error(err)
+    })
   }
 
 

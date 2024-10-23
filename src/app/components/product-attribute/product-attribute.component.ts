@@ -4,6 +4,7 @@ import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-product-attribute',
   templateUrl: './product-attribute.component.html',
@@ -18,7 +19,7 @@ export class ProductAttributeComponent {
   productName: any;
   pro_id: any;
 
-  constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(public service: SharedService,private location: Location, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.attr_id = params['attr_id'];
@@ -31,15 +32,15 @@ export class ProductAttributeComponent {
   }
 
   ngOnInit() {
-    this.getProAttributes()
+    this.getProAttributes();
   }
 
   getProAttributes() {
     let apiUrl = `admin/getAttributesByAttributeTypeId?attribute_id=${this.attr_id}`
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.productName = res.attributeName
-        this.attributeData = res.typeAttributes
+        this.productName = res.attributeName;
+        this.attributeData = res.typeAttributes;
       } else {
         this.productName = res.attributeName
         this.toastr.error(res.message)
@@ -119,5 +120,10 @@ export class ProductAttributeComponent {
       });
       }
     })
+  };
+
+   // Method to navigate back
+   goBack(): void {
+    this.location.back();  // Navigate to the previous page
   }
 }

@@ -19,7 +19,7 @@ export class ProductListComponent {
   productId:any;
   categoryName: any;
 
-  constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.cat_id = params['id'];
@@ -99,5 +99,10 @@ export class ProductListComponent {
       return 'This field cannot be empty'
     }
     return ''
-  }
+  };
+
+    // Method to navigate back
+    // goBack(): void {
+    //   this.location.back();  // Navigate to the previous page
+    // }
 }

@@ -20,7 +20,11 @@
                         <div class="modal-dialog-scrollable">
                               <div class="modal-content">
                                     <div class="chat-header">
+                                         <div class="d-flex align-items-center gap-2 justify-content-between flex-wrap">
                                           <h4 class="mb-3 ct_fs_22 ct_fw_700">Chats</h4>
+                                          <i  data-bs-toggle="modal"
+                                          data-bs-target="#ct_followed_coaches2" class="fa-solid fa-user-plus"></i>
+                                         </div>
                                           <div class="msg-search">
                                                 <input type="text" class="form-control" id="inlineFormInputGroup"
                                                       placeholder="Search" aria-label="search">
@@ -278,4 +282,57 @@
 
             </div>
       </div>
+</div>
+
+
+<!-- Follow Friend Modal S -->
+
+<div class="modal fade" id="ct_followed_coaches2" tabindex="-1" aria-labelledby="ct_followed_coachesLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pt-0 px-0 d-block text-center">
+                <h5 class="modal-title text-white ct_fs_15 mx-auto ct_ff_roboto" id="exampleModalLabel">Users
+                </h5>
+                <button type="button" class="btn-close ct_close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div >
+                    <input type="text" class="form-control ct_login_input" placeholder="Search..."
+                        [(ngModel)]="searchQuery">
+                </div>
+
+               
+
+                <div class="ct_add_member_scroll" >
+                    <div *ngIf="alluserData?.length === 0" class="text-center mt-4">
+                        <p class="ct_fs_15 text-white">No users found</p>
+                    </div>
+                    <div *ngFor="let items of alluserData;">
+                        <div  class="d-flex align-items-center gap-2 mt-4"
+                            style="cursor: pointer;" (click)="openChat(items.id, items.name)">
+                            <!-- <img [src]="'/assets/img/np_pro.png'"
+                                alt="" class="ct_img_62 ct_border_radius_100"> -->
+                            <div>
+                                <h4 class="ct_ff_roboto ct_fw_600 text-white ct_fs_15 mb-0">
+                                    {{items.first_name}} &nbsp;  {{items.last_name}} </h4>
+                                <div class="d-flex align-items-center  gap-2 mt-1">
+                                    <!-- <img src="../assets/img/star.png" alt="star"> -->
+                                    <!-- <span class="ct_orange_text">Accountability</span> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+               
+                <button hidden type="button" class="btn btn-secondary" #closeModal
+                    data-bs-dismiss="modal">Close</button>
+                <!-- <button class="ct_orange_btn ct_grey_btn ct_border_radius_10 w-100 mt-4">Create new team</button> -->
+            </div>
+
+        </div>
+    </div>
 </div>

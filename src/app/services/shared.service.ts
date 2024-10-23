@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +27,8 @@ export class SharedService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private location: Location,
   ) { }
 
   get(url: any): Observable<any> {
@@ -50,6 +51,11 @@ export class SharedService {
       .set('Access-Control-Allow-Origin', '*')
       .set('authorization', `Bearer ${this.authService.getToken()}`)
     return this.http.post(environment.baseUrl + url, data, { headers: headers })
+  };
+
+  goBack(): void {
+    this.location.back();  // Navigate to the previous page
   }
+ 
 }
 

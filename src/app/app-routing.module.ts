@@ -15,6 +15,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserOfferComponent } from './components/user-offer/user-offer.component';
 import { ProductAttributeComponent } from './components/product-attribute/product-attribute.component';
 import { authGuard } from './guards/auth.guard';
+import { BrandsModelComponent } from './components/brands-model/brands-model.component';
+import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
 
 const routes: Routes = [
   {
@@ -57,10 +59,16 @@ const routes: Routes = [
     path: 'product-list/:id', component: ProductListComponent, canActivate: [authGuard]
   },
   {
+    path: 'models/:id', component: BrandsModelComponent, canActivate: [authGuard]
+  },
+  {
     path: 'user-list', component: UserListComponent, canActivate: [authGuard]
   },
   {
     path: 'user-offer', component: UserOfferComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'liveBidding', component: LiveAuctionComponent, canActivate: [authGuard]
   },
 ];
 

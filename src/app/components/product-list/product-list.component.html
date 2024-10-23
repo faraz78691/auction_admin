@@ -11,22 +11,23 @@
                         </h6>
                   </li> -->
                   <li>
-                        <h6 class="mb-0">Category - {{categoryName}}  <i
-                                    class="fa-solid fa-angle-right ms-2"></i>
+                        <h6 class="mb-0">Category - {{categoryName}} <i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
                   <li>
-                        <h6 class="mb-0">Products <i
-                                    class="fa-solid fa-angle-right ms-2"></i>
+                        <h6 class="mb-0">Products <i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
             </ul>
             <!-- <h3 class="mb-0 ct_fw_600">Product List (Mobile Category)</h3> -->
       </div>
-      <button class="ct_blue_btn"> Back
-      </button>
-      <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Product Type
-            +</button>
+      <div class="d-flex ms-auto gap-3">
+            <button class="ct_blue_btn" (click)="service.goBack()"> <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                  Back</button>
+            <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Product Type
+                  +</button>
+
+      </div>
 </div>
 
 <div class="table-responsive ct_mt_40">
@@ -47,12 +48,16 @@
                         <td>{{item.name}}</td>
 
                         <td class="d-flex align-items-center gap-3">
+
                               <a data-bs-toggle="modal" data-bs-target="#ct_update_user" (click)="onClickUpdate(item)"
                                     class="ct_edit_btn py-1 ct_border_radius_10"><i
                                           class="fa-solid fa-pen-to-square text-dark"></i></a>
                               <a routerLink="/attribute/{{cat_id}}/{{item.id}}" title="Add product attribute"
                                     class="ct_edit_btn py-1 ct_border_radius_10"><i class="fas fa-upload"></i>
                               </a>
+                              <!-- <a routerLink="/attribute/{{cat_id}}/{{item.id}}" title="Add product attribute"
+                                    class="ct_edit_btn py-1 ct_border_radius_10"><i class="fas fa-upload"></i>
+                              </a> -->
                         </td>
                   </tr>
                   }

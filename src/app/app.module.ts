@@ -29,6 +29,8 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastrModule } from 'ngx-toastr';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BrandsModelComponent } from './components/brands-model/brands-model.component';
+import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     UserOfferComponent,
     SidebarComponent,
     HeaderComponent,
-    ProductAttributeComponent
+    ProductAttributeComponent,
+    BrandsModelComponent,
+    LiveAuctionComponent
   ],
   imports: [
     BrowserModule,

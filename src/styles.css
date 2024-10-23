@@ -10,3 +10,28 @@
       font-weight: 600;
       margin: 3px;
 }
+
+
+.ct_add_member_scroll {
+      height: auto;
+      max-height: 350px;
+      overflow-y: auto;
+  }
+  
+  
+  .ct_add_member_scroll::-webkit-scrollbar {
+      width: 4px;
+  }
+  
+  
+  
+  
+ 
+  .ct_add_member_scroll::-webkit-scrollbar-thumb {
+      background: #888;
+  }
+  
+ 
+  .ct_add_member_scroll::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }

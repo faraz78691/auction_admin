@@ -24,6 +24,9 @@ export class AttributeComponent {
   productName: any;
   pro_id: any;
   otherHeading:any;
+  attributeId:any;
+  attributeType:any;
+  editHeading:any;
   selectedInputs: any[] = [];
   miscInputd: any[] = [
     { type: 'Gender' },
@@ -64,9 +67,9 @@ export class AttributeComponent {
     });
 
     this.attributeForm = this.fb.group({
-      attribute_name: ['', [Validators.required]],
+      attribute_name: ['null', [Validators.required]],
       heading: ['', ],
-      input_type: ['',[Validators.required]],
+      input_type: ['null',[Validators.required]],
     });
   }
 
@@ -155,6 +158,13 @@ export class AttributeComponent {
       (item) => item.type === selectedAttribute
     );
     this.selectedInputs = selectedOption ? selectedOption.input : [];
+    if(this.selectedAttribute != 'Miscellaneous'){
+      this.heading = true;
+      this.attributeForm.patchValue({
+        input_type: this.selectedInputs[0].type, 
+      });
+    }
+    console.log(this.selectedInputs);
   }
 
   onInputChange(event: any) {
@@ -214,5 +224,25 @@ export class AttributeComponent {
           });
       }
     });
-  }
+  };
+
+  onClickUpdate(item: any) {
+    this.attributeId = item.id;
+    this.attributeForm.patchValue({
+      name: item.name
+    });
+  };
+
+  onClose(){
+    this.attributeForm.reset();
+    this.heading = false;
+    this.closeModal?.nativeElement.click();
+  };
+
+
+    // Method to navigate back
+    // goBack(): void {
+    //   this.location.back();  // Navigate to the previous page
+    // }
+  
 }
