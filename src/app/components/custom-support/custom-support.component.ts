@@ -87,7 +87,7 @@ export class CustomSupportComponent {
     this.apiService.get('admin/getAllChatMessageUser').subscribe({
       next: res => {
         if (res.success == true) {
-          this.userList = res.data;
+          this.userList = res.userChat;
           this.openChat(this.userList[0].user_id, this.userList[0].user_name)
         }
         console.log(res);

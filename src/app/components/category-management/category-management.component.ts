@@ -13,6 +13,7 @@ import { InputIconModule } from 'primeng/inputicon';
 export class CategoryManagementComponent {
   @ViewChild('closeModal') closeModal: ElementRef | undefined;
   @ViewChild('closeModal2') closeModal2: ElementRef | undefined;
+  @ViewChild('dt') table!: Table;
   categoryData: any[] = []
   categoryForm!: FormGroup;
   loading: boolean = false;
