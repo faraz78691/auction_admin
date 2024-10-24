@@ -15,11 +15,15 @@ export class BrandsModelComponent {
  modelsList:any[]= [];
  modelName:string | undefined;
  modelId:number | undefined
+  attrName: any;
+  productName: any;
+  categoryData: any;
+  attributeMapping: any;
+  brandName: any;
   constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.attr_id = params['id'];
-    
     });
 
     // this.attributeForm = this.fb.group({
@@ -36,6 +40,11 @@ export class BrandsModelComponent {
     let apiUrl = `admin/getSubAttributesByProductAttributesMappingId?attribute_mapping_id=${this.attr_id}`
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
+        this.attrName = res.attributeType;
+        this.productName = res.product;
+        this.categoryData = res.category;
+        this.attributeMapping = res.attribute_mapping_name;
+        this.brandName = res.attributeMapping;
        this.modelsList = res.subAttributeData;
       } else {
         // this.productName = res.attributeName

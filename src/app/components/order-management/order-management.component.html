@@ -1,200 +1,181 @@
 <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
       <div>
-            <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-1">Orders Management</h3>
-            <ul class="d-flex align-items-center gap-3">
+            <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-1">Order Management</h3>
+            <ul class="d-flex align-items-center gap-3 p-2">
+               
                   <li>
-                        <h6 class="mb-0">Orders Management<i class="fa-solid fa-angle-right ms-2"></i>
+                        <h6 class="mb-0">Sold Offers<i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
+      
             </ul>
       </div>
-      <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Items
-            +</button>
+      <!-- <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_offers">Add Items
+            +</button> -->
 </div>
 
 <div class="table-responsive ct_mt_40">
-      <table class="table ct_custom_table">
-            <thead>
-                  <tr>
-                        <th>S.No.</th>
-                        <th>Buyer Name</th>
-                        <th>Seller Name </th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                  </tr>
-            </thead>
-            <tbody>
-                  <tr>
-                        <td>
-                              1
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              2
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              3
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              4
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              5
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              6
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              7
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-                  <tr>
-                        <td>
-                              8
-                        </td>
-                        <td>John Doe</td>
-                        <td>XYZ Electronics</td>
-                        <td>$1,250</td>
-                        <td>01-Oct-2024</td>
-                        <td>Delivered</td>
-                        <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                  </tr>
-            </tbody>
+      <div class="card ct_custom_table">
+            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
+                  [tableStyle]="{ 'min-width': '75rem' }">
+                  <ng-template pTemplate="caption">
+                        <div class="flex">
+                              <p-iconField iconPosition="left" class="ml-auto">
+                                    <p-inputIcon>
+                                          <i class="pi pi-search"></i>
+                                    </p-inputIcon>
+                                    <input pInputText type="text"
+                                          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                          placeholder="Search keyword" />
+                              </p-iconField>
+                        </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                        <tr>
+                              <th style="width:25%" >S.no</th>
+                              <th pSortableColumn="">Offer ID</th>
+                              <th>Title</th>
+                              <th>Buyer</th>
+                              <th>Buyer Status</th>
+                              <th>Seller</th>
+                              <th>Seller Status</th>
+                              <th>Auction Type</th>
+                              <th>Bought Price</th>
+                              <th style="width:25%">Action</th>
 
-      </table>
+                        </tr>
+
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer let-i="rowIndex">
+                        <tr>
+                              <td>
+                                    {{i+ 1}}
+                              </td>
+                              <td>{{customer.offer_unique_id}}</td>
+                              <td>{{customer.title}}</td>
+                              <td>{{customer.buyer_name}}</td>
+                              @if(customer.buyer_status == '1'){
+                                    <td>To Pay</td>
+                              }@else if (customer.buyer_status == '2') {
+                                   <td> Delivery Open</td>
+                              }@else if (customer.buyer_status == '3') {
+                                  <td>To be evaluated</td>  
+                              }@else if (customer.buyer_status == '4') {
+                                  <td>Completed </td>  
+                              }@else if (customer.buyer_status == '5') {
+                                  <td>Cancelled</td>  	 
+                              }
+                              <td>{{customer.seller_name}}</td>
+                              @if(customer.seller_status == '1'){
+                                    <td>Payment pending</td>
+                              }@else if (customer.seller_status == '2') {
+                                   <td> Handover pending</td>
+                              }@else if (customer.seller_status == '3') {
+                                  <td>Pending evaluation</td>  
+                              }@else if (customer.seller_status == '4') {
+                                  <td>Completed  </td>  
+                              }@else if (customer.seller_status == '5') {
+                                  <td>Cancelled</td>  	 
+                              }
+                              <td>{{customer.buyer_name}}</td>
+                           
+                              <td>{{customer.amount}}</td>
+
+                              <td>{{customer.offfer_buy_status == 1 ? 'Finished' : 'Open'}}</td>
+                            
+                            
+                          
+                        </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                        <tr>
+                              <td colspan="5">No customers found.</td>
+                        </tr>
+                  </ng-template>
+            </p-table>
+      </div>
+     
 
 </div>
 
 
-<div class="modal fade " id="ct_add_user" tabindex="-1" aria-labelledby="ct_add_userLabel" aria-hidden="true">
+<div class="modal fade " id="ct_add_offers" tabindex="-1" aria-labelledby="ct_add_offersLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content  py-5">
-                  <!-- <div class="modal-header border-0">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div> -->
+
                   <div class="modal-body py-0">
                         <div>
-                              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Add User</h4>
+                              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Add User’s Offer</h4>
 
                               <form action="">
                                     <div class="row">
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Name</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Seller
+                                                            Name</label>
                                                       <input type="text" class="ct_input form-control ct_input_40"
-                                                            placeholder="Enter Name">
+                                                            placeholder="Enter Seller Name">
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">User</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Title</label>
                                                       <input type="text" class="ct_input form-control ct_input_40"
-                                                            placeholder="Enter User">
+                                                            placeholder="Enter Title">
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Email id</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Product</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Product">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Category</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Category">
+                                                </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Auction
+                                                            Type</label>
                                                       <input type="email" class="ct_input form-control ct_input_40"
-                                                            placeholder="Enter Email id">
+                                                            placeholder="Enter Auction Type">
+                                                </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Price</label>
+                                                      <input type="number" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Price">
+                                                </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Start
+                                                            Time</label>
+                                                      <input type="time" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Phone">
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Phone </label>
-                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">End Time</label>
+                                                      <input type="time" class="ct_input form-control ct_input_40"
                                                             placeholder="Enter Phone">
                                                 </div>
                                           </div>
 
 
-                                          <div class="col-md-12">
-                                                <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Address</label>
-                                                      <textarea class="ct_input form-control ct_input_40 h-auto"
-                                                            rows="4" placeholder="Type here....">
-                          </textarea>
-                                                </div>
-                                          </div>
+
+
                                     </div>
                               </form>
 
@@ -214,7 +195,7 @@
 </div>
 
 
-<div class="modal fade " id="ct_edit_user" tabindex="-1" aria-labelledby="ct_edit_userLabel" aria-hidden="true">
+<div class="modal fade " id="ct_edit_offer" tabindex="-1" aria-labelledby="ct_edit_offerLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content  py-5">
                   <!-- <div class="modal-header border-0">
@@ -222,48 +203,76 @@
           </div> -->
                   <div class="modal-body py-0">
                         <div>
-                              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Edit User Details</h4>
+                              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Edit User’s Offer</h4>
 
                               <form action="">
                                     <div class="row">
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Name</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Seller
+                                                            Name</label>
                                                       <input type="text" class="ct_input form-control ct_input_40"
-                                                            value="John Doe">
+                                                            placeholder="Enter Seller Name">
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">User</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Title</label>
                                                       <input type="text" class="ct_input form-control ct_input_40"
-                                                            value="john11">
+                                                            placeholder="Enter Title">
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Email id</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Product</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Product">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Category</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Category">
+                                                </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Auction
+                                                            Type</label>
                                                       <input type="email" class="ct_input form-control ct_input_40"
-                                                            value="john11@gmail.com	">
+                                                            placeholder="Enter Auction Type">
+                                                </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Price</label>
+                                                      <input type="number" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Price">
+                                                </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Start
+                                                            Time</label>
+                                                      <input type="time" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Phone">
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Phone </label>
-                                                      <input type="text" class="ct_input form-control ct_input_40"
-                                                            value="1234567890">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">End Time</label>
+                                                      <input type="time" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Phone">
                                                 </div>
                                           </div>
 
 
-                                          <div class="col-md-12">
-                                                <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Address</label>
-                                                      <textarea class="ct_input form-control ct_input_40 h-auto"
-                                                            rows="4" placeholder="Type here....">My Street, Bigtown BG23 4YZ, England	
-                          </textarea>
-                                                </div>
-                                          </div>
+
+
                                     </div>
                               </form>
 
@@ -277,6 +286,7 @@
                               <button type="button" class="ct_blue_btn   w-50">Update</button>
                         </div>
                   </div>
+
 
             </div>
       </div>
@@ -314,3 +324,5 @@
             </div>
       </div>
 </div>
+
+<!-- Log out modal Css E -->

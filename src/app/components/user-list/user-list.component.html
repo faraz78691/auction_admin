@@ -16,7 +16,7 @@
 </div>
 
 <div class="table-responsive ct_mt_40">
-      <div class="card">
+      <div class="card ct_custom_table">
             <p-table #dt2 [value]="userData" dataKey="id" [rows]="10" [rowHover]="true"
             [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
             [globalFilterFields]="['id', 'cat_name']" [tableStyle]="{ 'min-width': '75rem' }">
@@ -36,21 +36,37 @@
             </ng-template>
             <ng-template pTemplate="header">
                   <tr>
-                        <th style="width:25%" pSortableColumn="id">S.no <p-sortIcon field="id" /></th>
-                        <th style="width:25%" pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
-                        <th style="width:25%">Action</th>
+                        <th class="text-center" style="width:10%"  pSortableColumn="id">S.no <p-sortIcon field="id" /></th>
+                        <th style="width:15%"  pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
+                        <th style="width:15%"  pSortableColumn="cat_name">Email </th>
+                        <th style="width:10%">Phone </th>
+                        <th >Address</th>
+                        <!-- <th style="width:25%" pSortableColumn="cat_name">Street<p-sortIcon field="cat_name" /></th> -->
+                        <th >Action</th>
 
                   </tr>
 
             </ng-template>
-            <ng-template pTemplate="body" let-customer>
+            <ng-template pTemplate="body" let-customer let-i="rowIndex">
                   <tr>
                         <td>
-                              {{ customer.id }}
+                              {{ i + 1 }} 
                         </td>
 
                         <td>
-                              {{ customer.cat_name }}
+                              {{ customer.first_name }} {{ customer.last_name }}
+                        </td>
+                        <td>
+                              {{ customer.email }}
+                        </td>
+                        <td>
+                              {{ customer.phone_number }}
+                        </td>
+                        <td>
+                              {{ customer.address }}
+                        </td>
+                        <td>
+                             <button class="btn btn-primary" [routerLink]="['/user-offer']" [queryParams]="{ id: customer.id }">All Offer</button>
                         </td>
                       
                   </tr>
@@ -62,33 +78,7 @@
             </ng-template>
       </p-table>
       </div>
-      <!-- <table class="table ct_custom_table">
-            <thead>
-                  <tr>
-                        <th>S.No.</th>
-                        <th>Name</th>
-                        <th>Email id</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                       
-                  </tr>
-            </thead>
-            <tbody>
-                  @for (user of userData; track $index) {
-                  <tr>
-                        <td>
-                              {{$index + 1}}
-                        </td>
-                        <td>{{user.first_name}} {{user.last_name}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phone_number}}</td>
-                        <td>{{user.address}}</td>
-                       
-                  </tr>
-                  }
-            </tbody>
-
-      </table> -->
+    
 
 </div>
 

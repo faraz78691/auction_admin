@@ -10,6 +10,14 @@
                         <h6 class="mb-0">User’s offers<i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
+                  @if (userId != undefined) {
+                  <li>
+                        <h6 class="mb-0">{{userOfferData[0].seller_name}} offers<i
+                                    class="fa-solid fa-angle-right ms-2"></i>
+                        </h6>
+                  </li>
+
+                  }
             </ul>
       </div>
       <!-- <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_offers">Add Items
@@ -17,50 +25,82 @@
 </div>
 
 <div class="table-responsive ct_mt_40">
-      <table class="table ct_custom_table">
-            <thead>
-                  <tr>
-                        <th>S.No.</th>
-                        <th>Title</th>
-                        <th>Category </th>
-                        <th>Product</th>
-                        <th>Auction Type</th>
-                        <th>Start Price (CHF)</th>
-                        <th>Buy it now (CHF)</th>
-                        <th>Fixed Price (CHF)</th>
-                        <th>Start date</th>
-                        <th>End Date</th>
-                        <th>Seller</th>
-                        <!-- <th>Action</th> -->
-                  </tr>
-            </thead>
-            <tbody>
-                  @for (offer of userOfferData; track $index) {
-                  <tr>
-                        <td>
-                        {{$index+ 1}}
-                        </td>
-                        <td>{{offer.title}}</td>
-                        <td>{{offer.category_name}}</td>
-                        <td>{{offer.product_name}}</td>
-                        <td>{{offer.is_bid_or_fixed == 1 ? 'Auction' : 'Fixed'}}</td>
-                        <td>{{offer.is_bid_or_fixed == 1 ? offer.start_price : '-' }}</td>
-                        <td>{{offer.is_bid_or_fixed == 1 ? offer.buyto_price : '-'}}</td>
-                        <td>{{offer.is_bid_or_fixed == 0 ? offer.fixed_offer_price : '-'}}</td>
-                        <td>{{offer.offerStart}}</td>
-                        <td>{{ offer.end_date | date :'yyyy-MM-dd HH:mm:ss' : 'UTC'}}</td>
+      <div class="card ct_custom_table">
+            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
+                  [tableStyle]="{ 'min-width': '75rem' }">
+                  <ng-template pTemplate="caption">
+                        <div class="flex">
+                              <p-iconField iconPosition="left" class="ml-auto">
+                                    <p-inputIcon>
+                                          <i class="pi pi-search"></i>
+                                    </p-inputIcon>
+                                    <input pInputText type="text"
+                                          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                          placeholder="Search keyword" />
+                              </p-iconField>
+                        </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                        <tr>
+                              <th style="width:25%" >S.no</th>
+                              <th pSortableColumn="">Offer ID</th>
+                              <th>Title</th>
+                              <th>Auction Type</th>
+                              <th>Status</th>
+                              <th>Start Price (CHF)</th>
+                              <th>Buy it now (CHF)</th>
+                              <th>Fixed Price (CHF)</th>
+                              <th>Start date</th>
+                              <th>End Date</th>
+                              <th>Seller</th>
+                              <th style="width:25%">Action</th>
 
-                        <td>{{offer.seller_name}}</td>
+                        </tr>
 
-                        <!-- <td>
-                              <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_offer"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td> -->
-                  </tr>
-                  }
-            </tbody>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer let-i="rowIndex">
+                        <tr>
+                              <td>
+                                    {{i+ 1}}
+                              </td>
+                              <td>{{customer.offer_unique_id}}</td>
+                              <td>{{customer.title}}</td>
+                              <!-- <td>{{offer.category_name}}</td>
+                              <td>{{offer.product_name}}</td> -->
+                              <td>{{customer.is_bid_or_fixed == 1 ? 'Auction' : 'Fixed'}}</td>
 
-      </table>
+                              <td>{{customer.offfer_buy_status == 1 ? 'Finished' : 'Open'}}</td>
+                              <td>{{customer.is_bid_or_fixed == 1 ? customer.start_price : '-' }}</td>
+                              <td>{{customer.is_bid_or_fixed == 1 ? customer.buyto_price : '-'}}</td>
+                              <td>{{customer.is_bid_or_fixed == 0 ? customer.fixed_offer_price : '-'}}</td>
+                              <td>{{customer.offerStart}}</td>
+                              <td>{{ customer.end_date | date :'yyyy-MM-dd HH:mm:ss' : 'UTC'}}</td>
+      
+                              <td>{{customer.seller_name}}</td>
+                              <!-- <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                          <a data-bs-toggle="modal" data-bs-target="#ct_update_user"
+                                                (click)="onClickUpdate(customer)"
+                                                class="ct_edit_btn py-1 ct_border_radius_10"><i
+                                                      class="fa-solid fa-pen-to-square text-dark"></i></a>
+                                          <a routerLink="/product-list/{{customer.id}}"
+                                                title="Add Product type under category"
+                                                class="ct_edit_btn py-1 ct_border_radius_10"><i
+                                                      class="fas fa-upload"></i>
+                                          </a>
+                                    </div>
+                              </td> -->
+                        </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                        <tr>
+                              <td colspan="5">No customers found.</td>
+                        </tr>
+                  </ng-template>
+            </p-table>
+      </div>
+     
 
 </div>
 

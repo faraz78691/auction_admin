@@ -26,6 +26,7 @@ export class AttributeComponent {
   otherHeading:any;
   attributeId:any;
   attributeType:any;
+  categoryData:any;
   editHeading:any;
   selectedInputs: any[] = [];
   miscInputd: any[] = [
@@ -83,10 +84,12 @@ export class AttributeComponent {
       (res: any) => {
         if (res.success) {
           this.productName = res.product.name;
+          this.categoryData = res.category;
           this.service.setProductData(res.product.id, res.product.name);
           this.attributeData = res.typeAttributes;
         } else {
           this.productName = res.product.name;
+          this.categoryData = res.category;
           this.service.setProductData(res.product.id, res.product.name);
           this.toastr.error('No Attribute Found');
         }

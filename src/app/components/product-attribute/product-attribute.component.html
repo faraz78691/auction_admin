@@ -7,15 +7,15 @@
                         </h6>
                   </li>
                   <li>
-                        <h6 class="mb-0">Category - {{service.categoryData().name}} <i
+                        <h6 class="mb-0">Category - {{categoryData?.name}} <i
                                     class="fa-solid fa-angle-right ms-2"></i></h6>
                   </li>
                   <li>
-                        <h6 class="mb-0">Product - {{service.productData().name}} <i
+                        <h6 class="mb-0">Product - {{productName}} <i
                                     class="fa-solid fa-angle-right ms-2"></i></h6>
                   </li>
                   <li>
-                        <h6 class="mb-0">Attribute - {{productName}}<i class="fa-solid fa-angle-right ms-2"></i></h6>
+                        <h6 class="mb-0">Attribute - {{attrName}}<i class="fa-solid fa-angle-right ms-2"></i></h6>
                   </li>
                   <li>
                         <h6 class="mb-0">Attribute Options<i class="fa-solid fa-angle-right ms-2"></i></h6>
@@ -25,7 +25,7 @@
       <div class="d-flex ms-auto gap-3">
             <button class="ct_blue_btn" (click)="service.goBack()"> <i class="fa fa-arrow-left" aria-hidden="true"></i>
                   Back</button>
-            <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Atribute Options
+            <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Attribute Options
                   +</button>
       </div>
 </div>
@@ -35,7 +35,7 @@
             <thead>
                   <tr>
                         <th>S.No.</th>
-                        <th>Atribute Value</th>
+                        <th>Attribute Value</th>
                         <th>Action</th>
                   </tr>
             </thead>
@@ -48,9 +48,9 @@
                         <td>{{item.attribute_value_name}}</td>
                         <td class="d-flex align-items-center gap-3">
                               <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                    data-bs-target="#ct_edit_user"><i
+                                    data-bs-target="#ct_edit_user" (click)="onClickUpdate(item)"><i
                                           class="fa-solid fa-pen-to-square text-dark"></i></button>
-                              <a *ngIf="productName =='Brand'" routerLink="/models/{{item.id}}" title="Add Models"
+                              <a *ngIf="attrName =='Brand'" routerLink="/models/{{item.id}}" title="Add Models"
                                     class="ct_edit_btn py-1 ct_border_radius_10"><i class="fas fa-upload"></i>
                               </a>
                               <button class="ct_edit_btn py-1 ct_border_radius_10" (click)="deleteTypeATR(item.id)"><i
@@ -123,34 +123,19 @@
                                     <div class="row">
                                           <div class="col-md-12">
                                                 <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Title</label>
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Attribute Value</label>
                                                       <input type="text" class="ct_input form-control ct_input_40"
-                                                            placeholder="Title Name" value="iPhone 15	">
+                                                            placeholder="Title Name" value="iPhone 15" [(ngModel)]="attrValue" [ngModelOptions]="{standalone: true}">
                                                 </div>
                                           </div>
-                                          <div class="col-md-12">
-                                                <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Attribute
-                                                            Name</label>
-                                                      <input type="text" class="ct_input form-control ct_input_40"
-                                                            placeholder="Atribute Name" value="Color	">
-                                                </div>
-                                          </div>
-                                          <div class="col-md-12">
-                                                <div class="form-group text-start mb-4">
-                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Input
-                                                            Type</label>
-                                                      <input type="text" class="ct_input form-control ct_input_40"
-                                                            placeholder="Input Type" value="Dropdown">
-                                                </div>
-                                          </div>
+                                         
                                     </div>
                               </form>
                         </div>
                         <div class="d-flex align-items-center gap-3 pt-4">
                               <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
-                                    data-bs-dismiss="modal">Cancel</button>
-                              <button type="button" class="ct_blue_btn w-50">Update</button>
+                                    data-bs-dismiss="modal" #closeModal2>Cancel</button>
+                              <button type="button" class="ct_blue_btn w-50" (click)="updateAttr()">Update</button>
                         </div>
                   </div>
 

@@ -12,13 +12,17 @@ import { Location } from '@angular/common';
 })
 export class ProductAttributeComponent {
   @ViewChild('closeModal') closeModal: ElementRef | undefined
+  @ViewChild('closeModal2') closeModal2: ElementRef | undefined
   attributeData: any[] = []
   attributeForm!: FormGroup;
   loading: boolean = false;
   attr_id: any;
   productName: any;
+  attrName: any;
+  categoryData: any;
   pro_id: any;
-
+  attrValue:any;
+  attrMappingID:any
   constructor(public service: SharedService,private location: Location, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
@@ -39,10 +43,14 @@ export class ProductAttributeComponent {
     let apiUrl = `admin/getAttributesByAttributeTypeId?attribute_id=${this.attr_id}`
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.productName = res.attributeName;
+        this.attrName = res.attributeName;
+        this.productName = res.product.name;
+        this.categoryData = res.category;
         this.attributeData = res.typeAttributes;
       } else {
-        this.productName = res.attributeName
+        this.attrName = res.attributeName;
+        this.productName = res.product.name;
+        this.categoryData = res.category;
         this.toastr.error(res.message)
       }
     }, (err: any) => {
@@ -77,7 +85,33 @@ export class ProductAttributeComponent {
         this.loading = false
       }
     })
+  };
+
+  updateAttr(){
+
+    const apiUrl = `admin/updateProductAttributeMapping`
+    
+    let formData = new URLSearchParams();
+    formData.set('id', this.attrMappingID)
+    formData.set('attribute_value_name', this.attrValue)
+    this.service.post(apiUrl, formData.toString()).subscribe(res => {
+      if (res.success) {
+        this.toastr.success(res.message)
+        this.closeModal?.nativeElement.click();
+        this.closeModal2?.nativeElement.click();
+        this.getProAttributes()
+        this.loading = false
+      } else {
+        this.toastr.error("No Products found")
+        this.loading = false
+      }
+    })
   }
+
+  onClickUpdate(item: any) {
+    this.attrMappingID = item.id;
+    this.attrValue = item.attribute_value_name;
+  };
 
 
   getErrorMessage(field: string) {
