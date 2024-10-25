@@ -11,7 +11,7 @@ export class ChatSocketService {
   private socket!: Socket;
   // apiUrl = 'http://192.168.29.44:5000/';
   // apiUrl = 'http://localhost:5000/';
-
+  // apiUrl = 'http://192.168.29.44:5000/';
   apiUrl = 'http://98.80.36.64:5000/';
   authToken = localStorage.getItem('fbToken');
   constructor() {
@@ -25,7 +25,19 @@ export class ChatSocketService {
   // Emit event when user is online
   userOnline(userId: string) {
     this.socket.emit('userOnline', userId);
-  }
+  };
+
+
+     // Listen for bid updates
+     onBidUpdate(): Observable<any> {
+      return new Observable((observer) => {
+        this.socket.on('updateBid', (data) => {
+          console.log(data);
+          observer.next(data);
+        });
+      });
+    };
+
 
   sendMessage(msg: { user_id: number, admin_id: number, message: string, sender_id: number }): Promise<any> {
     console.log("sendBid", msg);

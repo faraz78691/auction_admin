@@ -13,134 +13,66 @@
 </div>
 
 <div class="table-responsive ct_mt_40">
-    <table class="table ct_custom_table">
-          <thead>
-                <tr>
-                      <th>S.No.</th>
-                      <th>Buyer Name</th>
-                      <th>Seller Name </th>
-                      <th>Price</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                </tr>
-          </thead>
-          <tbody>
-                <tr>
-                      <td>
-                            1
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            2
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            3
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            4
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            5
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            6
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            7
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-                <tr>
-                      <td>
-                            8
-                      </td>
-                      <td>John Doe</td>
-                      <td>XYZ Electronics</td>
-                      <td>$1,250</td>
-                      <td>01-Oct-2024</td>
-                      <td>Delivered</td>
-                      <td>
-                            <button class="ct_edit_btn py-1 ct_border_radius_10" data-bs-toggle="modal"
-                                  data-bs-target="#ct_edit_user"><i class="fa-solid fa-pen-to-square"></i></button>
-                      </td>
-                </tr>
-          </tbody>
+      <div class="card ct_custom_table">
+            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
+                  [tableStyle]="{ 'min-width': '75rem' }">
+                  <ng-template pTemplate="caption">
+                        <div class="flex">
+                              <p-iconField iconPosition="left" class="ml-auto">
+                                    <p-inputIcon>
+                                          <i class="pi pi-search"></i>
+                                    </p-inputIcon>
+                                    <input pInputText type="text"
+                                          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                          placeholder="Search keyword" />
+                              </p-iconField>
+                        </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                        <tr>
+                              <th style="width:10%" >S.no</th>
+                              <th pSortableColumn="">Offer ID</th>
+                              <th>Title</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              <th>Start Price</th>
+                              <th>Max Bid</th>
+                              <th>Max Bid User</th>
+                              <th>Status</th>
+                              <th>Bought by</th>
+                              <!-- <th style="width:25%">Action</th> -->
 
-    </table>
+                        </tr>
+
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer let-i="rowIndex">
+                        <tr>
+                              <td>
+                                    {{i+ 1}}
+                              </td>
+                              <td>{{customer.offer_unique_id}}</td>
+                              <td>{{customer.title}}</td>
+                              <td>{{customer.start_date.toUTCString() }}</td>
+                              <td>{{customer.end_date.toUTCString()}}</td>
+                          
+                              <td>{{customer.start_price}}</td>
+                           
+                              <td>{{customer.highest_bid}}</td>
+                              <td>{{customer.user_name}}</td>
+                              <td>{{customer.status}}</td>
+
+                              <td>{{customer.buyer == '' ? '-' : customer.buyer}}</td>
+                            
+                        </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                        <tr>
+                              <td colspan="5">No customers found.</td>
+                        </tr>
+                  </ng-template>
+            </p-table>
+      </div>
 
 </div>
 

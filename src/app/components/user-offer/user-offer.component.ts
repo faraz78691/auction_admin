@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
-
+import moment from 'moment-timezone';
 @Component({
   selector: 'app-user-offer',
   templateUrl: './user-offer.component.html',
@@ -10,45 +10,80 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserOfferComponent {
   userOfferData: any[] = []
-userId:number | undefined;
+  userId: number | undefined;
+  swissDate: any;
   constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    this.getSwitzerlandTime()
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       this.userId = params['id']
-      console.log(this.userId)
+     
     });
 
-    if(this.userId != undefined){
-this.getUserOffersByUserId()
-    }else{
+    if (this.userId != undefined) {
+      this.getUserOffersByUserId()
+    } else {
       this.getUserOffers()
     }
+  };
+
+
+  getSwitzerlandTime() {
+    this.swissDate = moment.tz("Europe/Zurich").toDate();
+     // Converts to Date object in Switzerland timezone
   }
 
   getUserOffers() {
-    let apiUrl = 'admin/getAllUsersOffers'
+    const apiUrl = 'admin/getAllUsersOffers';
+    
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.userOfferData = res.data
+        this.userOfferData = res.data.map((item: any) => {
+          // Convert end_date to Date if it's a string
+          const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+          const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
+      
+        if (endDateUTC <= swissDate ) {
+          item['status'] = item.offer_buy_status == 1 ? 'Sold' : 'Not Sold';
+        } else {
+          item['status'] = 'Open';
+        }
+          
+          return item; // Ensure each item is returned after modification
+        });
+        
+        console.log(this.userOfferData);
       } else {
-        this.toastr.error(res.message)
+        this.toastr.error(res.message);
       }
     }, (err: any) => {
-      this.toastr.error(err)
-    })
-  };
+      this.toastr.error(err);
+    });
+  }
+  
 
   getUserOffersByUserId() {
     let apiUrl = `admin/getAllOffersByUserId?user_id=${this.userId}`;
-    
+
     this.service.get(apiUrl).subscribe({
       next: (res: any) => {
         if (res.success) {
-          this.userOfferData = res.data;
+          this.userOfferData = res.data.map((item: any) => {
+            // Convert end_date to Date if it's a string
+            const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+            const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
+           
+          if (endDateUTC <=swissDate ) {
+            item['status'] = item.offer_buy_status == 1 ? 'Sold' : 'Not Sold';
+          } else {
+            item['status'] = 'Open';
+          }
+            
+            return item; // Ensure each item is returned after modification
+          });
         } else {
           this.toastr.error(res.message);
         }
@@ -60,6 +95,6 @@ this.getUserOffersByUserId()
         // Optional: If you need to perform something when the observable completes
       }
     });
-  }
-  
+  };
+
 }

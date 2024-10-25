@@ -40,7 +40,7 @@ export class AttributeComponent {
   selectBoxData = [
     { type: 'Type', input: [{ type: 'select' }] },
     { type: 'Brand', input: [{ type: 'select' }] },
-    { type: 'Material option', input: [{ type: 'select' }] },
+    { type: 'Material', input: [{ type: 'select' }] },
     { type: 'Color', input: [{ type: 'checkbox' }] },
     { type: 'Country', input: [{ type: 'select' }] },
     { type: 'Compatibility', input: [{ type: 'select' }] },

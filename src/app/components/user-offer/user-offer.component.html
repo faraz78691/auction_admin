@@ -12,7 +12,7 @@
                   </li>
                   @if (userId != undefined) {
                   <li>
-                        <h6 class="mb-0">{{userOfferData[0].seller_name}} offers<i
+                        <h6 class="mb-0">{{userOfferData[0]?.seller_name}} offers<i
                                     class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
@@ -70,7 +70,9 @@
                               <td>{{offer.product_name}}</td> -->
                               <td>{{customer.is_bid_or_fixed == 1 ? 'Auction' : 'Fixed'}}</td>
 
-                              <td>{{customer.offfer_buy_status == 1 ? 'Finished' : 'Open'}}</td>
+                              <td [ngStyle]="{ 'color': customer.status === 'Not Sold' ? 'red' : '' }">
+                                    {{ customer.status }}
+                                  </td>
                               <td>{{customer.is_bid_or_fixed == 1 ? customer.start_price : '-' }}</td>
                               <td>{{customer.is_bid_or_fixed == 1 ? customer.buyto_price : '-'}}</td>
                               <td>{{customer.is_bid_or_fixed == 0 ? customer.fixed_offer_price : '-'}}</td>
