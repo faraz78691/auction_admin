@@ -10,3 +10,17 @@
     overflow-x: hidden;
     padding-inline: 5px;
 }
+.ct_user_modal_list_50{
+  padding: 4px;
+  border-bottom: 1px solid #75757536;
+}
+
+.ct_close{
+  background-image: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.ct_close:focus{
+  box-shadow: unset;
+}

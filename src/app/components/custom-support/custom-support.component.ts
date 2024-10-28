@@ -17,13 +17,15 @@ export class CustomSupportComponent {
   chats: any[] = [];
   adminId!: any;
   userId!: number;
-  username!:string;
+  username!: string;
+  isNewChat: boolean = false;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   // apiUrl = 'http://192.168.29.44:5000/';
   // apiUrl = 'http://localhost:5000/';
   apiUrl = 'http://98.80.36.64:5000/';
-  searchQuery:string | undefined;
+  searchQuery: string | undefined;
   private socket: Socket;
+  usernameArray!: any[];
   constructor(private _chatService: ChatSocketService, private apiService: SharedService, private authService: AuthService) {
     this.socket = io(this.apiUrl);
   };
@@ -40,7 +42,7 @@ export class CustomSupportComponent {
       this.chats.push(chats)
       this.scrollToBottom();
       console.log(this.chats);
-
+      this.getUsersChats();
     });
   };
   ngAfterViewChecked() {
@@ -82,21 +84,27 @@ export class CustomSupportComponent {
   }
 
 
-
   getUsersChats() {
     this.apiService.get('admin/getAllChatMessageUser').subscribe({
       next: res => {
         if (res.success == true) {
-          this.userList = res.userChat;
-          this.openChat(this.userList[0].user_id, this.userList[0].user_name)
+          this.userList = res.userChat
+          if(this.isNewChat){
+            const usernameInfo = { user_name: this.username };
+            this.userList.unshift(usernameInfo);
+          }   
+
+          console.log(this.userList);
         }
-        console.log(res);
+        //console.log(res);
       }
     })
   }
 
   sendMessage() {
-    if(this.senderMessage.trim().length == 0){
+    this.isNewChat = false;
+    this.getUsersChats()
+    if (this.senderMessage.trim().length == 0) {
       return
     }
     const msg = {
@@ -106,6 +114,7 @@ export class CustomSupportComponent {
       sender_id: this.adminId
     }
     this._chatService.sendMessage(msg).then(() => {
+ 
       // console.log("not calling");
       // this.chats.push(msg);
       // console.log(this.chats);
@@ -119,25 +128,37 @@ export class CustomSupportComponent {
     this.senderMessage = ''
   };
 
-    // Function to handle keydown events
-    onKeyDown(event: KeyboardEvent) {
-   
-      if (event.key === 'Enter' && this.senderMessage.trim()) {
-        this.sendMessage();
-      }
+  // Function to handle keydown events
+  onKeyDown(event: KeyboardEvent) {
+
+    if (event.key === 'Enter' && this.senderMessage.trim()) {
+      this.sendMessage();
     }
+  }
 
 
-  openChat(userId: any, username:string) {
+  @ViewChild('closeModal') closeModal!: ElementRef;
+
+  openChat(userId: any, username: string) {
     this.isChatboxVisible = true;
     this.userId = userId;
     const formData = new URLSearchParams();
     formData.set('user_id', userId)
+    //debugger
     this.apiService.post('user/getChatMessage', formData.toString()).subscribe({
       next: res => {
         if (res.success == true) {
           this.chats = res.data;
           this.username = username
+          this.closeModal.nativeElement.click();
+          this.isNewChat = false;
+        } else {
+         
+          this.chats = []
+          this.username = username
+          this.isNewChat = true;
+          this.getUsersChats()
+          this.closeModal.nativeElement.click();
         }
 
       }

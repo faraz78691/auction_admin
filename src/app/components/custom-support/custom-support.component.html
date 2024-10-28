@@ -13,7 +13,7 @@
 <section class="message-area">
       <div class="chat-area row">
             <!-- chatlist -->
-            <div class=" col-xl-3">
+            <div class=" col-xxl-3 col-xl-4">
 
 
                   <div class="chatlist">
@@ -32,16 +32,16 @@
                                           </div>
                                     </div>
 
-                                    <div class="modal-body mt-4">
+                                    <div class="modal-body mt-4" style="height: calc(100vh - 254px); min-height: calc(100vh - 254px); max-height: calc(100vh - 254px);">
                                           <!-- chat-list -->
                                           <div class="chat-lists">
                                                 <div class="chat-list">
                                                       @for (item of userList; track $index) {
-                                                            <a  class="ct_chat_user ct_user_active" (click)="openChat(item.user_id, item.user_name)">
+                                                            <a  class="ct_chat_user ct_user_active mb-2" (click)="openChat(item.user_id, item.user_name)">
                                                                   <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                        <!-- <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                              alt="user img"> -->
-                                                                              <i class="ct_img_44 fa-solid fa-user"></i>
+                                                                        <img class="ct_img_44" src="assets/img/user_1.png"
+                                                                              alt="user img">
+                                                                              <!-- <i class="ct_img_44 fa-solid fa-user"></i> -->
                                                                         <!-- <span class="active"></span> -->
                                                                   </div>
                                                                   <div class="flex-grow-1">
@@ -70,7 +70,7 @@
             <!-- chatlist -->
 
 
-            <div class=" col-xl-9">
+            <div class=" col-xxl-9 col-xl-8 ">
                   <!-- chatbox -->
                   <div class="chatbox " [ngClass]="{'showbox': isChatboxVisible}">
                         <div class="modal-dialog-scrollable">
@@ -114,7 +114,9 @@
                                     </div>
 
 
-                                    <div class="modal-body " #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                                    <div class="modal-body "  style="height: calc(100vh - 364px);
+                                    min-height: calc(100vh - 364px);
+                                    max-height: calc(100vh - 364px);" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                                           <div class="msg-body "  >
                                                 <ul>
                                                     @for (item of chats; track $index) {
@@ -305,22 +307,20 @@
 
                
 
-                <div class="ct_add_member_scroll" >
+                <div class="ct_add_member_scroll mt-3" >
                     <div *ngIf="alluserData?.length === 0" class="text-center mt-4">
-                        <p class="ct_fs_15 text-white">No users found</p>
+                        <p class="ct_fs_15">No users found</p>
                     </div>
                     <div *ngFor="let items of alluserData;">
-                        <div  class="d-flex align-items-center gap-2 mt-4"
-                            style="cursor: pointer;" (click)="openChat(items.id, items.name)">
-                            <!-- <img [src]="'/assets/img/np_pro.png'"
-                                alt="" class="ct_img_62 ct_border_radius_100"> -->
+                        <div  class="d-flex align-items-center gap-2  ct_user_modal_list_50"
+                            style="cursor: pointer;" (click)="openChat(items.id, items.first_name)">
+                            <img [src]="'https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg='"
+                                alt="" class="ct_img_40 ct_border_radius_100">
+                                
                             <div>
-                                <h4 class="ct_ff_roboto ct_fw_600 text-white ct_fs_15 mb-0">
+                                <h4 class="ct_ff_roboto ct_fw_500 ct_fs_16  ct_fs_15 mb-0">
                                     {{items.first_name}} &nbsp;  {{items.last_name}} </h4>
-                                <div class="d-flex align-items-center  gap-2 mt-1">
-                                    <!-- <img src="../assets/img/star.png" alt="star"> -->
-                                    <!-- <span class="ct_orange_text">Accountability</span> -->
-                                </div>
+                             
                             </div>
                         </div>
                     </div>
