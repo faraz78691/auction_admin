@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, fromEvent, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ export class ChatSocketService {
   isCoach: boolean = true;
   private socket!: Socket;
   // apiUrl = 'http://192.168.29.44:5000/';
-  // apiUrl = 'http://localhost:5000/';
+  apiUrl = 'http://localhost:3000/';
   // apiUrl = 'http://192.168.29.44:5000/';
-  apiUrl = 'http://98.80.36.64:5000/';
+  // apiUrl = 'http://98.80.36.64:5000/';
   authToken = localStorage.getItem('fbToken');
   constructor() {
     this.socket = io(this.apiUrl);
@@ -61,15 +61,28 @@ export class ChatSocketService {
       });
     });
   };
+  getMessageCount(): Observable<any> {
 
-  sendAdminLogin(adminId: string): void {
-    this.socket.emit('admin_login', adminId);
-  }
-
-
-  sendLogin(userId: number): void {
-    this.socket.emit('user_login', userId);
+    return new Observable((observer) => {
+      this.socket.on('getMessages', (data) => {
+        console.log("get msg", data);
+        observer.next(data);
+      });
+    });
   };
+
+ 
+
+ // Use `fromEvent` to listen for the online status updates
+ getOnlineStatus(): Observable<string[]> {
+  return fromEvent<string[]>(this.socket, 'update_online_status');
+};
+
+ // Request the list of online users
+ getOnlineUsers() {
+  this.socket.emit('get_online_users');
+}
+
 
 
   getUserStatus(): Observable<any> {

@@ -32,7 +32,7 @@
                                           </div>
                                     </div>
 
-                                    <div class="modal-body mt-4" style="height: calc(100vh - 254px); min-height: calc(100vh - 254px); max-height: calc(100vh - 254px);">
+                                    <div class="modal-body mt-4" style="height: calc(1000vh - 254px); min-height: calc(100vh - 254px); max-height: calc(100vh - 254px);">
                                           <!-- chat-list -->
                                           <div class="chat-lists">
                                                 <div class="chat-list">
@@ -51,8 +51,8 @@
                                                                               style="color: #21212180;">
                                                                               {{item.message}}</p>
                                                                   </div>
-                                                                  <div class="ct_mesg_num_1 ms-auto">
-                                                                        <span> {{item.count}}</span>
+                                                                  <div class="ct_mesg_num_1 ms-auto" *ngIf="item.unread_count != 0">
+                                                                        <span> {{item.unread_count}}</span>
                                                                   </div>
                                                             </a>
 
@@ -115,7 +115,7 @@
 
 
                                     <div class="modal-body "  style="height: calc(100vh - 364px);
-                                    min-height: calc(100vh - 364px);
+                                    min-height: calc(90vh - 364px);
                                     max-height: calc(100vh - 364px);" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                                           <div class="msg-body "  >
                                                 <ul>

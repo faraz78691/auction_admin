@@ -21,13 +21,13 @@ export class CustomSupportComponent {
   isNewChat: boolean = false;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   // apiUrl = 'http://192.168.29.44:5000/';
-  // apiUrl = 'http://localhost:5000/';
-  apiUrl = 'http://98.80.36.64:5000/';
+  apiUrl = 'http://localhost:3000/';
+  // apiUrl = 'http://98.80.36.64:5000/';
   searchQuery: string | undefined;
-  private socket: Socket;
   usernameArray!: any[];
+  onlineUsers: string[] = [];
   constructor(private _chatService: ChatSocketService, private apiService: SharedService, private authService: AuthService) {
-    this.socket = io(this.apiUrl);
+    // this.socket = io(this.apiUrl);
   };
 
 
@@ -35,10 +35,15 @@ export class CustomSupportComponent {
     this.adminId = localStorage.getItem('auctionAdminID');
     this.getUserList();
     console.log(this.adminId);
-    this._chatService.sendAdminLogin(this.adminId);
+  
+    this._chatService.getOnlineUsers();
+    this._chatService.getOnlineStatus().subscribe((onlineUsers) => {
+      this.onlineUsers = onlineUsers;
+      console.log(this.onlineUsers)
+    });
     this.getUsersChats();
     this._chatService.getMessage().subscribe((chats) => {
-      console.log("subcirve called");
+     
       this.chats.push(chats)
       this.scrollToBottom();
       console.log(this.chats);
@@ -93,6 +98,21 @@ export class CustomSupportComponent {
             const usernameInfo = { user_name: this.username };
             this.userList.unshift(usernameInfo);
           }   
+
+          console.log(this.userList);
+        }
+        //console.log(res);
+      }
+    })
+  }
+  updateReadMSg(id:number) {
+    const formdata = new URLSearchParams();
+    formdata.set('id',id.toString())
+   
+    this.apiService.post('admin/updateMsgCount',formdata ).subscribe({
+      next: res => {
+        if (res.success == true) {
+       
 
           console.log(this.userList);
         }
@@ -160,6 +180,8 @@ export class CustomSupportComponent {
           this.getUsersChats()
           this.closeModal.nativeElement.click();
         }
+
+        this.updateReadMSg(userId)
 
       }
     })
