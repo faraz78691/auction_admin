@@ -441,7 +441,7 @@ message-area
     /* width: 100%; */
     /* background-color: #fff; */
     border-radius: 0.3rem;
-    height: 70vh;
+    height: 78vh;
     overflow: hidden;
     min-height: calc(100% - 1rem);
 }
@@ -1006,9 +1006,18 @@ button:focus {
 }
 .ct_chat_user{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 44px auto auto;
     align-items: center;
     gap: 15px;
+}
+.ct_icon_user_white_44{
+    width: 44px;
+    height: 44px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
 }
 
 .ct_grey_bg{

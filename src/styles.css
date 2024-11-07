@@ -26,6 +26,7 @@
   
   
   
+  
  
   .ct_add_member_scroll::-webkit-scrollbar-thumb {
       background: #888;
@@ -35,3 +36,28 @@
   .ct_add_member_scroll::-webkit-scrollbar-thumb:hover {
       background: #555;
   }
+
+  .ct_srch_top_center{
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
+}
+button.p-ripple.p-element.p-paginator-page.p-paginator-element{
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 10px;
+}
+
+.p-paginator-rpp-options {
+    height: 32px;
+    width: 50;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}   
+.p-datatable .p-datatable-header{
+    background-color: transparent;
+    border: 0px;
+}
