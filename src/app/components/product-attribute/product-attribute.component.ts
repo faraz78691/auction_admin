@@ -51,7 +51,7 @@ export class ProductAttributeComponent {
         this.attrName = res.attributeName;
         this.productName = res.product.name;
         this.categoryData = res.category;
-        this.toastr.error(res.message)
+
       }
     }, (err: any) => {
       this.toastr.error(err)
@@ -103,7 +103,8 @@ export class ProductAttributeComponent {
         this.loading = false
       } else {
         this.toastr.error("No Products found")
-        this.loading = false
+        
+        this.loading = false;
       }
     })
   }

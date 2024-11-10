@@ -24,18 +24,19 @@
             +</button> -->
 </div>
 
-<div class="table-responsive ct_mt_40">
+<div class=" ct_mt_40">
       <div class="card ct_custom_table">
-            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
-                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
-                  [tableStyle]="{ 'min-width': '75rem' }">
+            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true" [showCurrentPageReport]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[ 'offer_unique_id','title']"
+                  [tableStyle]="{ 'min-width': '75rem' ,'background-color': 'transparent', }"   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                   <ng-template pTemplate="caption">
-                        <div class="flex">
-                              <p-iconField iconPosition="left" class="ml-auto">
+                        <div class="d-flex justify-content-between ms-auto mb-3 mt-3">
+                              <p-button class="p-2" label="Clear" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(dt)" />
+                              <p-iconField iconPosition="right" class="ml-auto">
                                     <p-inputIcon>
-                                          <i class="pi pi-search"></i>
+                                          <i class="fa-solid fa-search ct_srch_top_center"></i>
                                     </p-inputIcon>
-                                    <input pInputText type="text"
+                                    <input #searchInput pInputText type="text" class="form-control ct_input"
                                           (input)="dt.filterGlobal($any($event.target).value, 'contains')"
                                           placeholder="Search keyword" />
                               </p-iconField>
@@ -43,11 +44,13 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
-                              <th style="width:25%" >S.no</th>
-                              <th pSortableColumn="">Offer ID</th>
-                              <th>Title</th>
-                              <th>Auction Type</th>
-                              <th>Status</th>
+                              <th style="width:25%" pSortableColumn="id">S.no <p-sortIcon field="code" /></th>
+                              <th pSortableColumn="offer_unique_id">Offer ID 
+                                   
+                              </th>
+                              <th pSortableColumn="title">Title</th>
+                              <th pSortableColumn="is_bid_or_fixed">Auction Type <p-sortIcon field="is_bid_or_fixed" /></th>
+                              <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
                               <th>Start Price (CHF)</th>
                               <th>Buy it now (CHF)</th>
                               <th>Fixed Price (CHF)</th>
@@ -97,7 +100,7 @@
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
                         <tr>
-                              <td colspan="5">No customers found.</td>
+                              <td colspan="5">No Offers found.</td>
                         </tr>
                   </ng-template>
             </p-table>

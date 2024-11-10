@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment-timezone';
+import { Table } from 'primeng/table';
 @Component({
   selector: 'app-user-offer',
   templateUrl: './user-offer.component.html',
@@ -12,6 +13,8 @@ export class UserOfferComponent {
   userOfferData: any[] = []
   userId: number | undefined;
   swissDate: any;
+  @ViewChild('dt') table!: Table;
+  @ViewChild('searchInput') searchInput!: ElementRef;
   constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
 
   }
@@ -96,5 +99,10 @@ export class UserOfferComponent {
       }
     });
   };
+
+  clear(table: any) {
+    table.clear();
+    this.searchInput.nativeElement.value = ''
+  }
 
 }

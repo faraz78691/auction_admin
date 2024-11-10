@@ -91,7 +91,7 @@ export class AttributeComponent {
           this.productName = res.product.name;
           this.categoryData = res.category;
           this.service.setProductData(res.product.id, res.product.name);
-          this.toastr.error('No Attribute Found');
+         
         }
       },
       (err: any) => {
@@ -130,7 +130,7 @@ export class AttributeComponent {
 
     this.service.post(apiUrl, formData.toString()).subscribe((res) => {
       if (res.success) {
-        this.toastr.success(res.message);
+        this.service.showSuccess(res.message);
         this.closeModal?.nativeElement.click();
         this.attributeForm.reset();
         this.getAttributes();

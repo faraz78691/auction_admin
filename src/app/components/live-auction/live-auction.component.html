@@ -12,18 +12,18 @@
           +</button>
 </div>
 
-<div class="table-responsive ct_mt_40">
+<div class=" ct_mt_40">
       <div class="card ct_custom_table">
             <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
                   [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
                   [tableStyle]="{ 'min-width': '75rem' }">
                   <ng-template pTemplate="caption">
-                        <div class="flex">
-                              <p-iconField iconPosition="left" class="ml-auto">
+                        <div class="flex w-25 ms-auto mb-3 mt-3">
+                              <p-iconField iconPosition="right" class="ml-auto">
                                     <p-inputIcon>
-                                          <i class="pi pi-search"></i>
+                                          <i class="fa-solid fa-search ct_srch_top_center"></i>
                                     </p-inputIcon>
-                                    <input pInputText type="text"
+                                    <input pInputText type="text" class="form-control ct_input"
                                           (input)="dt.filterGlobal($any($event.target).value, 'contains')"
                                           placeholder="Search keyword" />
                               </p-iconField>

@@ -9,7 +9,7 @@
       </li>
       <li>
         <h6 class="mb-0">
-          Category - {{ categoryData.name}}
+          Category - {{ categoryData?.name}}
           <i class="fa-solid fa-angle-right ms-2"></i>
         </h6>
       </li>
@@ -71,6 +71,13 @@
         </td>
       </tr>
       }
+    @if(attributeData.length ==0){
+      <tr class="mt-5">
+            <td class="p-3" colspan="5">No Attribute found.</td>
+      </tr>
+
+    }
+
     </tbody>
   </table>
 </div>

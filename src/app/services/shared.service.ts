@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Location } from '@angular/common';
+import { MessageService } from 'primeng/api';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,6 +30,7 @@ export class SharedService {
     private http: HttpClient,
     private authService: AuthService,
     private location: Location,
+    private messageService: MessageService
   ) { }
 
   get(url: any): Observable<any> {
@@ -55,6 +57,12 @@ export class SharedService {
 
   goBack(): void {
     this.location.back();  // Navigate to the previous page
+  };
+
+  
+
+  showSuccess(msg:string) {
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: msg});
   }
  
 }

@@ -18,7 +18,7 @@
       <div class="card ct_custom_table pt-4 px-3">
             <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
                   [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
-                  [tableStyle]="{ 'min-width': '75rem','background-color': 'transparent', }">
+                  [tableStyle]="{ 'min-width': '50rem','background-color': 'transparent', }">
                   <ng-template pTemplate="caption">
                         <div class="flex w-25 ms-auto mb-3 mt-3">
                               <p-iconField iconPosition="right" class="ml-auto">
@@ -33,56 +33,68 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
-                              <th style="width:10%" >S.no</th>
+                             
                               <th pSortableColumn="">Offer ID</th>
                               <th>Title</th>
-                              <th>Buyer</th>
                               <th>Buyer Status</th>
-                              <th>Seller</th>
                               <th>Seller Status</th>
-                              <th>Auction Type</th>
-                              <th>Bought Price</th>
-                              <th style="width:25%">Action</th>
+                              <th style="width:25%">Order Summary</th>
 
                         </tr>
 
                   </ng-template>
                   <ng-template pTemplate="body" let-customer let-i="rowIndex">
                         <tr>
-                              <td>
-                                    {{i+ 1}}
-                              </td>
+                        
                               <td>{{customer.offer_unique_id}}</td>
                               <td>{{customer.title}}</td>
-                              <td>{{customer.buyer_name}}</td>
+                            
                               @if(customer.buyer_status == '1'){
-                                    <td>To Pay</td>
+                                    <td>{{customer.buyer_name}}
+                                          <div style="display: block;">To Pay</div>
+                                    </td>
                               }@else if (customer.buyer_status == '2') {
-                                   <td> Delivery Open</td>
+                                   <td>{{customer.buyer_name}} 
+                                    <div style="display: block;">Delivery Open</div>
+                                    </td>
                               }@else if (customer.buyer_status == '3') {
-                                  <td>To be evaluated</td>  
+                                  <td>{{customer.buyer_name}}
+                                    <div style="display: block;">To be evaluated</div>
+                                    </td>  
                               }@else if (customer.buyer_status == '4') {
-                                  <td>Completed </td>  
+                                  <td>{{customer.buyer_name}}
+                                    <div style="display: block;">Completed</div>
+                                     </td>  
                               }@else if (customer.buyer_status == '5') {
-                                  <td>Cancelled</td>  	 
+                                  <td>{{customer.buyer_name}}
+                                    <div style="display: block;">Cancelled</div>
+                                    </td>  	 
                               }
-                              <td>{{customer.seller_name}}</td>
+                         
                               @if(customer.seller_status == '1'){
-                                    <td>Payment pending</td>
+                                    <td>{{customer.seller_name}}
+                                          <div style="display: block;">Payment pending</div>
+                                          </td>
                               }@else if (customer.seller_status == '2') {
-                                   <td> Handover pending</td>
+                                   <td> {{customer.seller_name}}
+                                    <div style="display: block;"> Handover pending</div>
+                                   </td>
                               }@else if (customer.seller_status == '3') {
-                                  <td>Pending evaluation</td>  
+                                  <td>{{customer.seller_name}}
+                                    <div style="display: block;">Pending evaluation</div>
+                                    </td>  
                               }@else if (customer.seller_status == '4') {
-                                  <td>Completed  </td>  
+                                  <td>{{customer.seller_name}}
+                                    <div style="display: block;">Completed</div>
+                                      </td>  
                               }@else if (customer.seller_status == '5') {
-                                  <td>Cancelled</td>  	 
+                                  <td>{{customer.seller_name}}
+                                    <div style="display: block;">Cancelled</div>
+                                    </td>  	 
                               }
-                              <td>{{customer.buyer_name}}</td>
-                           
-                              <td>{{customer.amount}}</td>
+                          
 
-                              <td>{{customer.offfer_buy_status == 1 ? 'Finished' : 'Open'}}</td>
+                              <td><i class="fa fa-eye" aria-hidden="true"></i></td>
                             
                             
                           
@@ -94,7 +106,7 @@
                         </tr>
                   </ng-template>
             </p-table>
-            <div style="height: 100px;"></div>
+          
       </div>
      
 

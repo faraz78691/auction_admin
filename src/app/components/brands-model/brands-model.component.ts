@@ -30,7 +30,7 @@ export class BrandsModelComponent {
     //   attribute_value_name: ['', [Validators.required]],
     // })
   };
-
+  // addSubAttributesMapping
 
   ngOnInit() {
     this.getModels();
@@ -48,7 +48,12 @@ export class BrandsModelComponent {
        this.modelsList = res.subAttributeData;
       } else {
         // this.productName = res.attributeName
-        this.toastr.error(res.message)
+        this.attrName = res.attributeType;
+        this.productName = res.product;
+        this.categoryData = res.category;
+        this.attributeMapping = res.attribute_mapping_name;
+        this.brandName = res.attributeMapping;
+       
       }
     }, (err: any) => {
       this.toastr.error(err)
@@ -94,5 +99,34 @@ export class BrandsModelComponent {
     this.modelName = item.value;
   
   };
+
+  // onSubmit(form: any) {
+  //   this.loading = true
+  //   form.markAllAsTouched()
+  //   if (form.invalid) {
+  //     this.loading = false
+  //     return
+  //   }
+
+  //   let apiUrl = `admin/addProductAttributes`
+  //   let formData = new URLSearchParams()
+  //   formData.set('attribute_value_name', form.value.attribute_value_name)
+  //   formData.set('product_id', this.pro_id)
+  //   formData.set('attribute_id', this.attr_id)
+
+
+  //   this.service.post(apiUrl, formData.toString()).subscribe(res => {
+  //     if (res.success) {
+  //       this.toastr.success(res.message)
+  //       this.closeModal?.nativeElement.click()
+  //       this.attributeForm.reset()
+  //       this.getProAttributes()
+  //       this.loading = false
+  //     } else {
+  //       this.toastr.error(res.message)
+  //       this.loading = false
+  //     }
+  //   })
+  // };
 
 }

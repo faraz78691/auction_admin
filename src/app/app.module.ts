@@ -31,6 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrandsModelComponent } from './components/brands-model/brands-model.component';
 import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,11 +63,11 @@ import { LiveAuctionComponent } from './components/live-auction/live-auction.com
     FormsModule,
     SweetAlert2Module,
     BrowserAnimationsModule,
-    IconFieldModule, InputTextModule, InputIconModule, DropdownModule,
+    IconFieldModule, InputTextModule, InputIconModule, DropdownModule,ButtonModule,
     TableModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
