@@ -59,6 +59,9 @@ export class ProductAttributeComponent {
   }
 
   onSubmit(form: any) {
+    if(this.attrValue.trim().length == 0){
+      return
+    }
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {
@@ -88,7 +91,9 @@ export class ProductAttributeComponent {
   };
 
   updateAttr(){
-
+    if(this.attrValue.trim().length == 0){
+      return
+    }
     const apiUrl = `admin/updateProductAttributeMapping`
     
     let formData = new URLSearchParams();

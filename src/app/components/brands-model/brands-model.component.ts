@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,9 +11,11 @@ import Swal from 'sweetalert2';
   styleUrl: './brands-model.component.css'
 })
 export class BrandsModelComponent {
+  @ViewChild('closeModal') closeModal: ElementRef | undefined;
+  @ViewChild('closeModal2') closeModal2: ElementRef | undefined;
   attr_id :number | undefined;
  modelsList:any[]= [];
- modelName:string | undefined;
+ modelName:string= '';
  modelId:number | undefined
   attrName: any;
   productName: any;
@@ -100,33 +102,56 @@ export class BrandsModelComponent {
   
   };
 
-  // onSubmit(form: any) {
-  //   this.loading = true
-  //   form.markAllAsTouched()
-  //   if (form.invalid) {
-  //     this.loading = false
-  //     return
-  //   }
+  onSubmit() {
+  
+  if(this.modelName.trim().length == 0){
+    return
+  }
 
-  //   let apiUrl = `admin/addProductAttributes`
-  //   let formData = new URLSearchParams()
-  //   formData.set('attribute_value_name', form.value.attribute_value_name)
-  //   formData.set('product_id', this.pro_id)
-  //   formData.set('attribute_id', this.attr_id)
+    let apiUrl = `admin/addSubAttributesMapping`
+    let formData = new URLSearchParams()
+    formData.set('attribute_mapping_id', this.attr_id!.toString())
+    formData.set('value', this.modelName)
+  
+
+    this.service.post(apiUrl, formData.toString()).subscribe(res => {
+      if (res.success) {
+        this.getModels()
+        this.toastr.success(res.message)
+        this.modelName = ''
+        this.closeModal?.nativeElement.click()
+     
+      } else {
+        this.toastr.error(res.message)
+    
+      }
+    })
+  };
 
 
-  //   this.service.post(apiUrl, formData.toString()).subscribe(res => {
-  //     if (res.success) {
-  //       this.toastr.success(res.message)
-  //       this.closeModal?.nativeElement.click()
-  //       this.attributeForm.reset()
-  //       this.getProAttributes()
-  //       this.loading = false
-  //     } else {
-  //       this.toastr.error(res.message)
-  //       this.loading = false
-  //     }
-  //   })
-  // };
+  updateAttr(){
+  
+    if(this.modelName.trim().length == 0){
+      return
+    }
+    const apiUrl = `admin/updateSubAttributesById`
+    
+    let formData = new URLSearchParams();
+    formData.set('id', this.modelId!.toString())
+    formData.set('value', this.modelName)
+    this.service.post(apiUrl, formData.toString()).subscribe(res => {
+      if (res.success) {
+        this.toastr.success(res.message)
+
+        this.closeModal2?.nativeElement.click();
+        this.getModels()
+      
+      } else {
+        this.toastr.error("Failed to update")
+        this.closeModal2?.nativeElement.click();
+     
+      }
+    })
+  }
 
 }

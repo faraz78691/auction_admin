@@ -28,12 +28,6 @@ export class CategoryManagementComponent {
     this.getCategories()
   };
 
-
- 
-  // Column Definitions: Defines the columns to be displayed.
- 
-
-
   getCategories() {
     let apiUrl = 'admin/getAllCategory'
     this.service.get(apiUrl).subscribe((res: any) => {
@@ -55,6 +49,9 @@ export class CategoryManagementComponent {
   };
 
   onSubmit(form: any, formType: number) {
+    if(form.value.cat_name.trim().length == 0){
+      return
+    }
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {

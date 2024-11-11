@@ -53,8 +53,8 @@
                               </td>
                               <td>{{customer.offer_unique_id}}</td>
                               <td>{{customer.title}}</td>
-                              <td>{{customer.start_date.toUTCString() }}</td>
-                              <td>{{customer.end_date.toUTCString()}}</td>
+                              <td>{{customer.start_date | date:'medium':'UTC' }}</td>
+                              <td>{{customer.end_date |  date:'medium':'UTC'}}</td>
                           
                               <td>{{customer.start_price}}</td>
                            

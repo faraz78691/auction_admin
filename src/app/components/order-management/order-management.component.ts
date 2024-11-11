@@ -10,6 +10,7 @@ import { SharedService } from '../../services/shared.service';
 })
 export class OrderManagementComponent {
   userOfferData: any[] = []
+  orderSummary: any;
   userId:number | undefined;
     constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
   
@@ -38,6 +39,27 @@ export class OrderManagementComponent {
           // Optional: If you need to perform something when the observable completes
         }
       });
+    };
+
+    OpenSummaryModal(items:any){
+      console.log(items);
+      let formData = new URLSearchParams()
+   
+        var apiUrl = `buyer/ordersummary`
+        formData.set('offer_id', items.offer_id)
+        formData.set('buyer_id', items.buyer_id)
+        formData.set('seller_id', items.seller_id)
+    
+      this.service.post(apiUrl, formData.toString()).subscribe(res => {
+        if (res.success) {
+       
+       this.orderSummary = res.data;
+       console.log(this.orderSummary);
+        } else {
+          this.toastr.error("No Products found")
+        
+        }
+      })
     }
 
 

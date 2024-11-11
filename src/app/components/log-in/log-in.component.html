@@ -2,7 +2,7 @@
   <h5 class="mb-0 text-white mb-4">Auction Marketplace Admin Login</h5>
   <div class="ct_login_inner_bg">
     <p class="mb-3">Please fill in your unique admin login details below</p>
-    <form [formGroup]="logInForm" (ngSubmit)="onSubmit(logInForm)">
+    <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
       <div class="form-group mb-3">
         <label for="" class="mb-2 ct_fw_600">Email address</label>
         <input type="email" class="form-control ct_input" formControlName="email" placeholder="Enter Email address">
@@ -39,7 +39,7 @@
         </p>
       </div>
       <div class="ct_forgot_link">
-        <a href="fotget-pasword.html">forgot password?</a>
+        <!-- <a href="fotget-pasword.html">forgot password?</a> -->
       </div>
       <button class="ct_blue_btn w-100 mt-4">Sign In</button>
     </form>

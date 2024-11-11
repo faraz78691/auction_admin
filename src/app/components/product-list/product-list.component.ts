@@ -66,6 +66,10 @@ export class ProductListComponent {
       return
     }
 
+    if(form.value.name.trim().length == 0){
+      return
+    }
+
 
     let formData = new URLSearchParams()
     if (formType == 1) {

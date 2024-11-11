@@ -109,6 +109,10 @@ export class AttributeComponent {
       return;
     }
 
+    if(form.value.attribute_name.trim().length == 0){
+      return
+    }
+
     let apiUrl = `admin/addProductTypeAttributes`;
     let formData = new URLSearchParams();
     formData.set('attribute_name', form.value.attribute_name);
