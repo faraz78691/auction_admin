@@ -12,7 +12,7 @@ export class OrderManagementComponent {
   userOfferData: any[] = []
   orderSummary: any;
   userId:number | undefined;
-    constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
+    constructor(public service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
   
     }
   

@@ -2,12 +2,12 @@
       <div>
             <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-1">Order Management</h3>
             <ul class="d-flex align-items-center gap-3 p-2">
-               
+
                   <li>
                         <h6 class="mb-0">Sold Offers<i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
-      
+
             </ul>
       </div>
       <!-- <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_offers">Add Items
@@ -33,7 +33,7 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
-                             
+
                               <th pSortableColumn="">Offer ID</th>
                               <th>Title</th>
                               <th>Buyer Status</th>
@@ -45,59 +45,69 @@
                   </ng-template>
                   <ng-template pTemplate="body" let-customer let-i="rowIndex">
                         <tr>
-                        
-                              <td>{{customer.offer_unique_id}}</td>
-                              <td>{{customer.title}}</td>
-                            
-                              @if(customer.buyer_status == '1'){
-                                    <td>{{customer.buyer_name}}
-                                          <div style="display: block;">To Pay</div>
-                                    </td>
-                              }@else if (customer.buyer_status == '2') {
-                                   <td>{{customer.buyer_name}} 
-                                    <div style="display: block;">Delivery Open</div>
-                                    </td>
-                              }@else if (customer.buyer_status == '3') {
-                                  <td>{{customer.buyer_name}}
-                                    <div style="display: block;">To be evaluated</div>
-                                    </td>  
-                              }@else if (customer.buyer_status == '4') {
-                                  <td>{{customer.buyer_name}}
-                                    <div style="display: block;">Completed</div>
-                                     </td>  
-                              }@else if (customer.buyer_status == '5') {
-                                  <td>{{customer.buyer_name}}
-                                    <div style="display: block;">Cancelled</div>
-                                    </td>  	 
-                              }
-                         
-                              @if(customer.seller_status == '1'){
-                                    <td>{{customer.seller_name}}
-                                          <div style="display: block;">Payment pending</div>
-                                          </td>
-                              }@else if (customer.seller_status == '2') {
-                                   <td> {{customer.seller_name}}
-                                    <div style="display: block;"> Handover pending</div>
-                                   </td>
-                              }@else if (customer.seller_status == '3') {
-                                  <td>{{customer.seller_name}}
-                                    <div style="display: block;">Pending evaluation</div>
-                                    </td>  
-                              }@else if (customer.seller_status == '4') {
-                                  <td>{{customer.seller_name}}
-                                    <div style="display: block;">Completed</div>
-                                      </td>  
-                              }@else if (customer.seller_status == '5') {
-                                  <td>{{customer.seller_name}}
-                                    <div style="display: block;">Cancelled</div>
-                                    </td>  	 
-                              }
-                          
 
-                              <td><i class="fa fa-eye" aria-hidden="true" (click)="OpenSummaryModal(customer)" data-bs-toggle="modal" data-bs-target="#orderSummary"></i></td>
-                            
-                            
-                          
+                              <td class="ct_blue_text" title="See offer details" (click)="service.redirectToOffer(customer.offer_unique_id)">{{customer.offer_unique_id}}</td>
+                              <td>{{customer.title}}</td>
+
+                              @if(customer.buyer_status == '1'){
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details">{{customer.buyer_name}}</p>
+                                    <div style="display: block;">To Pay</div>
+                              </td>
+                              }@else if (customer.buyer_status == '2') {
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details"> {{customer.buyer_name}} </p>
+
+                                    <div style="display: block;">Delivery Open</div>
+                              </td>
+                              }@else if (customer.buyer_status == '3') {
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details"> {{customer.buyer_name}}</p>
+
+                                    <div style="display: block;">To be evaluated</div>
+                              </td>
+                              }@else if (customer.buyer_status == '4') {
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details"> {{customer.buyer_name}}</p>
+
+                                    <div style="display: block;">Completed</div>
+                              </td>
+                              }@else if (customer.buyer_status == '5') {
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details">{{customer.buyer_name}}</p>
+
+                                    <div style="display: block;">Cancelled</div>
+                              </td>
+                              }
+
+                              @if(customer.seller_status == '1'){
+                              <td>{{customer.seller_name}}
+                                    <div style="display: block;">Payment pending</div>
+                              </td>
+                              }@else if (customer.seller_status == '2') {
+                              <td> {{customer.seller_name}}
+                                    <div style="display: block;"> Handover pending</div>
+                              </td>
+                              }@else if (customer.seller_status == '3') {
+                              <td>{{customer.seller_name}}
+                                    <div style="display: block;">Pending evaluation</div>
+                              </td>
+                              }@else if (customer.seller_status == '4') {
+                              <td>{{customer.seller_name}}
+                                    <div style="display: block;">Completed</div>
+                              </td>
+                              }@else if (customer.seller_status == '5') {
+                              <td>{{customer.seller_name}}
+                                    <div style="display: block;">Cancelled</div>
+                              </td>
+                              }
+
+
+                              <td><i class="fa fa-eye" aria-hidden="true" (click)="OpenSummaryModal(customer)"
+                                          data-bs-toggle="modal" data-bs-target="#orderSummary"></i></td>
+
+
+
                         </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
@@ -106,9 +116,9 @@
                         </tr>
                   </ng-template>
             </p-table>
-          
+
       </div>
-     
+
 
 </div>
 
@@ -316,147 +326,162 @@
                         <div class="row">
                               @if(orderSummary){
                               <div class="col-lg-7 mb-4 mb-lg-0">
-                                          <div class="ct_purchase_order_status ">
+                                    <div class="ct_purchase_order_status ">
                                           <ul>
-                                          @for (item of orderSummary.resultOrderSummary; track $index) {
+                                                @for (item of orderSummary.resultOrderSummary; track $index) {
                                                 @if(item.buyer_message == 'null'){
                                                 <li>
-                                                    <img src="assets/img/received_arrow_2.png" alt="">
-                                                    <div>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1">{{item.seller_created_at |
-                                                            date:'medium':'UTC'}}</p>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
-                                                            *ngIf="item.seller_message =='The seller has received the payment'">
-                                                            payment </p>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
-                                                            *ngIf="item.seller_message =='The seller has shipped the item'">pickup
-                                                        </p>
-                                                        <p class=" mb-0">
-                                                            {{item.seller_message}} </p>
-                                                    </div>
+                                                      <img src="assets/img/received_arrow_2.png" alt="">
+                                                      <div>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1">{{item.seller_created_at
+                                                                  |
+                                                                  date:'medium':'UTC'}}</p>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
+                                                                  *ngIf="item.seller_message =='The seller has received the payment'">
+                                                                  payment </p>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
+                                                                  *ngIf="item.seller_message =='The seller has shipped the item'">
+                                                                  pickup
+                                                            </p>
+                                                            <p class=" mb-0">
+                                                                  {{item.seller_message}} </p>
+                                                      </div>
                                                 </li>
                                                 }@else {
                                                 <li>
-                                                    <img src="assets/img/received_arrow_2.png" alt="">
-                                                    <div>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1">{{item.buyer_created_at |
-                                                            date:'medium':'UTC'}}</p>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
-                                                            *ngIf="item.buyer_message =='The Buyer has paid'">payment </p>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
-                                                            *ngIf="item.buyer_message =='The Buyer has received the item'">pickup
-                                                        </p>
-                                                        <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
-                                                            *ngIf="item.buyer_message =='Congratulations, you have purchased this item!'">
-                                                            item purchased </p>
-                                                        <p class=" mb-0">
-                                                            {{item.buyer_message}} </p>
-                                                    </div>
+                                                      <img src="assets/img/received_arrow_2.png" alt="">
+                                                      <div>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1">{{item.buyer_created_at |
+                                                                  date:'medium':'UTC'}}</p>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
+                                                                  *ngIf="item.buyer_message =='The Buyer has paid'">
+                                                                  payment </p>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
+                                                                  *ngIf="item.buyer_message =='The Buyer has received the item'">
+                                                                  pickup
+                                                            </p>
+                                                            <p class="ct_fc_ct_fc_757575 mb-1 ct_fw_500"
+                                                                  *ngIf="item.buyer_message =='Congratulations, you have purchased this item!'">
+                                                                  item purchased </p>
+                                                            <p class=" mb-0">
+                                                                  {{item.buyer_message}} </p>
+                                                      </div>
                                                 </li>
-                  
+
                                                 }
-                  
+
                                                 }
                                           </ul>
-                                         </div>
-                                    
+                                    </div>
+
 
                               </div>
                               <div class="col-lg-5 mb-4 mb-lg-0">
                                     <div class=" ct_black_border_1 px-0 mt-0">
                                           <h4 class="px-4 ct_fw_600 mb-4 ct_fs_21">Purchase overview</h4>
                                           <div>
-                                              <div class="px-4 d-flex gap-3 mb-3">
-                                                  <i class="bi bi-tags ct_fc_ct_fc_757575 ct_fs_21"></i>
-                                                  <div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_text_op_8">Price</p>
+                                                <div class="px-4 d-flex gap-3 mb-3">
+                                                      <i class="bi bi-tags ct_fc_ct_fc_757575 ct_fs_21"></i>
+                                                      <div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_text_op_8">Price</p>
+                                                            </div>
+                                                            <div
+                                                                  class="d-flex gap-3 align-items-center justify-content-between">
+                                                                  <p class="mb-0 ct_blue_text" >{{orderSummary.result[0].title}}</p>
+                                                                  <div class="d-flex align-items-center gap-1">
+                                                                        <p class="mb-0"><span class="me-1"></span>
+                                                                              {{orderSummary.result[0].amount}}
+                                                                        </p>
+                                                                  </div>
+                                                            </div>
+                                                            <div
+                                                                  class="d-flex gap-3 align-items-center justify-content-between">
+                                                                  <p class="mb-0">Parcel a-post</p>
+                                                                  <div class="d-flex align-items-center gap-1">
+                                                                        <p class="mb-0 ct_fw_500">-</p>
+                                                                  </div>
+                                                            </div>
+                                                            <div
+                                                                  class="d-flex gap-3 align-items-center justify-content-between">
+                                                                  <p class="mb-0 ct_fw_600">Total price</p>
+                                                                  <div class="d-flex align-items-center gap-1">
+                                                                        <p class="mb-0 ct_fw_600">
+                                                                              {{orderSummary.result[0].amount}}</p>
+                                                                  </div>
+                                                            </div>
                                                       </div>
-                                                      <div class="d-flex gap-3 align-items-center justify-content-between">
-                                                          <p class="mb-0">{{orderSummary.result[0].title}}</p>
-                                                          <div class="d-flex align-items-center gap-1">
-                                                              <p class="mb-0"><span class="me-1"></span> {{orderSummary.result[0].amount}}
-                                                              </p>
-                                                          </div>
+                                                </div>
+                                                <div class="px-4 d-flex gap-3 mb-3">
+                                                      <i class="bi bi-box-seam ct_fc_ct_fc_757575 ct_fs_21"></i>
+                                                      <div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_text_op_8">Delivery type</p>
+                                                            </div>
+                                                            <div class="d-flex align-items-center">
+                                                                  <p class="mb-0 ct_fw_600">Parcel B-Post</p>
+                                                            </div>
                                                       </div>
-                                                      <div class="d-flex gap-3 align-items-center justify-content-between">
-                                                          <p class="mb-0">Parcel a-post</p>
-                                                          <div class="d-flex align-items-center gap-1">
-                                                              <p class="mb-0 ct_fw_500">-</p>
-                                                          </div>
+                                                </div>
+                                                <div class="px-4 d-flex gap-3 mb-3">
+                                                      <i class="bi bi-geo-alt ct_fc_ct_fc_757575 ct_fs_21"></i>
+                                                      <div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_text_op_8">Delivery address</p>
+                                                            </div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_fw_600">
+                                                                        {{orderSummary.result[0].buyer_name}}</p>
+                                                                  <p class="mb-0">{{orderSummary.result[0].address}}</p>
+
+
+                                                            </div>
                                                       </div>
-                                                      <div class="d-flex gap-3 align-items-center justify-content-between">
-                                                          <p class="mb-0 ct_fw_600">Total price</p>
-                                                          <div class="d-flex align-items-center gap-1">
-                                                              <p class="mb-0 ct_fw_600">{{orderSummary.result[0].amount}}</p>
-                                                          </div>
+                                                </div>
+                                                <div class="px-4 d-flex gap-3 mb-3">
+                                                      <i class="bi bi-person ct_fc_ct_fc_757575 ct_fs_21"></i>
+                                                      <div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_text_op_8">Sold by</p>
+                                                            </div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_fw_600">
+                                                                        {{orderSummary.result[0].seller_name}}</p>
+                                                                  <p class="mb-0 ct_blue_text ct_fw_600">mina_d</p>
+                                                                  <p class="mb-0 ct_blue_text ct_fw_600">
+                                                                        {{orderSummary.result[0].seller_email}}
+                                                                  </p>
+                                                                  <p class="mb-0">
+                                                                        {{orderSummary.result[0].seller_number}}</p>
+
+                                                            </div>
                                                       </div>
-                                                  </div>
-                                              </div>
-                                              <div class="px-4 d-flex gap-3 mb-3">
-                                                  <i class="bi bi-box-seam ct_fc_ct_fc_757575 ct_fs_21"></i>
-                                                  <div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_text_op_8">Delivery type</p>
+                                                </div>
+                                                <div class="px-4 d-flex gap-3 mb-3">
+                                                      <i class="bi bi-person ct_fc_ct_fc_757575 ct_fs_21"></i>
+                                                      <div>
+                                                            <div class="">
+                                                                  <p class="mb-0 ct_text_op_8">Purchase</p>
+                                                            </div>
+                                                            <div class="">
+                                                                
+                                                                  
+                                                                  <p class="mb-0 ct_fs_14">Transaction:
+                                                                        {{orderSummary.result[0].transaction_id}}</p>
+                                                                  <p class="mb-0" ct_fs_14>Offer Id:
+                                                                        <span>{{orderSummary.result[0].offer_unique_id}}</span>
+                                                                  </p>
+
+                                                            </div>
                                                       </div>
-                                                      <div class="d-flex align-items-center">
-                                                          <p class="mb-0 ct_fw_600">Parcel B-Post</p>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="px-4 d-flex gap-3 mb-3">
-                                                  <i class="bi bi-geo-alt ct_fc_ct_fc_757575 ct_fs_21"></i>
-                                                  <div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_text_op_8">Delivery address</p>
-                                                      </div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_fw_600">{{orderSummary.result[0].buyer_name}}</p>
-                                                          <p class="mb-0">{{orderSummary.result[0].address}}</p>
-                  
-                  
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="px-4 d-flex gap-3 mb-3">
-                                                  <i class="bi bi-person ct_fc_ct_fc_757575 ct_fs_21"></i>
-                                                  <div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_text_op_8">Sold by</p>
-                                                      </div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_fw_600">{{orderSummary.result[0].seller_name}}</p>
-                                                          <p class="mb-0 ct_blue_text ct_fw_600">mina_d</p>
-                                                          <p class="mb-0 ct_blue_text ct_fw_600">{{orderSummary.result[0].seller_email}}
-                                                          </p>
-                                                          <p class="mb-0">{{orderSummary.result[0].seller_number}}</p>
-                  
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="px-4 d-flex gap-3 mb-3">
-                                                  <i class="bi bi-person ct_fc_ct_fc_757575 ct_fs_21"></i>
-                                                  <div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_text_op_8">Purchase</p>
-                                                      </div>
-                                                      <div class="">
-                                                          <p class="mb-0 ct_blue_text ct_fw_600">View offer page</p>
-                                                          <p class="mb-0 ">Transaction: {{orderSummary.result[0].transaction_id}}</p>
-                                                          <p class="mb-0">Offer Id:
-                                                              <span>{{orderSummary.result[0].offer_unique_id}}</span>
-                                                          </p>
-                  
-                                                      </div>
-                                                  </div>
-                                              </div>
+                                                </div>
                                           </div>
-                                      </div>
+                                    </div>
                               </div>
-                        }
+                              }
 
                         </div>
-                       
+
                         <div class="d-flex align-items-center gap-3 pt-4">
                               <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
                                     data-bs-dismiss="modal">Cancel</button>

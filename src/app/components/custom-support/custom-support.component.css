@@ -24,3 +24,20 @@
 .ct_close:focus{
   box-shadow: unset;
 }
+.ct_empty_chat_msg img{
+  width: 150px;
+
+}
+.ct_empty_chat_msg {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.ct_empty_chat_msg img{
+  margin-inline: auto;
+}
+.c_fw_600 {
+  font-weight: 600  ;
+}

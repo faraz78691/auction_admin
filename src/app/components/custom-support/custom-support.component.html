@@ -70,9 +70,9 @@
             <!-- chatlist -->
 
 
-            <div class=" col-xxl-9 col-xl-8 ">
+            <div class=" col-xxl-9 col-xl-8 " *ngIf="isChatboxVisible">
                   <!-- chatbox -->
-                  <div class="chatbox " [ngClass]="{'showbox': isChatboxVisible}">
+                  <div class="chatbox " >
                         <div class="modal-dialog-scrollable">
                               <div class="modal-content">
                                     <div class="msg-head">
@@ -206,6 +206,16 @@
 
                                     </div>
                               </div>
+                        </div>
+                  </div>
+            </div>
+            <div class=" col-xxl-9 col-xl-8 " *ngIf="!isChatboxVisible">
+                  <!-- chatbox -->
+                  <div class="chatbox " >
+                        <div class="ct_empty_chat_msg">
+                              <img src="assets/img/chatting.png" alt="">
+                              <h4 class="ct_fs_24 c_fw_600 mt-3">No Message Selected</h4>
+                              <p>Please select one message from chat sidebar</p>
                         </div>
                   </div>
             </div>

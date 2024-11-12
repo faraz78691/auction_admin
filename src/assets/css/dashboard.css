@@ -1062,6 +1062,17 @@ button:focus {
     .ct_clr_48484880{
         color: #48484880;
     }
+    .ct_blue_text{
+        color: blue !important;
+        cursor: pointer;
+    }
+
+    .ct_fs_12{
+        font-size: 12px !important;
+    }
+    .ct_fs_14{
+        font-size: 14px !important;
+    }
 
     .ct_blue_btn {
         background-color:var(--blue);

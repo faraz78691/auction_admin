@@ -1,18 +1,18 @@
 <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-    <div>
-          <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-1">Orders Management</h3>
-          <ul class="d-flex align-items-center gap-3">
-                <li>
-                      <h6 class="mb-0">Orders Management<i class="fa-solid fa-angle-right ms-2"></i>
-                      </h6>
-                </li>
-          </ul>
-    </div>
-    <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Items
-          +</button>
+      <div>
+            <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-1">Orders Management</h3>
+            <ul class="d-flex align-items-center gap-3">
+                  <li>
+                        <h6 class="mb-0">Orders Management<i class="fa-solid fa-angle-right ms-2"></i>
+                        </h6>
+                  </li>
+            </ul>
+      </div>
+      <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Items
+            +</button>
 </div>
 
-<div class=" ct_mt_40">
+<div class="ct_mt_40">
       <div class="card ct_custom_table">
             <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
                   [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
@@ -31,17 +31,16 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
-                              <th style="width:10%" >S.no</th>
+                              <th style="width:10%">S.no</th>
                               <th pSortableColumn="">Offer ID</th>
                               <th>Title</th>
-                              <th>Start Date</th>
                               <th>End Date</th>
                               <th>Start Price</th>
                               <th>Max Bid</th>
                               <th>Max Bid User</th>
                               <th>Status</th>
                               <th>Bought by</th>
-                              <!-- <th style="width:25%">Action</th> -->
+                              <th>Action</th>
 
                         </tr>
 
@@ -53,17 +52,18 @@
                               </td>
                               <td>{{customer.offer_unique_id}}</td>
                               <td>{{customer.title}}</td>
-                              <td>{{customer.start_date | date:'medium':'UTC' }}</td>
-                              <td>{{customer.end_date |  date:'medium':'UTC'}}</td>
-                          
+                              <td>{{customer.end_date | date:'medium':'UTC'}}</td>
+
                               <td>{{customer.start_price}}</td>
-                           
+
                               <td>{{customer.highest_bid}}</td>
                               <td>{{customer.user_name}}</td>
                               <td>{{customer.status}}</td>
 
                               <td>{{customer.buyer == '' ? '-' : customer.buyer}}</td>
-                            
+                              <td data-bs-target="#userBids" data-bs-toggle="modal"
+                                    (click)="getOfferBids(customer.offer_id)">View</td>
+
                         </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
@@ -78,171 +78,189 @@
 
 
 <div class="modal fade " id="ct_add_user" tabindex="-1" aria-labelledby="ct_add_userLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content  py-5">
-                <!-- <div class="modal-header border-0">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content  py-5">
+                  <!-- <div class="modal-header border-0">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
-                <div class="modal-body py-0">
-                      <div>
-                            <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Add User</h4>
+                  <div class="modal-body py-0">
+                        <div>
+                              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Add User</h4>
 
-                            <form action="">
-                                  <div class="row">
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Name</label>
-                                                    <input type="text" class="ct_input form-control ct_input_40"
-                                                          placeholder="Enter Name">
-                                              </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">User</label>
-                                                    <input type="text" class="ct_input form-control ct_input_40"
-                                                          placeholder="Enter User">
-                                              </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Email id</label>
-                                                    <input type="email" class="ct_input form-control ct_input_40"
-                                                          placeholder="Enter Email id">
-                                              </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Phone </label>
-                                                    <input type="text" class="ct_input form-control ct_input_40"
-                                                          placeholder="Enter Phone">
-                                              </div>
-                                        </div>
+                              <form action="">
+                                    <div class="row">
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Name</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Name">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">User</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter User">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Email id</label>
+                                                      <input type="email" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Email id">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Phone </label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            placeholder="Enter Phone">
+                                                </div>
+                                          </div>
 
 
-                                        <div class="col-md-12">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Address</label>
-                                                    <textarea class="ct_input form-control ct_input_40 h-auto"
-                                                          rows="4" placeholder="Type here....">
+                                          <div class="col-md-12">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Address</label>
+                                                      <textarea class="ct_input form-control ct_input_40 h-auto"
+                                                            rows="4" placeholder="Type here....">
                         </textarea>
-                                              </div>
-                                        </div>
-                                  </div>
-                            </form>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </form>
 
 
 
 
-                      </div>
-                      <div class="d-flex align-items-center gap-3 pt-4">
-                            <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
-                                  data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="ct_blue_btn   w-50">Update</button>
-                      </div>
-                </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 pt-4">
+                              <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
+                                    data-bs-dismiss="modal">Cancel</button>
+                              <button type="button" class="ct_blue_btn   w-50">Update</button>
+                        </div>
+                  </div>
 
-          </div>
-    </div>
+            </div>
+      </div>
 </div>
 
 
 <div class="modal fade " id="ct_edit_user" tabindex="-1" aria-labelledby="ct_edit_userLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content  py-5">
-                <!-- <div class="modal-header border-0">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content  py-5">
+                  <!-- <div class="modal-header border-0">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
-                <div class="modal-body py-0">
-                      <div>
-                            <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Edit User Details</h4>
+                  <div class="modal-body py-0">
+                        <div>
+                              <h4 class="ct_fs_22 ct_fw_600 ct_ff_roboto mb-4 text-center"> Edit User Details</h4>
 
-                            <form action="">
-                                  <div class="row">
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Name</label>
-                                                    <input type="text" class="ct_input form-control ct_input_40"
-                                                          value="John Doe">
-                                              </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">User</label>
-                                                    <input type="text" class="ct_input form-control ct_input_40"
-                                                          value="john11">
-                                              </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Email id</label>
-                                                    <input type="email" class="ct_input form-control ct_input_40"
-                                                          value="john11@gmail.com	">
-                                              </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Phone </label>
-                                                    <input type="text" class="ct_input form-control ct_input_40"
-                                                          value="1234567890">
-                                              </div>
-                                        </div>
+                              <form action="">
+                                    <div class="row">
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Name</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            value="John Doe">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">User</label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            value="john11">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Email id</label>
+                                                      <input type="email" class="ct_input form-control ct_input_40"
+                                                            value="john11@gmail.com	">
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Phone </label>
+                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                            value="1234567890">
+                                                </div>
+                                          </div>
 
 
-                                        <div class="col-md-12">
-                                              <div class="form-group text-start mb-4">
-                                                    <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Address</label>
-                                                    <textarea class="ct_input form-control ct_input_40 h-auto"
-                                                          rows="4" placeholder="Type here....">My Street, Bigtown BG23 4YZ, England	
+                                          <div class="col-md-12">
+                                                <div class="form-group text-start mb-4">
+                                                      <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Address</label>
+                                                      <textarea class="ct_input form-control ct_input_40 h-auto"
+                                                            rows="4" placeholder="Type here....">My Street, Bigtown BG23 4YZ, England	
                         </textarea>
-                                              </div>
-                                        </div>
-                                  </div>
-                            </form>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </form>
 
 
 
 
-                      </div>
-                      <div class="d-flex align-items-center gap-3 pt-4">
-                            <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
-                                  data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="ct_blue_btn   w-50">Update</button>
-                      </div>
-                </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 pt-4">
+                              <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
+                                    data-bs-dismiss="modal">Cancel</button>
+                              <button type="button" class="ct_blue_btn   w-50">Update</button>
+                        </div>
+                  </div>
 
-          </div>
-    </div>
+            </div>
+      </div>
 </div>
+<div class="modal fade " id="userBids" tabindex="-1" aria-labelledby="ct_edit_userLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content  py-5">
+                  <div class="modal-header border-0">
+                        <h5>Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body py-0">
+                        <div class="card ct_custom_table">
+                              <p-table #dt [value]="offerBids" dataKey="id" [rows]="10" [rowHover]="true"
+                                    [tableStyle]="{ 'min-width': '30rem' }">
 
-<!-- Log out modal Css S -->
-<div class="modal fade ct_assets_modal" id="ct_logout_modal" tabindex="-1" aria-labelledby="ct_logout_modalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-                <div class="modal-header border-0 pt-0">
-                      <button type="button" class="btn-close ct_cloose_btn" data-bs-dismiss="modal"
-                            aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="modal-body border-0 ">
-                      <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.0117 0C4.51172 0 0.0117188 4.5 0.0117188 10C0.0117188 15.5 4.51172 20 10.0117 20C15.5117 20 20.0117 15.5 20.0117 10C20.0117 4.5 15.5117 0 10.0117 0ZM10.0117 15.9C6.81172 15.9 4.11172 13.3 4.11172 10C4.11172 8.3 4.91172 6.6 6.21172 5.5C6.61172 5.2 7.31172 5.2 7.61172 5.6C8.01172 6.1 7.91172 6.7 7.51172 7.1C6.61172 7.8 6.11172 8.9 6.11172 10.1C6.11172 12.2 7.81172 14 10.0117 14C12.2117 14 13.9117 12.3 13.9117 10.1C13.9117 9 13.4117 7.9 12.5117 7.1C12.1117 6.8 12.0117 6.1 12.4117 5.7C12.8117 5.3 13.4117 5.2 13.8117 5.6C15.1117 6.7 15.9117 8.4 15.9117 10.1C15.9117 13.3 13.2117 15.9 10.0117 15.9ZM10.0117 3.5C10.5117 3.5 11.0117 3.9 11.0117 4.5V8.2C11.0117 8.7 10.5117 9.2 10.0117 9.2C9.51172 9.2 9.01172 8.7 9.01172 8.2V4.5C9.01172 3.9 9.51172 3.5 10.0117 3.5Z"
-                                  fill="#DC0202"></path>
-                      </svg>
-                      <h4 class="text-center mb-4 ct_fw_600">Log Out Account</h4>
-                      <p class="text-center ct_grey_text">
-                            Are you sure, you want to logout? once you logout <br> you need to login again.
-                      </p>
-                      <div class="modal-footer border-0 justify-content-center">
-                            <button type="button" class="ct_purple_btn ct_outline_blue"
-                                  data-bs-dismiss="modal">Cancel</button>
-                            <a href="login.html" type="button"
-                                  class=" bg-danger  ct_purple_btn  justify-content-center"
-                                  style="border-color: rgb(220, 53, 69)">Yes Logout!</a>
-                      </div>
-                      <div>
-                      </div>
-                </div>
+                                    <ng-template pTemplate="header">
+                                          <tr>
+                                                <th style="width:10%">S.no</th>
+                                                <th>User name</th>
+                                                <th>Max Bid</th>
+                                                <th>Time of bid</th>
 
-          </div>
-    </div>
+                                          </tr>
+
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-customer let-i="rowIndex">
+                                          <tr>
+                                                <td>
+                                                      {{i+ 1}}
+                                                </td>
+                                                <td>{{customer.offer_unique_id}}</td>
+                                                <td>{{customer.offer_unique_id}}</td>
+
+
+                                          </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="emptymessage">
+                                          <tr>
+                                                <td colspan="5">No customers found.</td>
+                                          </tr>
+                                    </ng-template>
+                              </p-table>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-3 pt-4">
+                              <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
+                                    data-bs-dismiss="modal">Cancel</button>
+                              <button type="button" class="ct_blue_btn   w-50">Update</button>
+                        </div>
+                  </div>
+
+            </div>
+      </div>
 </div>

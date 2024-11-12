@@ -5,10 +5,14 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Location } from '@angular/common';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
+
+
+
   categoryData = signal<{ id: number | null, name: string | null }>({
     id: null,
     name: null
@@ -17,6 +21,8 @@ export class SharedService {
     id: null,
     name: null
   });
+
+  offer_unique_signal = signal<number>(0)
 
 
   setCategoryData(id: number, name: string) {
@@ -30,6 +36,7 @@ export class SharedService {
     private http: HttpClient,
     private authService: AuthService,
     private location: Location,
+    private router :Router,
     private messageService: MessageService
   ) { }
 
@@ -63,6 +70,16 @@ export class SharedService {
 
   showSuccess(msg:string) {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: msg});
+  };
+
+
+  redirectToOffer(offerUniqueId:number){
+    this.offer_unique_signal.set(offerUniqueId)
+    this.router.navigateByUrl('/user-offer')
+  };
+
+  resetOfferUniqueSignal(){
+    this.offer_unique_signal.set(0)
   }
  
 }

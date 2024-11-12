@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, computed, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,11 +10,15 @@ import { Table } from 'primeng/table';
   styleUrl: './user-offer.component.css'
 })
 export class UserOfferComponent {
-  userOfferData: any[] = []
+  userOfferData: any[] = [];
+  alluserOfferData: any[] = [];
   userId: number | undefined;
   swissDate: any;
   @ViewChild('dt') table!: Table;
   @ViewChild('searchInput') searchInput!: ElementRef;
+  offerUniqueId = computed(()=>{
+   return this.service.offer_unique_signal()
+  })
   constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
 
   }
@@ -44,21 +48,40 @@ export class UserOfferComponent {
     
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.userOfferData = res.data.map((item: any) => {
-          // Convert end_date to Date if it's a string
-          const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
-          const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
-      
-        if (endDateUTC <= swissDate ) {
-          item['status'] = item.offer_buy_status == 1 ? 'Sold' : 'Not Sold';
-        } else {
-          item['status'] = 'Open';
-        }
-          
-          return item; // Ensure each item is returned after modification
-        });
+       
+        if(this.offerUniqueId() == 0){
+          this.userOfferData = res.data.map((item: any) => {
+            // Convert end_date to Date if it's a string
+            const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+            const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
         
-        console.log(this.userOfferData);
+          if (endDateUTC <= swissDate ) {
+            item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
+          } else {
+            item['status'] = 'Open';
+          }
+            
+            return item; // Ensure each item is returned after modification
+          });
+        }else{
+          this.alluserOfferData = res.data;
+          const filteredOffer = res.data.filter((items:any)=> items.offer_unique_id == this.offerUniqueId());
+          this.userOfferData = filteredOffer.map((item: any) => {
+            // Convert end_date to Date if it's a string
+            const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+            const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
+        
+          if (endDateUTC <= swissDate ) {
+            item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
+          } else {
+            item['status'] = 'Open';
+          }
+            
+            return item; // Ensure each item is returned after modification
+          });
+          console.log(filteredOffer);
+           this.searchInput.nativeElement.value = this.offerUniqueId()
+        }
       } else {
         this.toastr.error(res.message);
       }
@@ -101,8 +124,30 @@ export class UserOfferComponent {
   };
 
   clear(table: any) {
-    table.clear();
-    this.searchInput.nativeElement.value = ''
+    if(this.offerUniqueId() != 0){
+      this.userOfferData = this.alluserOfferData.map((item: any) => {
+        // Convert end_date to Date if it's a string
+        const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+        const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
+    
+      if (endDateUTC <= swissDate ) {
+        item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
+      } else {
+        item['status'] = 'Open';
+      }
+        
+        return item; // Ensure each item is returned after modification
+      });
+       table.clear();
+      this.searchInput.nativeElement.value = ''
+    }else{
+      table.clear();
+      this.searchInput.nativeElement.value = ''
+    }
+  };
+
+  ngOnDestroy(){
+    this.service.resetOfferUniqueSignal()
   }
 
 }

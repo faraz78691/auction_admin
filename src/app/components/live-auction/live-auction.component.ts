@@ -11,7 +11,8 @@ import { ChatSocketService } from '../../services/chat-socket.service';
   styleUrl: './live-auction.component.css'
 })
 export class LiveAuctionComponent {
-  userOfferData: any[] = []
+  userOfferData: any[] = [];
+  offerBids: any[] = [];
   userId:number | undefined;
     constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute, private webSocketService :ChatSocketService) {
   
@@ -60,6 +61,25 @@ export class LiveAuctionComponent {
         next: (res: any) => {
           if (res.success) {
             this.userOfferData = res.highestBid;
+          } else {
+            this.toastr.error(res.message);
+          }
+        },
+        error: (err: any) => {
+          this.toastr.error(err);
+        },
+        complete: () => {
+          // Optional: If you need to perform something when the observable completes
+        }
+      });
+   }
+    getOfferBids(offerId:number) {
+      const apiUrl = `buyer/getallbid-offerid?offer_id=${offerId}`;
+   
+      this.service.get(apiUrl).subscribe({
+        next: (res: any) => {
+          if (res.success) {
+            this.offerBids = res.data;
           } else {
             this.toastr.error(res.message);
           }
