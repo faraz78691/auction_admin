@@ -33,6 +33,7 @@ import { BrandsModelComponent } from './components/brands-model/brands-model.com
 import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { FeesManagementComponent } from './components/fees-management/fees-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { ButtonModule } from 'primeng/button';
     HeaderComponent,
     ProductAttributeComponent,
     BrandsModelComponent,
-    LiveAuctionComponent
+    LiveAuctionComponent,
+    FeesManagementComponent
   ],
   imports: [
     BrowserModule,

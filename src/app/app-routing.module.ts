@@ -17,6 +17,7 @@ import { ProductAttributeComponent } from './components/product-attribute/produc
 import { authGuard } from './guards/auth.guard';
 import { BrandsModelComponent } from './components/brands-model/brands-model.component';
 import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
+import { FeesManagementComponent } from './components/fees-management/fees-management.component';
 
 const routes: Routes = [
   {
@@ -41,10 +42,10 @@ const routes: Routes = [
     path: 'attribute/:cat_id/:pro_id', component: AttributeComponent, canActivate: [authGuard]
   },
   {
-    path: 'product-attribute/:pro_id/:attr_id', component: ProductAttributeComponent , canActivate: [authGuard]
+    path: 'product-attribute/:pro_id/:attr_id', component: ProductAttributeComponent, canActivate: [authGuard]
   },
   {
-    path: 'boosted-offers', component: BoostedOffersComponent , canActivate: [authGuard]
+    path: 'boosted-offers', component: BoostedOffersComponent, canActivate: [authGuard]
   },
   {
     path: 'category-management', component: CategoryManagementComponent, canActivate: [authGuard]
@@ -69,6 +70,9 @@ const routes: Routes = [
   },
   {
     path: 'liveBidding', component: LiveAuctionComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'fees-management', component: FeesManagementComponent, canActivate: [authGuard]
   },
 ];
 

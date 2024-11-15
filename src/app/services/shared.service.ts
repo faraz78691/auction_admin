@@ -23,6 +23,7 @@ export class SharedService {
   });
 
   offer_unique_signal = signal<number>(0)
+  user_signal = signal<number>(0)
 
 
   setCategoryData(id: number, name: string) {
@@ -36,7 +37,7 @@ export class SharedService {
     private http: HttpClient,
     private authService: AuthService,
     private location: Location,
-    private router :Router,
+    private router: Router,
     private messageService: MessageService
   ) { }
 
@@ -66,21 +67,29 @@ export class SharedService {
     this.location.back();  // Navigate to the previous page
   };
 
-  
 
-  showSuccess(msg:string) {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: msg});
+
+  showSuccess(msg: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: msg });
   };
 
 
-  redirectToOffer(offerUniqueId:number){
+  redirectToOffer(offerUniqueId: number) {
     this.offer_unique_signal.set(offerUniqueId)
     this.router.navigateByUrl('/user-offer')
   };
 
-  resetOfferUniqueSignal(){
+  resetOfferUniqueSignal() {
     this.offer_unique_signal.set(0)
   }
- 
+
+  redirectToUser(userId: number) {
+    this.user_signal.set(userId)
+    this.router.navigateByUrl('/user-list')
+  };
+
+  resetUserSignal() {
+    this.offer_unique_signal.set(0)
+  }
 }
 

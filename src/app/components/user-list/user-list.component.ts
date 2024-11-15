@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { Table } from 'primeng/table';
 import { ToastrService } from 'ngx-toastr';
@@ -10,8 +10,11 @@ import { ToastrService } from 'ngx-toastr';
 export class UserListComponent {
   userData: any[] = []
   loading: boolean = false;
-  constructor(private service: SharedService, private toastr: ToastrService) {
 
+  UserId = computed(() => {
+    return this.service.user_signal()
+  })
+  constructor(private service: SharedService, private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -23,12 +26,21 @@ export class UserListComponent {
 
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        this.userData = res.data
+        if (this.UserId() !== 0) {
+          const currentUserId = this.UserId();
+          this.userData = res.data.filter((user: any) => user.id === currentUserId);
+        } else {
+          this.userData = res.data
+        }
       } else {
-        this.toastr.warning(res.message)
+        this.toastr.warning(res.message);
       }
     }, (err: any) => {
-      this.toastr.error(err)
-    })
+      this.toastr.error(err);
+    });
+  }
+
+  ngOnDestroy() {
+    this.service.resetUserSignal()
   }
 }

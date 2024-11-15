@@ -46,35 +46,47 @@
                   <ng-template pTemplate="body" let-customer let-i="rowIndex">
                         <tr>
 
-                              <td class="ct_blue_text" title="See offer details" (click)="service.redirectToOffer(customer.offer_unique_id)">{{customer.offer_unique_id}}</td>
+                              <td class="ct_blue_text" title="See offer details"
+                                    (click)="service.redirectToOffer(customer.offer_unique_id)">
+                                    {{customer.offer_unique_id}}</td>
                               <td>{{customer.title}}</td>
 
                               @if(customer.buyer_status == '1'){
                               <td>
-                                    <p class="ct_blue_text mb-0" title="See user details">{{customer.buyer_name}}</p>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer.buyer_id)">{{customer.buyer_name}}
+                                    </p>
                                     <div style="display: block;">To Pay</div>
                               </td>
                               }@else if (customer.buyer_status == '2') {
                               <td>
-                                    <p class="ct_blue_text mb-0" title="See user details"> {{customer.buyer_name}} </p>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer.buyer_id)"> {{customer.buyer_name}}
+                                    </p>
 
                                     <div style="display: block;">Delivery Open</div>
                               </td>
                               }@else if (customer.buyer_status == '3') {
                               <td>
-                                    <p class="ct_blue_text mb-0" title="See user details"> {{customer.buyer_name}}</p>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer.buyer_id)"> {{customer.buyer_name}}
+                                    </p>
 
                                     <div style="display: block;">To be evaluated</div>
                               </td>
                               }@else if (customer.buyer_status == '4') {
                               <td>
-                                    <p class="ct_blue_text mb-0" title="See user details"> {{customer.buyer_name}}</p>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer.buyer_id)"> {{customer.buyer_name}}
+                                    </p>
 
                                     <div style="display: block;">Completed</div>
                               </td>
                               }@else if (customer.buyer_status == '5') {
                               <td>
-                                    <p class="ct_blue_text mb-0" title="See user details">{{customer.buyer_name}}</p>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer.buyer_id)">{{customer.buyer_name}}
+                                    </p>
 
                                     <div style="display: block;">Cancelled</div>
                               </td>
@@ -102,11 +114,8 @@
                               </td>
                               }
 
-
                               <td><i class="fa fa-eye" aria-hidden="true" (click)="OpenSummaryModal(customer)"
                                           data-bs-toggle="modal" data-bs-target="#orderSummary"></i></td>
-
-
 
                         </tr>
                   </ng-template>
@@ -388,7 +397,8 @@
                                                             </div>
                                                             <div
                                                                   class="d-flex gap-3 align-items-center justify-content-between">
-                                                                  <p class="mb-0 ct_blue_text" >{{orderSummary.result[0].title}}</p>
+                                                                  <p class="mb-0 ct_blue_text">
+                                                                        {{orderSummary.result[0].title}}</p>
                                                                   <div class="d-flex align-items-center gap-1">
                                                                         <p class="mb-0"><span class="me-1"></span>
                                                                               {{orderSummary.result[0].amount}}
@@ -464,8 +474,8 @@
                                                                   <p class="mb-0 ct_text_op_8">Purchase</p>
                                                             </div>
                                                             <div class="">
-                                                                
-                                                                  
+
+
                                                                   <p class="mb-0 ct_fs_14">Transaction:
                                                                         {{orderSummary.result[0].transaction_id}}</p>
                                                                   <p class="mb-0" ct_fs_14>Offer Id:

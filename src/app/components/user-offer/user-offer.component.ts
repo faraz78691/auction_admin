@@ -16,18 +16,17 @@ export class UserOfferComponent {
   swissDate: any;
   @ViewChild('dt') table!: Table;
   @ViewChild('searchInput') searchInput!: ElementRef;
-  offerUniqueId = computed(()=>{
-   return this.service.offer_unique_signal()
+  offerUniqueId = computed(() => {
+    return this.service.offer_unique_signal()
   })
   constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
-
   }
 
   ngOnInit() {
     this.getSwitzerlandTime()
     this.route.queryParams.subscribe(params => {
       this.userId = params['id']
-     
+
     });
 
     if (this.userId != undefined) {
@@ -40,47 +39,47 @@ export class UserOfferComponent {
 
   getSwitzerlandTime() {
     this.swissDate = moment.tz("Europe/Zurich").toDate();
-     // Converts to Date object in Switzerland timezone
+    // Converts to Date object in Switzerland timezone
   }
 
   getUserOffers() {
     const apiUrl = 'admin/getAllUsersOffers';
-    
+
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-       
-        if(this.offerUniqueId() == 0){
+
+        if (this.offerUniqueId() == 0) {
           this.userOfferData = res.data.map((item: any) => {
             // Convert end_date to Date if it's a string
             const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
             const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
-        
-          if (endDateUTC <= swissDate ) {
-            item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
-          } else {
-            item['status'] = 'Open';
-          }
-            
+
+            if (endDateUTC <= swissDate) {
+              item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
+            } else {
+              item['status'] = 'Open';
+            }
+
             return item; // Ensure each item is returned after modification
           });
-        }else{
+        } else {
           this.alluserOfferData = res.data;
-          const filteredOffer = res.data.filter((items:any)=> items.offer_unique_id == this.offerUniqueId());
+          const filteredOffer = res.data.filter((items: any) => items.offer_unique_id == this.offerUniqueId());
           this.userOfferData = filteredOffer.map((item: any) => {
             // Convert end_date to Date if it's a string
             const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
             const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
-        
-          if (endDateUTC <= swissDate ) {
-            item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
-          } else {
-            item['status'] = 'Open';
-          }
-            
+
+            if (endDateUTC <= swissDate) {
+              item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
+            } else {
+              item['status'] = 'Open';
+            }
+
             return item; // Ensure each item is returned after modification
           });
           console.log(filteredOffer);
-           this.searchInput.nativeElement.value = this.offerUniqueId()
+          this.searchInput.nativeElement.value = this.offerUniqueId()
         }
       } else {
         this.toastr.error(res.message);
@@ -89,7 +88,7 @@ export class UserOfferComponent {
       this.toastr.error(err);
     });
   }
-  
+
 
   getUserOffersByUserId() {
     let apiUrl = `admin/getAllOffersByUserId?user_id=${this.userId}`;
@@ -101,13 +100,13 @@ export class UserOfferComponent {
             // Convert end_date to Date if it's a string
             const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
             const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
-           
-          if (endDateUTC <=swissDate ) {
-            item['status'] = item.offer_buy_status == 1 ? 'Sold' : 'Not Sold';
-          } else {
-            item['status'] = 'Open';
-          }
-            
+
+            if (endDateUTC <= swissDate) {
+              item['status'] = item.offer_buy_status == 1 ? 'Sold' : 'Not Sold';
+            } else {
+              item['status'] = 'Open';
+            }
+
             return item; // Ensure each item is returned after modification
           });
         } else {
@@ -124,29 +123,29 @@ export class UserOfferComponent {
   };
 
   clear(table: any) {
-    if(this.offerUniqueId() != 0){
+    if (this.offerUniqueId() != 0) {
       this.userOfferData = this.alluserOfferData.map((item: any) => {
         // Convert end_date to Date if it's a string
         const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
         const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
-    
-      if (endDateUTC <= swissDate ) {
-        item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
-      } else {
-        item['status'] = 'Open';
-      }
-        
+
+        if (endDateUTC <= swissDate) {
+          item['status'] = item.offfer_buy_status == 1 ? 'Sold' : 'Not Sold';
+        } else {
+          item['status'] = 'Open';
+        }
+
         return item; // Ensure each item is returned after modification
       });
-       table.clear();
+      table.clear();
       this.searchInput.nativeElement.value = ''
-    }else{
+    } else {
       table.clear();
       this.searchInput.nativeElement.value = ''
     }
   };
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.service.resetOfferUniqueSignal()
   }
 

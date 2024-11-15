@@ -14,17 +14,16 @@
       <div class="chat-area row">
             <!-- chatlist -->
             <div class=" col-xxl-3 col-xl-4">
-
-
                   <div class="chatlist">
                         <div class="modal-dialog-scrollable">
                               <div class="modal-content">
                                     <div class="chat-header">
-                                         <div class="d-flex align-items-center gap-2 justify-content-between flex-wrap">
-                                          <h4 class="mb-3 ct_fs_22 ct_fw_700">Chats</h4>
-                                          <i  data-bs-toggle="modal"
-                                          data-bs-target="#ct_followed_coaches2" class="fa-solid fa-user-plus"></i>
-                                         </div>
+                                          <div
+                                                class="d-flex align-items-center gap-2 justify-content-between flex-wrap">
+                                                <h4 class="mb-3 ct_fs_22 ct_fw_700">Chats</h4>
+                                                <i data-bs-toggle="modal" data-bs-target="#ct_followed_coaches2"
+                                                      class="fa-solid fa-user-plus"></i>
+                                          </div>
                                           <div class="msg-search">
                                                 <input type="text" class="form-control" id="inlineFormInputGroup"
                                                       placeholder="Search" aria-label="search">
@@ -32,32 +31,35 @@
                                           </div>
                                     </div>
 
-                                    <div class="modal-body mt-4" style="height: calc(1000vh - 254px); min-height: calc(100vh - 254px); max-height: calc(100vh - 254px);">
+                                    <div class="modal-body mt-4"
+                                          style="height: calc(1000vh - 254px); min-height: calc(100vh - 254px); max-height: calc(100vh - 254px);">
                                           <!-- chat-list -->
                                           <div class="chat-lists">
                                                 <div class="chat-list">
                                                       @for (item of userList; track $index) {
-                                                            <a  class="ct_chat_user ct_user_active mb-2" (click)="openChat(item.user_id, item.user_name)">
-                                                                  <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                        <img class="ct_img_44" src="assets/img/user_1.png"
-                                                                              alt="user img">
-                                                                              <!-- <i class="ct_icon_user_white_44 fa-solid fa-user"></i> -->
-                                                                        <!-- <span class="active"></span> -->
-                                                                  </div>
-                                                                  <div class="flex-grow-1">
-                                                                        <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
-                                                                              {{item.user_name}}</h3>
-                                                                        <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                              style="color: #21212180;">
-                                                                              {{item.message}}</p>
-                                                                  </div>
-                                                                  <div class="ct_mesg_num_1 ms-auto" *ngIf="item.unread_count != 0">
-                                                                        <span> {{item.unread_count}}</span>
-                                                                  </div>
-                                                            </a>
+                                                      <a class="ct_chat_user ct_user_active mb-2"
+                                                            (click)="openChat(item.user_id, item.user_name)">
+                                                            <div class="flex-shrink-0 position-relative ct_img_44">
+                                                                  <img class="ct_img_44" src="assets/img/user_1.png"
+                                                                        alt="user img">
+                                                                  <!-- <i class="ct_icon_user_white_44 fa-solid fa-user"></i> -->
+                                                                  <!-- <span class="active"></span> -->
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                  <h3 class="mb-0 ct_fs_14 ct_fw_600 ct_ff_roboto">
+                                                                        {{item.user_name}}</h3>
+                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
+                                                                        style="color: #21212180;">
+                                                                        {{item.message}}</p>
+                                                            </div>
+                                                            <div class="ct_mesg_num_1 ms-auto"
+                                                                  *ngIf="item.unread_count != 0">
+                                                                  <span> {{item.unread_count}}</span>
+                                                            </div>
+                                                      </a>
 
                                                       }
-                                                   
+
                                                 </div>
 
                                           </div>
@@ -72,7 +74,7 @@
 
             <div class=" col-xxl-9 col-xl-8 " *ngIf="isChatboxVisible">
                   <!-- chatbox -->
-                  <div class="chatbox " >
+                  <div class="chatbox ">
                         <div class="modal-dialog-scrollable">
                               <div class="modal-content">
                                     <div class="msg-head">
@@ -88,10 +90,13 @@
                                                             <div class="flex-grow-1 ms-3">
                                                                   <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600">
                                                                         {{username}}</h3>
-                                                                  <p class="mb-0 ct_fs_12 ct_ff_roboto"
-                                                                        style="color: #21212180;">
-                                                                        Online</p>
-
+                                                                  <ng-container>
+                                                                        <p *ngIf="isOnline"
+                                                                              class="mb-0 ct_fs_12 ct_ff_roboto"
+                                                                              style="color: #21212180;">
+                                                                              Online
+                                                                        </p>
+                                                                  </ng-container>
                                                             </div>
                                                       </div>
                                                 </div>
@@ -114,40 +119,42 @@
                                     </div>
 
 
-                                    <div class="modal-body "  style="height: calc(100vh - 364px);
+                                    <div class="modal-body " style="height: calc(100vh - 364px);
                                     min-height: calc(90vh - 364px);
                                     max-height: calc(100vh - 364px);" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-                                          <div class="msg-body "  >
+                                          <div class="msg-body ">
                                                 <ul>
-                                                    @for (item of chats; track $index) {
+                                                      @for (item of chats; track $index) {
                                                       @if(item.sender_id !== item.admin_id){
-                                                            <li class="sender">
-                                                                  <!-- <img src="assets/img/user_profile.png" alt=""
+                                                      <li class="sender">
+                                                            <!-- <img src="assets/img/user_profile.png" alt=""
                                                                         class="ct_img_30"> -->
-                                                                  <div>
-                                                                        <p>{{item.message}} </p>
-                                                                        <span class="time">{{ item.created_at | date: 'dd MMM, hh:mm a' }}</span>
+                                                            <div>
+                                                                  <p>{{item.message}} </p>
+                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,
+                                                                        hh:mm a' }}</span>
 
 
-                                                                  </div>
-                                                            </li>
+                                                            </div>
+                                                      </li>
 
                                                       }@else {
-                                                            <li class="repaly">
-                                                                  <div>
-                                                                        <p>{{item.message}}</p>
-                                                                        <span class="time">{{ item.created_at | date: 'dd MMM, hh:mm a' }}</span>
+                                                      <li class="repaly">
+                                                            <div>
+                                                                  <p>{{item.message}}</p>
+                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,
+                                                                        hh:mm a' }}</span>
 
 
-                                                                  </div>
-                                                                  <!-- <img src="assets/img/user_profile.png" alt=""
+                                                            </div>
+                                                            <!-- <img src="assets/img/user_profile.png" alt=""
                                                                         class="ct_img_30"> -->
-                                                            </li>
+                                                      </li>
 
                                                       }
 
-                                                    }
-                                             
+                                                      }
+
                                                       <!-- <li>
                                                             <div class="divider">
                                                                   <h6>Today</h6>
@@ -181,9 +188,11 @@
 
 
                                     <div class="send-box">
-                                          <form  class="position-relative">
+                                          <form class="position-relative">
                                                 <input type="text" class="form-control ct_text_indent_15 w-100"
-                                                      aria-label="message…" placeholder="Type message" [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}"   (keydown)="onKeyDown($event)">
+                                                      aria-label="message…" placeholder="Type message"
+                                                      [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}"
+                                                      (keydown)="onKeyDown($event)">
                                                 <div class="d-flex align-items-center ct_send_btn_position">
                                                       <div class="send-btns">
                                                             <div class="attach">
@@ -197,7 +206,8 @@
                                                                   </div>
                                                             </div>
                                                       </div>
-                                                      <button type="button" (click)="sendMessage()"><i class="fa fa-paper-plane"
+                                                      <button type="button" (click)="sendMessage()"><i
+                                                                  class="fa fa-paper-plane"
                                                                   aria-hidden="true"></i></button>
                                                 </div>
                                           </form>
@@ -211,7 +221,7 @@
             </div>
             <div class=" col-xxl-9 col-xl-8 " *ngIf="!isChatboxVisible">
                   <!-- chatbox -->
-                  <div class="chatbox " >
+                  <div class="chatbox ">
                         <div class="ct_empty_chat_msg">
                               <img src="assets/img/chatting.png" alt="">
                               <h4 class="ct_fs_24 c_fw_600 mt-3">No Message Selected</h4>
@@ -245,10 +255,6 @@
                                           </div>
                                     </div>
                               </form>
-
-
-
-
                         </div>
                         <div class="d-flex align-items-center gap-3 pt-4">
                               <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"
@@ -300,49 +306,49 @@
 <!-- Follow Friend Modal S -->
 
 <div class="modal fade" id="ct_followed_coaches2" tabindex="-1" aria-labelledby="ct_followed_coachesLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0 pt-0 px-0 d-block text-center">
-                <h5 class="modal-title text-white ct_fs_15 mx-auto ct_ff_roboto" id="exampleModalLabel">Users
-                </h5>
-                <button type="button" class="btn-close ct_close" data-bs-dismiss="modal" aria-label="Close"><i
-                        class="fa-solid fa-x"></i></button>
-            </div>
-            <div class="modal-body">
-                <div >
-                    <input type="text" class="form-control ct_login_input" placeholder="Search..."
-                        [(ngModel)]="searchQuery">
-                </div>
-
-               
-
-                <div class="ct_add_member_scroll mt-3" >
-                    <div *ngIf="alluserData?.length === 0" class="text-center mt-4">
-                        <p class="ct_fs_15">No users found</p>
-                    </div>
-                    <div *ngFor="let items of alluserData;">
-                        <div  class="d-flex align-items-center gap-2  ct_user_modal_list_50"
-                            style="cursor: pointer;" (click)="openChat(items.id, items.first_name)">
-                            <img [src]="'https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg='"
-                                alt="" class="ct_img_40 ct_border_radius_100">
-                                
-                            <div>
-                                <h4 class="ct_ff_roboto ct_fw_500 ct_fs_16  ct_fs_15 mb-0">
-                                    {{items.first_name}} &nbsp;  {{items.last_name}} </h4>
-                             
-                            </div>
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                  <div class="modal-header border-0 pt-0 px-0 d-block text-center">
+                        <h5 class="modal-title text-white ct_fs_15 mx-auto ct_ff_roboto" id="exampleModalLabel">Users
+                        </h5>
+                        <button type="button" class="btn-close ct_close" data-bs-dismiss="modal" aria-label="Close"><i
+                                    class="fa-solid fa-x"></i></button>
+                  </div>
+                  <div class="modal-body">
+                        <div>
+                              <input type="text" class="form-control ct_login_input" placeholder="Search..."
+                                    [(ngModel)]="searchQuery">
                         </div>
-                    </div>
-                </div>
 
 
-               
-                <button hidden type="button" class="btn btn-secondary" #closeModal
-                    data-bs-dismiss="modal">Close</button>
-                <!-- <button class="ct_orange_btn ct_grey_btn ct_border_radius_10 w-100 mt-4">Create new team</button> -->
+
+                        <div class="ct_add_member_scroll mt-3">
+                              <div *ngIf="alluserData?.length === 0" class="text-center mt-4">
+                                    <p class="ct_fs_15">No users found</p>
+                              </div>
+                              <div *ngFor="let items of alluserData;">
+                                    <div class="d-flex align-items-center gap-2  ct_user_modal_list_50"
+                                          style="cursor: pointer;" (click)="openChat(items.id, items.first_name)">
+                                          <img [src]="'https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg='"
+                                                alt="" class="ct_img_40 ct_border_radius_100">
+
+                                          <div>
+                                                <h4 class="ct_ff_roboto ct_fw_500 ct_fs_16  ct_fs_15 mb-0">
+                                                      {{items.first_name}} &nbsp; {{items.last_name}} </h4>
+
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+
+
+
+                        <button hidden type="button" class="btn btn-secondary" #closeModal
+                              data-bs-dismiss="modal">Close</button>
+                        <!-- <button class="ct_orange_btn ct_grey_btn ct_border_radius_10 w-100 mt-4">Create new team</button> -->
+                  </div>
+
             </div>
-
-        </div>
-    </div>
+      </div>
 </div>

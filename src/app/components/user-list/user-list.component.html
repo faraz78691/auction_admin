@@ -18,65 +18,67 @@
 <div class=" ">
       <div class="card ct_custom_table">
             <p-table #dt2 [value]="userData" dataKey="id" [rows]="10" [rowHover]="true"
-            [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
-            [globalFilterFields]="['id', 'email']"   [tableStyle]="{ 'min-width': '50rem','background-color': 'transparent', }">
-            <ng-template pTemplate="caption">
-                  <div class="flex w-25 ms-auto mb-3 mt-3">
-                        <p-iconField iconPosition="right" class="ml-auto">
-                              <p-inputIcon>
-                                    <i class="fa-solid fa-search ct_srch_top_center"></i>
-                              </p-inputIcon>
-                              <input pInputText type="text" class="form-control ct_input"
-                                    (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
-                                    placeholder="Search keyword" />
-                        </p-iconField>
-                  </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                  <tr>
-                        <th class="text-center" style="width:10%"  pSortableColumn="id">S.no <p-sortIcon field="id" /></th>
-                        <th style="width:15%"  pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
-                        <th style="width:15%"  pSortableColumn="cat_name">Email </th>
-                        <th style="width:10%">Phone </th>
-                        <th style="width: 5%;">Address</th>
-                        <!-- <th style="width:25%" pSortableColumn="cat_name">Street<p-sortIcon field="cat_name" /></th> -->
-                        <th >Action</th>
+                  [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+                  [globalFilterFields]="['id', 'email']"
+                  [tableStyle]="{ 'min-width': '50rem','background-color': 'transparent', }">
+                  <ng-template pTemplate="caption">
+                        <div class="flex w-25 ms-auto mb-3 mt-3">
+                              <p-iconField iconPosition="right" class="ml-auto">
+                                    <p-inputIcon>
+                                          <i class="fa-solid fa-search ct_srch_top_center"></i>
+                                    </p-inputIcon>
+                                    <input pInputText type="text" class="form-control ct_input"
+                                          (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                                          placeholder="Search keyword" />
+                              </p-iconField>
+                        </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                        <tr>
+                              <th class="text-center" style="width:10%" pSortableColumn="id">S.no <p-sortIcon
+                                          field="id" /></th>
+                              <th style="width:15%" pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
+                              <th style="width:15%" pSortableColumn="cat_name">Email </th>
+                              <th style="width:10%">Phone </th>
+                              <th style="width: 5%;">Address</th>
+                              <!-- <th style="width:25%" pSortableColumn="cat_name">Street<p-sortIcon field="cat_name" /></th> -->
+                              <th>Action</th>
+                        </tr>
 
-                  </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer let-i="rowIndex">
+                        <tr>
+                              <td>
+                                    {{ i + 1 }}
+                              </td>
 
-            </ng-template>
-            <ng-template pTemplate="body" let-customer let-i="rowIndex">
-                  <tr>
-                        <td>
-                              {{ i + 1 }} 
-                        </td>
+                              <td>
+                                    {{ customer.first_name }} {{ customer.last_name }}
+                              </td>
+                              <td>
+                                    {{ customer.email }}
+                              </td>
+                              <td>
+                                    {{ customer.phone_number }}
+                              </td>
+                              <td style="width: 10px;">
+                                    {{ customer.address }}
+                              </td>
+                              <td>
+                                    <button class="btn btn-primary" [routerLink]="['/user-offer']"
+                                          [queryParams]="{ id: customer.id }">All Offer</button>
+                              </td>
 
-                        <td>
-                              {{ customer.first_name }} {{ customer.last_name }}
-                        </td>
-                        <td>
-                              {{ customer.email }}
-                        </td>
-                        <td>
-                              {{ customer.phone_number }}
-                        </td>
-                        <td style="width: 10px;">
-                              {{ customer.address }}
-                        </td>
-                        <td>
-                             <button class="btn btn-primary" [routerLink]="['/user-offer']" [queryParams]="{ id: customer.id }">All Offer</button>
-                        </td>
-                      
-                  </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                  <tr>
-                        <td colspan="5">No customers found.</td>
-                  </tr>
-            </ng-template>
-      </p-table>
+                        </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                        <tr>
+                              <td colspan="5">No customers found.</td>
+                        </tr>
+                  </ng-template>
+            </p-table>
       </div>
-    
+
 
 </div>
 
@@ -202,10 +204,6 @@
                                           </div>
                                     </div>
                               </form>
-
-
-
-
                         </div>
                         <div class="d-flex align-items-center gap-3 pt-4">
                               <button type="button" class="ct_blue_btn ct_outline_btn_blue  w-50"

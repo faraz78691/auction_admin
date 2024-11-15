@@ -57,7 +57,10 @@
                               <td>{{customer.start_price}}</td>
 
                               <td>{{customer.highest_bid}}</td>
-                              <td>{{customer.user_name}}</td>
+                              <p class="ct_blue_text mb-0" title="See user details"
+                                    (click)="service.redirectToUser(customer.user_id)"> {{ customer.user_name
+                                    }}
+                              </p>
                               <td>{{customer.status}}</td>
 
                               <td>{{customer.buyer == '' ? '-' : customer.buyer}}</td>

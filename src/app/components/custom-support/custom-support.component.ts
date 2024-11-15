@@ -19,6 +19,7 @@ export class CustomSupportComponent {
   userId!: number;
   username!: string;
   isNewChat: boolean = false;
+  isOnline: boolean = false;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   // apiUrl = 'http://192.168.29.44:5000/';
   apiUrl = 'http://localhost:3000/';
@@ -32,31 +33,36 @@ export class CustomSupportComponent {
 
 
   ngOnInit() {
+    this._chatService.connectAdmin()
     this.adminId = localStorage.getItem('auctionAdminID');
     this.getUserList();
     console.log(this.adminId);
-  
+
     this._chatService.getOnlineUsers();
     this._chatService.getOnlineStatus().subscribe((onlineUsers) => {
       this.onlineUsers = onlineUsers;
-      console.log(this.onlineUsers)
+      console.log(this.onlineUsers);
+
     });
     this.getUsersChats();
     this._chatService.getMessage().subscribe((chats) => {
-     
+
       this.chats.push(chats)
       this.scrollToBottom();
       console.log(this.chats);
       this.getUsersChats();
     });
   };
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
+
+  // ngAfterViewChecked() {
+  //   this.scrollToBottom();
+  // }
 
   scrollToBottom(): void {
     try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      if (this.myScrollContainer && this.myScrollContainer.nativeElement) {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      }
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
     }
@@ -94,26 +100,23 @@ export class CustomSupportComponent {
       next: res => {
         if (res.success == true) {
           this.userList = res.userChat
-          if(this.isNewChat){
+          if (this.isNewChat) {
             const usernameInfo = { user_name: this.username };
             this.userList.unshift(usernameInfo);
-          }   
-
-          console.log(this.userList);
+          }
         }
-        //console.log(res);
+        console.log(107, res);
       }
     })
   }
-  updateReadMSg(id:number) {
+
+  updateReadMSg(id: number) {
     const formdata = new URLSearchParams();
-    formdata.set('id',id.toString())
-   
-    this.apiService.post('admin/updateMsgCount',formdata ).subscribe({
+    formdata.set('id', id.toString())
+
+    this.apiService.post('admin/updateMsgCount', formdata).subscribe({
       next: res => {
         if (res.success == true) {
-       
-
           console.log(this.userList);
         }
         //console.log(res);
@@ -134,10 +137,10 @@ export class CustomSupportComponent {
       sender_id: this.adminId
     }
     this._chatService.sendMessage(msg).then(() => {
- 
+      // this.openChat()
       // console.log("not calling");
-      // this.chats.push(msg);
-      // console.log(this.chats);
+      this.chats.push(msg);
+      console.log(this.chats);
 
       // Close the modal if bid is successful
       // Assuming you have a closeModal() method to close the modal
@@ -150,7 +153,6 @@ export class CustomSupportComponent {
 
   // Function to handle keydown events
   onKeyDown(event: KeyboardEvent) {
-
     if (event.key === 'Enter' && this.senderMessage.trim()) {
       this.sendMessage();
     }
@@ -173,7 +175,7 @@ export class CustomSupportComponent {
           this.closeModal.nativeElement.click();
           this.isNewChat = false;
         } else {
-         
+
           this.chats = []
           this.username = username
           this.isNewChat = true;
@@ -182,9 +184,8 @@ export class CustomSupportComponent {
         }
 
         this.updateReadMSg(userId)
-
+        this.isOnline = this.onlineUsers.includes(userId.toString())
       }
     })
   }
-
 }
