@@ -79,6 +79,7 @@ export class LiveAuctionComponent {
     this.service.get(apiUrl).subscribe({
       next: (res: any) => {
         if (res.success) {
+          console.log(this.offerBids)
           this.offerBids = res.data;
         } else {
           this.toastr.error(res.message);

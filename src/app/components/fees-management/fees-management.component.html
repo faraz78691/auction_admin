@@ -34,24 +34,18 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
-                              <th style="width:10%" pSortableColumn="id">S.no <p-sortIcon field="id" /></th>
-                              <th style="width:25%" pSortableColumn="title">Title <p-sortIcon field="title" /></th>
-                              <th style="width:25%" pSortableColumn="transaction_id">Transaction Id <p-sortIcon
-                                          field="transaction_id" /></th>
-                              <th style="width:25%" pSortableColumn="payment_id">Payment Id <p-sortIcon
-                                          field="payment_id" /></th>
-                              <th style="width:25%" pSortableColumn="payment_type">Payment Type <p-sortIcon
-                                          field="payment_type" /></th>
-                              <th style="width:25%" pSortableColumn="amount">Amount (CHF)<p-sortIcon field="amount" />
-                              </th>
-                              <th style="width:25%" pSortableColumn="pay_amount">Pay Amount (CHF)<p-sortIcon
-                                          field="pay_amount" /></th>
+                              <th style="width:10%" pSortableColumn="id">Offer Id <p-sortIcon field="id" /></th>
+                              <th style="width:25%" pSortableColumn="title">Title/Sold on<p-sortIcon field="title" /></th>
+                              <th style="width:25%" pSortableColumn="amount">Amount (CHF)<p-sortIcon field="amount" /></th>
+                              <th style="width:25%" pSortableColumn="pay_amount">Pay Amount (CHF)<p-sortIcon field="pay_amount" /></th>
+                              <th style="width:25%" pSortableColumn="fees_type">Fee Type<p-sortIcon field="fees_type" /></th>
+                              <th style="width:25%" pSortableColumn="payment_id">Status <p-sortIcon field="payment_id" /></th>
                               <th style="width:25%" pSortableColumn="seller_name">Seller Name <p-sortIcon
                                           field="seller_name" /></th>
-                              <th style="width:25%" pSortableColumn="buyer_name">Buyer Name <p-sortIcon
-                                          field="buyer_name" /></th>
-                              <th style="width:25%">Status</th>
-                              <th style="width:25%" pSortableColumn="payment_date">Date<p-sortIcon
+                              <th style="width:25%" pSortableColumn="payment_id">Payment Id <p-sortIcon field="payment_id" /></th>
+                              <th style="width:25%" pSortableColumn="payment_type">Payment Type <p-sortIcon field="payment_type" /></th>
+                              
+                          <th style="width:25%" pSortableColumn="payment_date">Payment date<p-sortIcon
                                           field="payment_date" /></th>
 
 
@@ -61,20 +55,11 @@
                   <ng-template pTemplate="body" let-customer>
                         <tr>
                               <td>
-                                    {{ customer.id }}
+                                    {{ customer.offer_unique_id }}
                               </td>
 
                               <td>
-                                    {{ customer.title }}
-                              </td>
-                              <td>
-                                    {{ customer.transaction_id }}
-                              </td>
-                              <td>
-                                    {{ customer.payment_id }}
-                              </td>
-                              <td>
-                                    {{ customer.payment_type}}
+                                    {{ customer.title }} <br>{{customer.created_at | date : 'medium':'UTC'}}
                               </td>
                               <td>
                                     {{ customer.amount }}
@@ -83,22 +68,29 @@
                                     {{ customer.pay_amount }}
                               </td>
                               <td>
-                                    <p class="ct_blue_text mb-0" title="See user details"
-                                          (click)="service.redirectToUser(customer.seller_id)"> {{ customer.seller_name
-                                          }}
-                                    </p>
-                              </td>
-                              <td>
-                                    <p class="ct_blue_text mb-0" title="See user details"
-                                          (click)="service.redirectToUser(customer.buyer_id)"> {{ customer.buyer_name }}
-                                    </p>
+                                    {{ customer.fees_type == '1' ? 'Item sold' : 'Boosted' }}
                               </td>
                               <td>
                                     <span [ngClass]="customer.status == '1' ? 'Green': 'Red'">{{ customer.status == '1'
                                           ? 'Paid' : 'Pending'}}</span>
                               </td>
                               <td>
-                                    {{ customer.payment_date | date }}
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer.seller_id)"> {{ customer.seller_name
+                                          }}
+                                    </p>
+                              </td>
+                            
+                              <td>
+                                    {{ customer.payment_id }}
+                              </td>
+                              <td>
+                                    {{ customer.payment_type}}
+                              </td>
+                             
+                        
+                              <td>
+                                    {{ customer.payment_date | date :'medium' :'UTC' }}
                               </td>
                         </tr>
                   </ng-template>

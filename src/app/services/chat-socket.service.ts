@@ -10,8 +10,8 @@ export class ChatSocketService {
   isCoach: boolean = true;
   private socket!: Socket;
   // apiUrl = 'http://192.168.29.44:5000/';
-  // apiUrl = 'http://localhost:3000/';
-  apiUrl = 'http://192.168.29.44:5000/';
+  apiUrl = 'http://localhost:3000/';
+  // apiUrl = 'http://192.168.29.44:5000/';
   // apiUrl = 'http://98.80.36.64:5000/';
   authToken = localStorage.getItem('fbToken');
   constructor() {

@@ -63,9 +63,9 @@
                               </p>
                               <td>{{customer.status}}</td>
 
-                              <td>{{customer.buyer == '' ? '-' : customer.buyer}}</td>
-                              <td data-bs-target="#userBids" data-bs-toggle="modal"
-                                    (click)="getOfferBids(customer.offer_id)">View</td>
+                              <td>{{customer.buyer == '' ? '-' : customer.buyer.name}}</td>
+                              <td  data-bs-target="#userBids" data-bs-toggle="modal"
+                                    (click)="getOfferBids(customer.offer_id)">View bids</td>
 
                         </tr>
                   </ng-template>
@@ -220,7 +220,11 @@
       <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content  py-5">
                   <div class="modal-header border-0">
-                        <h5>Title</h5>
+                        @if(offerBids){
+                              <h5>{{offerBids[0]?.title}}</h5>
+                              <h5>{{offerBids[0]?.offer_unique_id}}</h5>
+
+                        }
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body py-0">
@@ -243,8 +247,9 @@
                                                 <td>
                                                       {{i+ 1}}
                                                 </td>
-                                                <td>{{customer.offer_unique_id}}</td>
-                                                <td>{{customer.offer_unique_id}}</td>
+                                                <td>{{customer.user_name}}</td>
+                                                <td>{{customer.bid}}</td>
+                                                <td>{{customer.created_at | date :'medium' : 'UTC'}}</td>
 
 
                                           </tr>
