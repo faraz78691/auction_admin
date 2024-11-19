@@ -22,8 +22,8 @@ export class CustomSupportComponent {
   isOnline: boolean = false;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   // apiUrl = 'http://192.168.29.44:5000/';
-  apiUrl = 'http://localhost:3000/';
-  // apiUrl = 'http://98.80.36.64:5000/';
+  // apiUrl = 'http://localhost:3000/';
+  apiUrl = 'http://98.80.36.64:5000/';
   searchQuery: string | undefined;
   usernameArray!: any[];
   onlineUsers: string[] = [];

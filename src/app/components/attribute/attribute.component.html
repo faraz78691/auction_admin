@@ -149,7 +149,7 @@
                   <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Attribute Type</label>
                   <select class="ct_input form-control ct_input_40" formControlName="attribute_name"
                     (change)="onAttributeChange($event)">
-                    <option value="null">-- Select --</option>
+                    <option value="">-- Select --</option>
                     <option *ngFor="let item of selectBoxData" [value]="item.type">
                       {{ item.type }}
                     </option>
@@ -172,7 +172,7 @@
                   <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Input Type</label>
                   <select *ngIf="selectedInputs" class="ct_input form-control ct_input_40" formControlName="input_type"
                     (change)="onInputChange($event)">
-                    <option  value="null" >-- Choose input type --</option>
+                    <option  value="" >-- Choose input type --</option>
                     <option  *ngFor="let inputType of selectedInputs" [value]="inputType.type">
                       {{ inputType.type }}
                     </option>

@@ -24,9 +24,6 @@
                               <li>
                                     <a routerLink="/user-offer" routerLinkActive="active">User`s offers </a>
                               </li>
-                              <li>
-                                    <a routerLink="/boosted-offers" routerLinkActive="active">Boosted offers</a>
-                              </li>
                         </ul>
                   </div>
             </li>
@@ -55,6 +52,18 @@
                   <a routerLink="/custom-support" routerLinkActive="active"><img
                               src="assets/img/customer_support_icon.svg" alt="">Customer
                         Support</a>
+            </li>
+            <li class="ct_dropdown" [ngClass]="{'ct_drop_show': isDropdownVisible2}">
+                  <a href="javascripr:void(0)" (click)="toggleDropdown2()" routerLinkActive="active"><img
+                              src="assets/img/user_icon.svg" alt="">Settings<i class="fa-solid fa-angle-down ms-auto"></i></a>
+                  <div class="ct_dropdown_menu mt-3">
+                        <ul>
+                              <li>
+                                    <a routerLink="/comission" routerLinkActive="active">Comission</a>
+                              </li>
+                            
+                        </ul>
+                  </div>
             </li>
 
       </ul>

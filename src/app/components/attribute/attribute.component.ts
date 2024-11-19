@@ -68,9 +68,9 @@ export class AttributeComponent {
     });
 
     this.attributeForm = this.fb.group({
-      attribute_name: ['null', [Validators.required]],
+      attribute_name: ['', [Validators.required]],
       heading: ['', ],
-      input_type: ['null',[Validators.required]],
+      input_type: ['',[Validators.required]],
     });
   }
 
@@ -101,6 +101,7 @@ export class AttributeComponent {
   }
 
   onSubmit(form: any) {
+    console.log(form)
     this.loading = true;
     form.markAllAsTouched();
     if (form.invalid) {

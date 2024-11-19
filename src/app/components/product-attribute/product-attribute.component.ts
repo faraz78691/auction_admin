@@ -59,11 +59,12 @@ export class ProductAttributeComponent {
   }
 
   onSubmit(form: any) {
-    if(this.attrValue.trim().length == 0){
+    form.markAllAsTouched()
+    console.log(form.value)
+    if(form.value.attribute_value_name.trim().length == 0){
       return
     }
     this.loading = true
-    form.markAllAsTouched()
     if (form.invalid) {
       this.loading = false
       return

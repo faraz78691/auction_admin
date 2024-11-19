@@ -18,6 +18,7 @@ import { authGuard } from './guards/auth.guard';
 import { BrandsModelComponent } from './components/brands-model/brands-model.component';
 import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
 import { FeesManagementComponent } from './components/fees-management/fees-management.component';
+import { SetComisssionComponent } from './set-comisssion/set-comisssion.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,9 @@ const routes: Routes = [
   },
   {
     path: 'fees-management', component: FeesManagementComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'comission', component: SetComisssionComponent, canActivate: [authGuard]
   },
 ];
 

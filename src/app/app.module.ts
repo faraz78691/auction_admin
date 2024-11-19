@@ -34,6 +34,7 @@ import { LiveAuctionComponent } from './components/live-auction/live-auction.com
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { FeesManagementComponent } from './components/fees-management/fees-management.component';
+import { SetComisssionComponent } from './set-comisssion/set-comisssion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { FeesManagementComponent } from './components/fees-management/fees-manag
     ProductAttributeComponent,
     BrandsModelComponent,
     LiveAuctionComponent,
-    FeesManagementComponent
+    FeesManagementComponent,
+    SetComisssionComponent
   ],
   imports: [
     BrowserModule,

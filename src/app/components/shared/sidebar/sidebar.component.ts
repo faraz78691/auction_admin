@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SidebarComponent {
   isDropdownVisible: boolean = false;
+  isDropdownVisible2: boolean = false;
   isSidebarCollapsed: boolean = false;
   @Output() closeSidebarEvent = new EventEmitter<void>();
 
@@ -34,5 +35,8 @@ export class SidebarComponent {
   // Method to toggle the dropdown
   toggleDropdown(): void {
     this.isDropdownVisible = !this.isDropdownVisible;
+  }
+  toggleDropdown2(): void {
+    this.isDropdownVisible2 = !this.isDropdownVisible2;
   }
 }
