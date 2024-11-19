@@ -131,8 +131,7 @@
                                                                         class="ct_img_30"> -->
                                                             <div>
                                                                   <p>{{item.message}} </p>
-                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,
-                                                                        hh:mm a' }}</span>
+                                                                  <span class="time">{{ item.created_at | date: 'dd MMM, hh:mm a' : 'UTC' }}</span>
 
 
                                                             </div>
@@ -142,45 +141,17 @@
                                                       <li class="repaly">
                                                             <div>
                                                                   <p>{{item.message}}</p>
-                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,
-                                                                        hh:mm a' }}</span>
+                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,hh:mm a':'UTC' }}</span>
 
 
                                                             </div>
-                                                            <!-- <img src="assets/img/user_profile.png" alt=""
-                                                                        class="ct_img_30"> -->
+
                                                       </li>
 
                                                       }
+                                                }
 
-                                                      }
 
-                                                      <!-- <li>
-                                                            <div class="divider">
-                                                                  <h6>Today</h6>
-                                                            </div>
-                                                      </li>
-
-                                                      <li class="repaly">
-                                                            <div>
-                                                                  <p>Lorem Ipsum has been the
-                                                                        industry's standard dummy text
-                                                                        ever since the 1500s,</p>
-                                                                  <span class="time">10:20 am</span>
-                                                            </div>
-                                                            <img src="assets/img/user_profile.png" alt=""
-                                                                  class="ct_img_30">
-                                                      </li>
-                                                      <li class="repaly">
-                                                            <div>
-                                                                  <p>Lorem Ipsum has been the
-                                                                        industry's standard dummy text
-                                                                        ever since the 1500s,</p>
-                                                                  <span class="time">10:20 am</span>
-                                                            </div>
-                                                            <img src="assets/img/user_profile.png" alt=""
-                                                                  class="ct_img_30">
-                                                      </li> -->
 
                                                 </ul>
                                           </div>
