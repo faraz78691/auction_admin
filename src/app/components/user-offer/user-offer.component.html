@@ -30,8 +30,8 @@
                   [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[ 'offer_unique_id','title']"
                   [tableStyle]="{ 'min-width': '75rem' ,'background-color': 'transparent', }"   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                   <ng-template pTemplate="caption">
-                        <div class="d-flex justify-content-between ms-auto mb-3 mt-3">
-                              <p-button class="p-2" label="Clear" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(dt)" />
+                      <div class="ms-auto">
+                        <div class="d-flex  ms-auto mb-3 mt-3 justify-content-end ">
                               <p-iconField iconPosition="right" class="ml-auto">
                                     <p-inputIcon>
                                           <i class="fa-solid fa-search ct_srch_top_center"></i>
@@ -40,7 +40,10 @@
                                           (input)="dt.filterGlobal($any($event.target).value, 'contains')"
                                           placeholder="Search keyword" />
                               </p-iconField>
+                              <p-button class="px-2 ct_clear_btn12" label="Clear" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(dt)" />
+
                         </div>
+                      </div>
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
@@ -321,10 +324,10 @@
                               Are you sure, you want to logout? once you logout <br> you need to login again.
                         </p>
                         <div class="modal-footer border-0 justify-content-center">
-                              <button type="button" class="ct_purple_btn ct_outline_blue"
+                              <button type="button" class="ct_blue_btn ct_outline_blue"
                                     data-bs-dismiss="modal">Cancel</button>
                               <a href="login.html" type="button"
-                                    class=" bg-danger  ct_purple_btn  justify-content-center"
+                                    class=" bg-danger  ct_blue_btn  justify-content-center"
                                     style="border-color: rgb(220, 53, 69)">Yes Logout!</a>
                         </div>
                         <div>

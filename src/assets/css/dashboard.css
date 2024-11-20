@@ -1077,7 +1077,8 @@ button:focus {
 }
 
 .ct_chat_user {
-    border: 1px solid
+    border: 1px solid;
+    cursor:pointer
 }
 
 .ct_chat_user {
