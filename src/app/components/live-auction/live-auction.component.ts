@@ -62,11 +62,11 @@ export class LiveAuctionComponent {
         if (res.success) {
           this.userOfferData = res.highestBid;
         } else {
-          this.toastr.error(res.message);
+          // this.toastr.error(res.message);
         }
       },
       error: (err: any) => {
-        this.toastr.error(err);
+        // this.toastr.error(err);
       },
       complete: () => {
         // Optional: If you need to perform something when the observable completes
@@ -82,11 +82,11 @@ export class LiveAuctionComponent {
           console.log(this.offerBids)
           this.offerBids = res.data;
         } else {
-          this.toastr.error(res.message);
+          // this.toastr.error(res.message);
         }
       },
       error: (err: any) => {
-        this.toastr.error(err);
+        // this.toastr.error(err);
       },
       complete: () => {
         // Optional: If you need to perform something when the observable completes
