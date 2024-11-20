@@ -29,11 +29,11 @@ export class OrderManagementComponent {
         if (res.success) {
           this.userOfferData = res.transdactionData;
         } else {
-          this.toastr.error(res.message);
+          // this.toastr.error(res.message);
         }
       },
       error: (err: any) => {
-        this.toastr.error(err);
+        // this.toastr.error(err);
       },
       complete: () => {
         // Optional: If you need to perform something when the observable completes
@@ -56,7 +56,7 @@ export class OrderManagementComponent {
         this.orderSummary = res.data;
         console.log(this.orderSummary);
       } else {
-        this.toastr.error("No Products found")
+        // this.toastr.error("No Products found")
       }
     })
   }

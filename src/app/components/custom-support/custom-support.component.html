@@ -20,15 +20,15 @@
                                     <div class="chat-header">
                                           <div
                                                 class="d-flex align-items-center gap-2 justify-content-between flex-wrap">
-                                                <h4 class="mb-3 ct_fs_22 ct_fw_700">Chats</h4>
+                                                <h4 class="mb-3 ct_fs_22 ct_fw_700">Users List</h4>
                                                 <i data-bs-toggle="modal" data-bs-target="#ct_followed_coaches2"
                                                       class="fa-solid fa-user-plus"></i>
                                           </div>
-                                          <div class="msg-search">
+                                          <!-- <div class="msg-search">
                                                 <input type="text" class="form-control" id="inlineFormInputGroup"
                                                       placeholder="Search" aria-label="search">
                                                 <i class="fa-solid fa-magnifying-glass ct_search_icon_top"></i>
-                                          </div>
+                                          </div> -->
                                     </div>
 
                                     <div class="modal-body mt-4"
@@ -165,7 +165,7 @@
                                                       [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}"
                                                       (keydown)="onKeyDown($event)">
                                                 <div class="d-flex align-items-center ct_send_btn_position">
-                                                      <div class="send-btns">
+                                                      <!-- <div class="send-btns">
                                                             <div class="attach">
                                                                   <div class="button-wrapper">
                                                                         <span class="label">
@@ -176,7 +176,7 @@
                                                                               aria-label="Upload File">
                                                                   </div>
                                                             </div>
-                                                      </div>
+                                                      </div> -->
                                                       <button type="button" (click)="sendMessage()"><i
                                                                   class="fa fa-paper-plane"
                                                                   aria-hidden="true"></i></button>
