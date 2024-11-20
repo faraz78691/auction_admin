@@ -1,6 +1,6 @@
 <div>
       <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-1">Dashboard</h3>
-   
+
       <div class="row ct_mt_40">
             <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 mb-4 mb-xxl-0">
                   <div class="ct_dashboard_card">
@@ -8,12 +8,9 @@
                               <img src="assets/img/total_icon.png" alt="">
                         </div>
                         <div>
-                              <h2 class="ct_fs_28 ct_fw_600 mb-2">75</h2>
-                              <p class="ct_fw_600 mb-0">Total Orders </p>
+                              <h2 class="ct_fs_28 ct_fw_600 mb-2">{{data.totalOffers}}</h2>
+                              <p class="ct_fw_600 mb-0">Total Offers </p>
                         </div>
-
-
-
                   </div>
             </div>
             <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 mb-4 mb-xl-0">
@@ -23,10 +20,9 @@
                         </div>
 
                         <div>
-                              <h2 class="ct_fs_28 ct_fw_600 mb-2">357</h2>
-                              <p class="ct_fw_600 mb-0">Total Delivered </p>
+                              <h2 class="ct_fs_28 ct_fw_600 mb-2">{{data.totalDeliveredOffers}}</h2>
+                              <p class="ct_fw_600 mb-0">Total Delivered Offers</p>
                         </div>
-
                   </div>
             </div>
             <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 mb-4 mb-xl-0">
@@ -35,8 +31,8 @@
                               <img src="assets/img/total-canceled.png" alt="">
                         </div>
                         <div>
-                              <h2 class="ct_fs_28 ct_fw_600 mb-2">65</h2>
-                              <p class="ct_fw_600 mb-0">Total Canceled</p>
+                              <h2 class="ct_fs_28 ct_fw_600 mb-2">{{data.totalRevenue}}</h2>
+                              <p class="ct_fw_600 mb-0">Total Revenue</p>
                         </div>
                   </div>
             </div>
@@ -46,25 +42,11 @@
                               <img src="assets/img/total-revenue.png" alt="">
                         </div>
                         <div>
-                              <h2 class="ct_fs_28 ct_fw_600 mb-2">$128</h2>
-                              <p class="ct_fw_600 mb-0">Total Revenue</p>
-                        </div>
-
-
-                  </div>
-            </div>
-
-      </div>
-      <div class="">
-            <div class="row">
-                  <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="ct_white_bg">
-
+                              <h2 class="ct_fs_28 ct_fw_600 mb-2">{{data.totalPaidRevenue}}</h2>
+                              <p class="ct_fw_600 mb-0">Total Paid Revenue</p>
                         </div>
                   </div>
-
             </div>
-
       </div>
 </div>
 
