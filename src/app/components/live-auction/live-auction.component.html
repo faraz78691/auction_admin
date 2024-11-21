@@ -15,7 +15,7 @@
 <div class="ct_mt_40">
       <div class="card ct_custom_table">
             <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
-                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
+                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['offer_unique_id', 'title']"
                   [tableStyle]="{ 'min-width': '75rem' }">
                   <ng-template pTemplate="caption">
                         <div class="flex w-25 ms-auto mb-3 mt-3">

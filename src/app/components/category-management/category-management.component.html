@@ -37,17 +37,17 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
-                              <th style="width:10%" pSortableColumn="id">S.no <p-sortIcon field="id" /></th>
+                              <th style="width:10%" >S.no </th>
                               <th style="width:25%" pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
                               <th style="width:25%">Action</th>
 
                         </tr>
 
                   </ng-template>
-                  <ng-template pTemplate="body" let-customer>
+                  <ng-template pTemplate="body" let-customer let-i="rowIndex">
                         <tr>
                               <td>
-                                    {{ customer.id }}
+                                    {{ i + 1 }}
                               </td>
 
                               <td>

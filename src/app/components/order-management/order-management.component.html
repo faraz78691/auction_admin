@@ -17,7 +17,7 @@
 <div class="table-responsive ct_mt_40">
       <div class="card ct_custom_table pt-4 px-3">
             <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
-                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['id', 'cat_name']"
+                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="['offer_unique_id', 'title']"
                   [tableStyle]="{ 'min-width': '50rem','background-color': 'transparent', }">
                   <ng-template pTemplate="caption">
                         <div class="flex w-25 ms-auto mb-3 mt-3">
@@ -407,7 +407,7 @@
                                                             </div>
                                                             <div
                                                                   class="d-flex gap-3 align-items-center justify-content-between">
-                                                                  <p class="mb-0">Parcel a-post</p>
+                                                                  <p class="mb-0">Pick up</p>
                                                                   <div class="d-flex align-items-center gap-1">
                                                                         <p class="mb-0 ct_fw_500">-</p>
                                                                   </div>
@@ -429,7 +429,7 @@
                                                                   <p class="mb-0 ct_text_op_8">Delivery type</p>
                                                             </div>
                                                             <div class="d-flex align-items-center">
-                                                                  <p class="mb-0 ct_fw_600">Parcel B-Post</p>
+                                                                  <p class="mb-0 ct_fw_600">Pick up</p>
                                                             </div>
                                                       </div>
                                                 </div>
@@ -457,7 +457,7 @@
                                                             <div class="">
                                                                   <p class="mb-0 ct_fw_600">
                                                                         {{orderSummary.result[0].seller_name}}</p>
-                                                                  <p class="mb-0 ct_blue_text ct_fw_600">mina_d</p>
+                                                            
                                                                   <p class="mb-0 ct_blue_text ct_fw_600">
                                                                         {{orderSummary.result[0].seller_email}}
                                                                   </p>

@@ -27,6 +27,7 @@ export class CustomSupportComponent {
   searchQuery: string | undefined;
   usernameArray!: any[];
   onlineUsers: string[] = [];
+  filteredUsers:any
   constructor(
     private _chatService: ChatSocketService,
     private apiService: SharedService,
@@ -84,6 +85,7 @@ export class CustomSupportComponent {
       (res: any) => {
         if (res.success) {
           this.alluserData = res.data;
+          this.filteredUsers = [...this.alluserData]; 
           // console.log(this.alluserData);
         } else {
           // this.toastr.warning(res.message)
@@ -198,5 +200,19 @@ export class CustomSupportComponent {
         this.isOnline = this.onlineUsers.includes(userId.toString());
       },
     });
+  };
+
+
+  onKeyup(event:any): void {
+    const query = this.searchQuery?.toLowerCase().trim();
+    console.log("query" ,query)
+    if(query == ''){
+      this.filteredUsers = this.alluserData
+    }else{
+      this.filteredUsers = this.alluserData.filter(user =>
+        user.user_name.toLowerCase().includes(query)
+      );
+
+    }
   }
 }

@@ -289,14 +289,15 @@
                   <div class="modal-body">
                         <div>
                               <input type="text" class="form-control ct_login_input" placeholder="Search..."
-                                    [(ngModel)]="searchQuery">
+                              (keyup)="onKeyup($event)"
+    [(ngModel)]="searchQuery" >
                         </div>
 
                         <div class="ct_add_member_scroll mt-3">
-                              <div *ngIf="alluserData?.length === 0" class="text-center mt-4">
+                              <div *ngIf="filteredUsers?.length === 0" class="text-center mt-4">
                                     <p class="ct_fs_15">No users found</p>
                               </div>
-                              <div *ngFor="let items of alluserData;">
+                              <div *ngFor="let items of filteredUsers;">
                                     <div class="d-flex align-items-center gap-2  ct_user_modal_list_50"
                                           style="cursor: pointer;" (click)="openChat(items.id, items.first_name)">
                                           <img [src]="'https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg='"
