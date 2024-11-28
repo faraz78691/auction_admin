@@ -55,13 +55,18 @@
             </li>
             <li class="ct_dropdown" [ngClass]="{'ct_drop_show': isDropdownVisible2}">
                   <a href="javascripr:void(0)" (click)="toggleDropdown2()" routerLinkActive="active"><img
-                              src="assets/img/user_icon.svg" alt="">Settings<i class="fa-solid fa-angle-down ms-auto"></i></a>
+                              src="assets/img/user_icon.svg" alt="">Settings<i
+                              class="fa-solid fa-angle-down ms-auto"></i></a>
                   <div class="ct_dropdown_menu mt-3">
                         <ul>
                               <li>
                                     <a routerLink="/comission" routerLinkActive="active">Commission</a>
                               </li>
-                            
+                              <li>
+                                    <a routerLink="/terms-conditions" routerLinkActive="active">Terms &
+                                          Conditions</a>
+                              </li>
+
                         </ul>
                   </div>
             </li>

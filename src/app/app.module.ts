@@ -35,6 +35,10 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { FeesManagementComponent } from './components/fees-management/fees-management.component';
 import { SetComisssionComponent } from './set-comisssion/set-comisssion.component';
+import { PopularCategoriesComponent } from './components/popular-categories/popular-categories.component';
+import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
+import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
+import { NgxEditorModule } from 'ngx-editor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +61,10 @@ import { SetComisssionComponent } from './set-comisssion/set-comisssion.componen
     BrandsModelComponent,
     LiveAuctionComponent,
     FeesManagementComponent,
-    SetComisssionComponent
+    SetComisssionComponent,
+    PopularCategoriesComponent,
+    TermsConditionsComponent,
+    SubHeadingComponent
   ],
   imports: [
     BrowserModule,
@@ -67,8 +74,9 @@ import { SetComisssionComponent } from './set-comisssion/set-comisssion.componen
     FormsModule,
     SweetAlert2Module,
     BrowserAnimationsModule,
-    IconFieldModule, InputTextModule, InputIconModule, DropdownModule,ButtonModule,
+    IconFieldModule, InputTextModule, InputIconModule, DropdownModule, ButtonModule,
     TableModule,
+    NgxEditorModule,
     ToastrModule.forRoot()
   ],
   providers: [MessageService],

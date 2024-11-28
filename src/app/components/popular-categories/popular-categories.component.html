@@ -1,30 +1,26 @@
 <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
       <div>
-            <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-3">Category List</h3>
+            <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-3">Popular Category List</h3>
             <ul class="d-flex align-items-center gap-3">
                   <li>
                         <h6 class="mb-0">Category Management<i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
                   <li>
-                        <h6 class="mb-0">Category list<i class="fa-solid fa-angle-right ms-2"></i>
+                        <h6 class="mb-0">Popular Category list<i class="fa-solid fa-angle-right ms-2"></i>
                         </h6>
                   </li>
             </ul>
             <!-- <p class="mb-0 ct_fw_600">Category List</p> -->
       </div>
-      <div>
-            <button class="ct_blue_btn me-2" routerLink="/popular-categories">Popular Category
-            </button>
-            <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add Category
-                  +</button>
-      </div>
+      <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add New
+            +</button>
 </div>
 
 <div class="table-responsive ct_mt_40">
       <div class="card ct_custom_table">
-            <p-table #dt [value]="categoryData" dataKey="id" [rows]="10" [rowHover]="true"
-                  [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+            <p-table #dt [value]="popularCatData" dataKey="id" [rows]="10" [rowHover]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="false"
                   [globalFilterFields]="['id', 'cat_name']" [tableStyle]="{ 'min-width': '75rem' }">
                   <ng-template pTemplate="caption">
                         <div class="flex w-25 ms-auto mb-3 mt-3">
@@ -42,6 +38,7 @@
                         <tr>
                               <th style="width:10%">S.no </th>
                               <th style="width:25%" pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
+                              <th style="width:25%">IMage <p-sortIcon field="cat_image" /></th>
                               <th style="width:25%">Action</th>
 
                         </tr>
@@ -54,7 +51,12 @@
                               </td>
 
                               <td>
-                                    {{ customer.cat_name }}
+                                    {{ customer.category_name}}
+                              </td>
+
+                              <td>
+                                    <img [src]="imgUrl + customer.category_image" [alt]="customer.category_image
+                                    " class="cat_img">
                               </td>
                               <td>
                                     <div class="d-flex align-items-center gap-2">
@@ -62,10 +64,9 @@
                                                 (click)="onClickUpdate(customer)"
                                                 class="ct_edit_btn py-1 ct_border_radius_10"><i
                                                       class="fa-solid fa-pen-to-square text-dark"></i></a>
-                                          <a routerLink="/product-list/{{customer.id}}"
-                                                title="Add Product type under category"
+                                          <a (click)="Delete(customer.id)" title="Delete"
                                                 class="ct_edit_btn py-1 ct_border_radius_10"><i
-                                                      class="fas fa-upload"></i>
+                                                      class="fas fa-trash"></i>
                                           </a>
                                     </div>
                               </td>
@@ -97,14 +98,52 @@
                                                 <div class="form-group text-start mb-4">
                                                       <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Category
                                                             Name</label>
-                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                      <select class="ct_input form-control ct_input_40"
                                                             formControlName="cat_name" placeholder="Category Name">
+                                                            <option value="" disabled selected>select
+                                                            </option>
+                                                            <option *ngFor="let item of  categoryData"
+                                                                  [value]="item.cat_name">{{item.cat_name}}
+                                                            </option>
+                                                      </select>
                                                       <p *ngIf="
                                                             categoryForm.controls['cat_name'].errors &&
                                                             categoryForm.controls['cat_name'].touched
                                                           "
                                                             class="d-flex justify-content-between align-items-center error_message">
                                                             {{ getErrorMessage('cat_name') }}
+                                                            <svg width="13" height="13" viewBox="0 0 17 17" fill="none"
+                                                                  xmlns="http://www.w3.org/2000/svg">
+                                                                  <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                                        fill="#F80000" />
+                                                            </svg>
+                                                      </p>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                                <div class="form-group text-start mb-4">
+                                                      <ng-container *ngIf="!uploadedImage; else preview">
+                                                            <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Category
+                                                                  Image</label>
+                                                            <input type="file" class="ct_input form-control ct_input_40"
+                                                                  formControlName="cat_Image"
+                                                                  (change)="ngFileInputChange($event)">
+                                                      </ng-container>
+                                                      <ng-template #preview>
+                                                            <div class="mb-2 position-relative w-fit">
+                                                                  <img [src]="uploadedImage" alt="Uploaded Image"
+                                                                        class="img-thumbnail" style="max-width: 150px;">
+                                                                  <i class="fa fa-times-circle close_btn"
+                                                                        aria-hidden="true"
+                                                                        (click)="uploadedImage = null"></i>
+                                                            </div>
+                                                      </ng-template>
+                                                      <p *ngIf="
+                                                            categoryForm.controls['cat_Image'].errors &&
+                                                            categoryForm.controls['cat_Image'].touched
+                                                          "
+                                                            class="d-flex justify-content-between align-items-center error_message">
+                                                            {{ getErrorMessage('cat_Image') }}
                                                             <svg width="13" height="13" viewBox="0 0 17 17" fill="none"
                                                                   xmlns="http://www.w3.org/2000/svg">
                                                                   <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
@@ -141,14 +180,52 @@
                                                 <div class="form-group text-start mb-4">
                                                       <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Category
                                                             Name</label>
-                                                      <input type="text" class="ct_input form-control ct_input_40"
+                                                      <select class="ct_input form-control ct_input_40"
                                                             formControlName="cat_name" placeholder="Category Name">
+                                                            <option value="" disabled selected>select
+                                                            </option>
+                                                            <option *ngFor="let item of  categoryData"
+                                                                  [value]="item.cat_name">{{item.cat_name}}
+                                                            </option>
+                                                      </select>
                                                       <p *ngIf="
                                                             categoryForm.controls['cat_name'].errors &&
                                                             categoryForm.controls['cat_name'].touched
                                                           "
                                                             class="d-flex justify-content-between align-items-center error_message">
                                                             {{ getErrorMessage('cat_name') }}
+                                                            <svg width="13" height="13" viewBox="0 0 17 17" fill="none"
+                                                                  xmlns="http://www.w3.org/2000/svg">
+                                                                  <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                                        fill="#F80000" />
+                                                            </svg>
+                                                      </p>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                                <div class="form-group text-start mb-4">
+                                                      <ng-container *ngIf="!uploadedImage; else preview">
+                                                            <label for="" class="ct_ff_roboto mb-2 ct_fw_500">Category
+                                                                  Image</label>
+                                                            <input type="file" class="ct_input form-control ct_input_40"
+                                                                  formControlName="cat_Image"
+                                                                  (change)="ngFileInputChange($event)">
+                                                      </ng-container>
+                                                      <ng-template #preview>
+                                                            <div class="mb-2 position-relative w-fit">
+                                                                  <img [src]="uploadedImage" alt="Uploaded Image"
+                                                                        class="img-thumbnail" style="max-width: 150px;">
+                                                                  <i class="fa fa-times-circle close_btn"
+                                                                        aria-hidden="true"
+                                                                        (click)="uploadedImage = null"></i>
+                                                            </div>
+                                                      </ng-template>
+                                                      <p *ngIf="
+                                                            categoryForm.controls['cat_Image'].errors &&
+                                                            categoryForm.controls['cat_Image'].touched
+                                                          "
+                                                            class="d-flex justify-content-between align-items-center error_message">
+                                                            {{ getErrorMessage('cat_Image') }}
                                                             <svg width="13" height="13" viewBox="0 0 17 17" fill="none"
                                                                   xmlns="http://www.w3.org/2000/svg">
                                                                   <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"

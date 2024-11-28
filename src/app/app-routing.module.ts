@@ -19,6 +19,9 @@ import { BrandsModelComponent } from './components/brands-model/brands-model.com
 import { LiveAuctionComponent } from './components/live-auction/live-auction.component';
 import { FeesManagementComponent } from './components/fees-management/fees-management.component';
 import { SetComisssionComponent } from './set-comisssion/set-comisssion.component';
+import { PopularCategoriesComponent } from './components/popular-categories/popular-categories.component';
+import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
+import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
 
 const routes: Routes = [
   {
@@ -77,6 +80,15 @@ const routes: Routes = [
   },
   {
     path: 'comission', component: SetComisssionComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'popular-categories', component: PopularCategoriesComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'terms-conditions', component: TermsConditionsComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'terms-conditions/subheading/:id', component: SubHeadingComponent, canActivate: [authGuard]
   },
 ];
 
