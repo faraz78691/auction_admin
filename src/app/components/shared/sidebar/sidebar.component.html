@@ -53,6 +53,22 @@
                               src="assets/img/customer_support_icon.svg" alt="">Customer
                         Support</a>
             </li>
+            <li class="ct_dropdown" [ngClass]="{'ct_drop_show': isDropdownVisible3}">
+                  <a href="javascripr:void(0)" (click)="toggleDropdown3()" routerLinkActive="active"><img
+                              src="assets/img/user_icon.svg" alt="">Landing Page<i
+                              class="fa-solid fa-angle-down ms-auto"></i></a>
+                  <div class="ct_dropdown_menu mt-3">
+                        <ul>
+                              <li>
+                                    <a routerLink="/popular-categories" routerLinkActive="active">Popular Category</a>
+                              </li>
+                              <li>
+                                    <a routerLink="/fatured-products" routerLinkActive="active">Fetured Products
+                                    </a>
+                              </li>
+                        </ul>
+                  </div>
+            </li>
             <li class="ct_dropdown" [ngClass]="{'ct_drop_show': isDropdownVisible2}">
                   <a href="javascripr:void(0)" (click)="toggleDropdown2()" routerLinkActive="active"><img
                               src="assets/img/user_icon.svg" alt="">Settings<i
@@ -66,10 +82,8 @@
                                     <a routerLink="/terms-conditions" routerLinkActive="active">Terms &
                                           Conditions</a>
                               </li>
-
                         </ul>
                   </div>
             </li>
-
       </ul>
 </div>

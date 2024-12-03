@@ -1,0 +1,19 @@
+.close_btn {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      color: #df3522;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+}
+
+.w-fit {
+      width: fit-content;
+}
+
+.cat_img {
+      height: 100px;
+      width: 300px;
+      object-fit: fill;
+}

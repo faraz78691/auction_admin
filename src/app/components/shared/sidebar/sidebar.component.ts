@@ -8,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class SidebarComponent {
   isDropdownVisible: boolean = false;
   isDropdownVisible2: boolean = false;
+  isDropdownVisible3: boolean = false;
   isSidebarCollapsed: boolean = false;
   @Output() closeSidebarEvent = new EventEmitter<void>();
 
@@ -17,7 +18,7 @@ export class SidebarComponent {
     this.hideLoader();
   };
 
-  
+
   // Method to hide the loader
   hideLoader(): void {
     const loaderElement = document.querySelector('.ct_loader_main');
@@ -31,12 +32,15 @@ export class SidebarComponent {
   closeSidebar(): void {
     this.isSidebarCollapsed = true; // Set it to true to collapse the sidebar
   }
-  
+
   // Method to toggle the dropdown
   toggleDropdown(): void {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
   toggleDropdown2(): void {
     this.isDropdownVisible2 = !this.isDropdownVisible2;
+  }
+  toggleDropdown3(): void {
+    this.isDropdownVisible3 = !this.isDropdownVisible3;
   }
 }

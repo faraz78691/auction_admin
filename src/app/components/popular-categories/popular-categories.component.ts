@@ -62,7 +62,7 @@ export class PopularCategoriesComponent {
   onClickUpdate(item: any) {
     this.categoryId = item.id;
     this.categoryForm.patchValue({
-      cat_name: item.category_name
+      cat_name: item.category_id
     });
     this.uploadedImage = this.imgUrl + item.category_image
   };
@@ -81,19 +81,20 @@ export class PopularCategoriesComponent {
     let formData = new FormData()
     if (formType == 1) {
       var apiUrl = `admin/addPopularCategory`
-      formData.append('cat_name', form.value.cat_name)
+      formData.append('category_id', form.value.cat_name)
       formData.append('cat_image', this.uploadImg)
     } else {
       var apiUrl = `admin/updatePopularCategoryById`
       formData.append('category_id', Number(this.categoryId).toString())
       formData.append('cat_image', this.uploadImg)
-      formData.append('cat_name', form.value.cat_name)
+      formData.append('category_id', form.value.cat_name)
     }
 
     this.service.upload(apiUrl, formData).subscribe(res => {
       if (res.success) {
         this.toastr.success(res.message);
         this.categoryForm.reset();
+        this.uploadImg = this.uploadedImage = undefined
         this.closeModal?.nativeElement.click();
         this.closeModal2?.nativeElement.click();
         this.categoryId = undefined;

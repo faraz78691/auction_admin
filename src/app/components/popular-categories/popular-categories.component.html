@@ -13,8 +13,8 @@
             </ul>
             <!-- <p class="mb-0 ct_fw_600">Category List</p> -->
       </div>
-      <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add New
-            +</button>
+      <!-- <button class="ct_blue_btn" data-bs-toggle="modal" data-bs-target="#ct_add_user">Add New
+            +</button> -->
 </div>
 
 <div class="table-responsive ct_mt_40">
@@ -24,21 +24,21 @@
                   [globalFilterFields]="['id', 'cat_name']" [tableStyle]="{ 'min-width': '75rem' }">
                   <ng-template pTemplate="caption">
                         <div class="flex w-25 ms-auto mb-3 mt-3">
-                              <p-iconField iconPosition="right" class="ml-auto">
+                              <!-- <p-iconField iconPosition="right" class="ml-auto">
                                     <p-inputIcon>
                                           <i class="fa-solid fa-search ct_srch_top_center"></i>
                                     </p-inputIcon>
                                     <input pInputText type="text" class="form-control ct_input"
                                           (input)="dt.filterGlobal($any($event.target).value, 'contains')"
                                           placeholder="Search keyword" />
-                              </p-iconField>
+                              </p-iconField> -->
                         </div>
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
                               <th style="width:10%">S.no </th>
                               <th style="width:25%" pSortableColumn="cat_name">Name <p-sortIcon field="cat_name" /></th>
-                              <th style="width:25%">IMage <p-sortIcon field="cat_image" /></th>
+                              <th style="width:25%">Image <p-sortIcon field="cat_image" /></th>
                               <th style="width:25%">Action</th>
 
                         </tr>
@@ -64,10 +64,10 @@
                                                 (click)="onClickUpdate(customer)"
                                                 class="ct_edit_btn py-1 ct_border_radius_10"><i
                                                       class="fa-solid fa-pen-to-square text-dark"></i></a>
-                                          <a (click)="Delete(customer.id)" title="Delete"
+                                          <!-- <a (click)="Delete(customer.id)" title="Delete"
                                                 class="ct_edit_btn py-1 ct_border_radius_10"><i
                                                       class="fas fa-trash"></i>
-                                          </a>
+                                          </a> -->
                                     </div>
                               </td>
                         </tr>
@@ -103,7 +103,7 @@
                                                             <option value="" disabled selected>select
                                                             </option>
                                                             <option *ngFor="let item of  categoryData"
-                                                                  [value]="item.cat_name">{{item.cat_name}}
+                                                                  [value]="item.id">{{item.cat_name}}
                                                             </option>
                                                       </select>
                                                       <p *ngIf="
@@ -185,7 +185,7 @@
                                                             <option value="" disabled selected>select
                                                             </option>
                                                             <option *ngFor="let item of  categoryData"
-                                                                  [value]="item.cat_name">{{item.cat_name}}
+                                                                  [value]="item.id">{{item.cat_name}}
                                                             </option>
                                                       </select>
                                                       <p *ngIf="

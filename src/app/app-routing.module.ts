@@ -22,6 +22,7 @@ import { SetComisssionComponent } from './set-comisssion/set-comisssion.componen
 import { PopularCategoriesComponent } from './components/popular-categories/popular-categories.component';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
+import { FeturedProductsComponent } from './components/fetured-products/fetured-products.component';
 
 const routes: Routes = [
   {
@@ -89,6 +90,9 @@ const routes: Routes = [
   },
   {
     path: 'terms-conditions/subheading/:id', component: SubHeadingComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'fatured-products', component: FeturedProductsComponent, canActivate: [authGuard]
   },
 ];
 

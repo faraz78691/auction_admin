@@ -39,6 +39,7 @@ import { PopularCategoriesComponent } from './components/popular-categories/popu
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { FeturedProductsComponent } from './components/fetured-products/fetured-products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { NgxEditorModule } from 'ngx-editor';
     SetComisssionComponent,
     PopularCategoriesComponent,
     TermsConditionsComponent,
-    SubHeadingComponent
+    SubHeadingComponent,
+    FeturedProductsComponent
   ],
   imports: [
     BrowserModule,
