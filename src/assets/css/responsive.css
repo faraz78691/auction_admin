@@ -1,15 +1,14 @@
+@media screen and (max-width:1199px) {
 
-
-
-@media screen and (max-width:1199px){
-  
     .chat-icon {
         display: block;
         margin-right: 5px;
     }
+
     .chatlist {
         width: 100%;
     }
+
     .chatbox {
         width: 100%;
         position: absolute;
@@ -20,29 +19,40 @@
         transition: all 0.5s ease;
         border-left: none;
     }
+
+    .chatbox.ct_chat_show {
+        left: 0px !important;
+    }
+
     .showbox {
         left: 0 !important;
         transition: all 0.5s ease;
     }
+
     .msg-head h3 {
         font-size: 14px;
     }
+
     .msg-head p {
         font-size: 12px;
     }
+
     .msg-head .flex-shrink-0 img {
-        height: 30px;
+        height: 40px;
     }
-   
+
     .send-box .form-control {
         width: 70%;
     }
+
     .chat-list h3 {
         font-size: 14px;
     }
+
     .chat-list p {
         font-size: 12px;
     }
+
     .msg-body ul li.sender p {
         font-size: 13px;
         padding: 8px;
@@ -50,6 +60,7 @@
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;
     }
+
     .msg-body ul li.repaly p {
         font-size: 13px;
         padding: 8px;
@@ -57,66 +68,72 @@
         border-top-right-radius: 6px;
         border-bottom-left-radius: 6px;
     }
-    .ct_chat_user{
+
+    .ct_chat_user {
         display: flex;
         align-items: center;
-        
+
     }
-    .ct_student_chat_box{
+
+    .ct_student_chat_box {
         left: 0px !important;
     }
 }
 
-@media screen and (max-width:991px){
+@media screen and (max-width:991px) {
 
-  
-    .ct_side_bar{
+
+    .ct_side_bar {
         left: -100%;
     }
-    .ct_right_content{
+
+    .ct_right_content {
         width: calc(100% - 0px) !important;
         margin-left: 0px !important;
     }
+
     .ct_collapsed_sidebar .ct_side_bar {
         left: 0% !important;
     }
-    .ct_collapsed_sidebar .ct_right_content{
+
+    .ct_collapsed_sidebar .ct_right_content {
         width: calc(100% - 0px) !important;
         /* margin-left: 260px; */
     }
-    .ct_close_menu{
+
+    .ct_close_menu {
         display: flex !important;
     }
-    
+
 }
 
-@media screen and (max-width:767px){
-   
-   
-  
-}
+@media screen and (max-width:767px) {}
 
-@media screen and (max-width:575px){
-    .ct_btn_group{
+@media screen and (max-width:575px) {
+    .ct_btn_group {
         flex-direction: column;
     }
-    .ct_btn_group a{
+
+    .ct_btn_group a {
         width: 100% !important;
         text-align: center;
         justify-content: center;
     }
-    .ct_res_fs_30{
+
+    .ct_res_fs_30 {
         font-size: 30px;
     }
 
     .ct_right_header {
         padding-inline: 15px;
     }
+
     .ct_right_header_right {
         gap: 15px;
     }
-    .ct_back_text span{
+
+    .ct_back_text span {
         display: none;
     }
- 
+
 }
