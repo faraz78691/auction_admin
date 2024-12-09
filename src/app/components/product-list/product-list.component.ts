@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export class ProductListComponent {
   productForm!: FormGroup;
   loading: boolean = false;
   cat_id: any;
-  productId:any;
+  productId: any;
   categoryName: any;
 
   constructor(public service: SharedService, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
@@ -26,7 +26,7 @@ export class ProductListComponent {
     });
 
     this.productForm = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required, NoWhitespaceDirective.validate]]
     })
   }
 
@@ -41,7 +41,7 @@ export class ProductListComponent {
         console.log(res);
         this.categoryName = res.productList.category?.cat_name;
         this.productData = res.productList.products;
-        this.service.setCategoryData(res.productList.category.id ,res.productList.category.cat_name)
+        this.service.setCategoryData(res.productList.category.id, res.productList.category.cat_name)
       } else {
         this.categoryName = res.category.cat_name
         this.toastr.error(res.message)
@@ -58,7 +58,7 @@ export class ProductListComponent {
     });
   };
 
-  onSubmit(form: any, formType:number) {
+  onSubmit(form: any, formType: number) {
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {
@@ -66,7 +66,7 @@ export class ProductListComponent {
       return
     }
 
-    if(form.value.name.trim().length == 0){
+    if (form.value.name.trim().length == 0) {
       return
     }
 
@@ -105,8 +105,17 @@ export class ProductListComponent {
     return ''
   };
 
-    // Method to navigate back
-    // goBack(): void {
-    //   this.location.back();  // Navigate to the previous page
-    // }
+  // Method to navigate back
+  // goBack(): void {
+  //   this.location.back();  // Navigate to the previous page
+  // }
+}
+
+export class NoWhitespaceDirective {
+  static validate(control: AbstractControl): ValidationErrors | null {
+    if (!control.value || control.value.trim() == '') {
+      return { required: true };
+    }
+    return null;
+  }
 }

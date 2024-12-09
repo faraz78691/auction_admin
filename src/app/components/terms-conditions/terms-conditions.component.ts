@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Table } from 'primeng/table';
 import { SharedService } from '../../services/shared.service';
@@ -19,7 +19,7 @@ export class TermsConditionsComponent {
   headingId: number | undefined;
   constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder,) {
     this.Form = this.fb.group({
-      heading: ['', [Validators.required]]
+      heading: ['', [Validators.required, NoWhitespaceDirective.validate]]
     })
   }
 
@@ -105,5 +105,14 @@ export class TermsConditionsComponent {
       return 'This field cannot be empty'
     }
     return ''
+  }
+}
+
+export class NoWhitespaceDirective {
+  static validate(control: AbstractControl): ValidationErrors | null {
+    if (!control.value || control.value.trim() == '') {
+      return { required: true };
+    }
+    return null;
   }
 }

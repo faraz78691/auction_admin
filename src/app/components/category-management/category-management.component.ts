@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -20,7 +20,7 @@ export class CategoryManagementComponent {
   categoryId: number | undefined;
   constructor(private service: SharedService, private toastr: ToastrService, private fb: FormBuilder,) {
     this.categoryForm = this.fb.group({
-      cat_name: ['', [Validators.required]]
+      cat_name: ['', [Validators.required, NoWhitespaceDirective.validate]]
     })
   }
 
@@ -49,7 +49,7 @@ export class CategoryManagementComponent {
   };
 
   onSubmit(form: any, formType: number) {
-    if(form.value.cat_name.trim().length == 0){
+    if (form.value.cat_name.trim().length == 0) {
       return
     }
     this.loading = true
@@ -92,5 +92,14 @@ export class CategoryManagementComponent {
       return 'This field cannot be empty'
     }
     return ''
+  }
+}
+
+export class NoWhitespaceDirective {
+  static validate(control: AbstractControl): ValidationErrors | null {
+    if (!control.value || control.value.trim() == '') {
+      return { required: true };
+    }
+    return null;
   }
 }
