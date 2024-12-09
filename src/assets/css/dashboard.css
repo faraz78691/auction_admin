@@ -549,7 +549,8 @@ message-area
 
 .chat-area .modal-dialog-scrollable .modal-body {
     overflow-y: auto;
-    height: calc(100vh - 400px);
+    height: calc(100vh - 430px);
+    
     /* min-height: 380px; */
     /* max-height: 380px; */
 }
