@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
@@ -23,11 +23,11 @@ export class AttributeComponent {
   cat_id: any;
   productName: any;
   pro_id: any;
-  otherHeading:any;
-  attributeId:any;
-  attributeType:any;
-  categoryData:any;
-  editHeading:any;
+  otherHeading: any;
+  attributeId: any;
+  attributeType: any;
+  categoryData: any;
+  editHeading: any;
   selectedInputs: any[] = [];
   miscInputd: any[] = [
     { type: 'Gender' },
@@ -68,9 +68,9 @@ export class AttributeComponent {
     });
 
     this.attributeForm = this.fb.group({
-      attribute_name: ['', [Validators.required]],
-      heading: ['', ],
-      input_type: ['',[Validators.required]],
+      attribute_name: ['', [Validators.required, NoWhitespaceDirective.validate]],
+      heading: ['',],
+      input_type: ['', [Validators.required, NoWhitespaceDirective.validate]],
     });
   }
 
@@ -91,7 +91,7 @@ export class AttributeComponent {
           this.productName = res.product.name;
           this.categoryData = res.category;
           this.service.setProductData(res.product.id, res.product.name);
-         
+
         }
       },
       (err: any) => {
@@ -110,23 +110,23 @@ export class AttributeComponent {
       return;
     }
 
-    if(form.value.attribute_name.trim().length == 0){
+    if (form.value.attribute_name.trim().length == 0) {
       return
     }
 
     let apiUrl = `admin/addProductTypeAttributes`;
     let formData = new URLSearchParams();
     formData.set('attribute_name', form.value.attribute_name);
-    if(this.selectHeader == true){
-      if(this.otherType == true){
+    if (this.selectHeader == true) {
+      if (this.otherType == true) {
         formData.set('heading', this.otherHeading);
-      }else{
+      } else {
         console.log("sfgg");
-        
+
         formData.set('heading', this.mainHeading);
       }
 
-    }else{
+    } else {
       formData.set('heading', form.value.heading);
     }
     formData.set('input_type', form.value.input_type);
@@ -166,10 +166,10 @@ export class AttributeComponent {
       (item) => item.type === selectedAttribute
     );
     this.selectedInputs = selectedOption ? selectedOption.input : [];
-    if(this.selectedAttribute != 'Miscellaneous'){
+    if (this.selectedAttribute != 'Miscellaneous') {
       this.heading = true;
       this.attributeForm.patchValue({
-        input_type: this.selectedInputs[0].type, 
+        input_type: this.selectedInputs[0].type,
       });
     }
     console.log(this.selectedInputs);
@@ -194,11 +194,11 @@ export class AttributeComponent {
     console.log(event.target.value)
     if (event.target.value == 'Other') {
       this.otherType = true;
-    }else{
+    } else {
       this.otherType = false;
 
     }
-    
+
   }
 
   deleteTypeATR(id: number) {
@@ -241,16 +241,25 @@ export class AttributeComponent {
     });
   };
 
-  onClose(){
+  onClose() {
     this.attributeForm.reset();
     this.heading = false;
     this.closeModal?.nativeElement.click();
   };
 
 
-    // Method to navigate back
-    // goBack(): void {
-    //   this.location.back();  // Navigate to the previous page
-    // }
-  
+  // Method to navigate back
+  // goBack(): void {
+  //   this.location.back();  // Navigate to the previous page
+  // }
+
+}
+
+export class NoWhitespaceDirective {
+  static validate(control: AbstractControl): ValidationErrors | null {
+    if (!control.value || control.value.trim() == '') {
+      return { required: true };
+    }
+    return null;
+  }
 }
