@@ -84,8 +84,8 @@
                                                             <span class="chat-icon"><i
                                                                         class="fa-solid fa-chevron-left"></i></span>
                                                             <div class="flex-shrink-0">
-                                                                  <img class="img-fluid ct_img_40" src="assets/img/user.png"
-                                                                        alt="user img">
+                                                                  <img class="img-fluid ct_img_40"
+                                                                        src="assets/img/user.png" alt="user img">
                                                             </div>
                                                             <div class="flex-grow-1 ms-3">
                                                                   <h3 class="mb-0 ct_fs_16 ct_ff_roboto ct_fw_600">
@@ -119,9 +119,7 @@
                                     </div>
 
 
-                                    <div class="modal-body " style="height: calc(100vh - 364px);
-                                    min-height: calc(90vh - 364px);
-                                    max-height: calc(100vh - 364px);" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                                    <div class="modal-body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                                           <div class="msg-body ">
                                                 <ul>
                                                       @for (item of chats; track $index) {
@@ -129,62 +127,77 @@
                                                       <li class="sender">
                                                             <!-- <img src="assets/img/user_profile.png" alt=""
                                                                         class="ct_img_30"> -->
-                                                            <div>
-                                                                  <p>{{item.message}} </p>
-                                                                  <span class="time">{{ item.created_at | date: 'dd MMM, hh:mm a' : 'UTC' }}</span>
-
-
+                                                            <div class="d-grid">
+                                                                  <ng-container *ngIf="item.image_path">
+                                                                        <img *ngFor="let img of item.image_path.split(',')"
+                                                                              class="sent_image"
+                                                                              [src]="imgUrl + img.trim()" alt="Image" />
+                                                                  </ng-container>
+                                                                  <ng-container *ngIf="item.message">
+                                                                        <p>{{item.message}} </p>
+                                                                  </ng-container>
+                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,
+                                                                        hh:mm a':'UTC' }}</span>
                                                             </div>
                                                       </li>
 
-                                                      }@else {
+                                                      }@else{
                                                       <li class="repaly">
-                                                            <div>
-                                                                  <p>{{item.message}}</p>
-                                                                  <span class="time">{{ item.created_at | date: 'dd MMM,hh:mm a':'UTC' }}</span>
-
-
+                                                            <div class="d-grid">
+                                                                  <ng-container *ngIf="item.image_path">
+                                                                        <img *ngFor="let img of item.image_path.split(',')"
+                                                                              class="recived_image"
+                                                                              [src]="imgUrl + img.trim()" alt="Image" />
+                                                                  </ng-container>
+                                                                  <ng-container *ngIf="item.message">
+                                                                        <p>{{item.message}} </p>
+                                                                  </ng-container>
+                                                                  <span class="time me-0">{{ item.created_at | date: 'dd
+                                                                        MMM, hh:mm a':'UTC'
+                                                                        }}</span>
                                                             </div>
-
                                                       </li>
-
                                                       }
-                                                }
-
-
-
+                                                      }
                                                 </ul>
                                           </div>
                                     </div>
 
 
                                     <div class="send-box">
+                                          <div *ngIf="previewFiles.length > 0" class="preview-container">
+                                                <div *ngFor="let file of previewFiles" class="preview">
+                                                      <img *ngIf="file.type.startsWith('image/')" [src]="file.url"
+                                                            alt="File preview" />
+                                                      <i (click)="removeFile(file)" class="fa fa-minus-circle remove"
+                                                            aria-hidden="true"></i>
+                                                </div>
+                                          </div>
                                           <form class="position-relative">
                                                 <input type="text" class="form-control ct_text_indent_15 w-100"
                                                       aria-label="message…" placeholder="Type message"
                                                       [(ngModel)]="senderMessage" [ngModelOptions]="{standalone: true}"
                                                       (keydown)="onKeyDown($event)">
                                                 <div class="d-flex align-items-center ct_send_btn_position">
-                                                      <!-- <div class="send-btns">
+                                                      <div class="send-btns">
                                                             <div class="attach">
                                                                   <div class="button-wrapper">
                                                                         <span class="label">
                                                                               <i class="fa-solid fa-link"></i>
-                                                                        </span><input type="file" name="upload"
-                                                                              id="upload" class="upload-box"
+                                                                        </span><input type="file"
+                                                                              (change)="onFileChange($event)" multiple
+                                                                              name="upload" id="upload"
+                                                                              class="upload-box"
                                                                               placeholder="Upload File"
                                                                               aria-label="Upload File">
                                                                   </div>
                                                             </div>
-                                                      </div> -->
+                                                      </div>
                                                       <button type="button" (click)="sendMessage()"><i
                                                                   class="fa fa-paper-plane"
                                                                   aria-hidden="true"></i></button>
                                                 </div>
                                           </form>
-
-
-
                                     </div>
                               </div>
                         </div>
@@ -261,8 +274,7 @@
                         <div class="modal-footer border-0 justify-content-center">
                               <button type="button" class="ct_blue_btn ct_outline_blue"
                                     data-bs-dismiss="modal">Cancel</button>
-                              <a href="login.html" type="button"
-                                    class=" bg-danger  ct_blue_btn  justify-content-center"
+                              <a href="login.html" type="button" class=" bg-danger  ct_blue_btn  justify-content-center"
                                     style="border-color: rgb(220, 53, 69)">Yes Logout!</a>
                         </div>
                         <div>
@@ -289,8 +301,7 @@
                   <div class="modal-body">
                         <div>
                               <input type="text" class="form-control ct_login_input" placeholder="Search..."
-                              (keyup)="onKeyup($event)"
-    [(ngModel)]="searchQuery" >
+                                    (keyup)="onKeyup($event)" [(ngModel)]="searchQuery">
                         </div>
 
                         <div class="ct_add_member_scroll mt-3">

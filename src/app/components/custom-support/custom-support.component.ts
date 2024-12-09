@@ -3,6 +3,7 @@ import { ChatSocketService } from '../../services/chat-socket.service';
 import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../services/auth.service';
 import { Socket, io } from 'socket.io-client';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-custom-support',
@@ -27,13 +28,15 @@ export class CustomSupportComponent {
   searchQuery: string | undefined;
   usernameArray!: any[];
   onlineUsers: string[] = [];
-  filteredUsers:any
+  filteredUsers: any
+  imgUrl: any
   constructor(
     private _chatService: ChatSocketService,
     private apiService: SharedService,
     private authService: AuthService
   ) {
     // this.socket = io(this.apiUrl);
+    this.imgUrl = environment.imageUrl
   }
 
   ngOnInit() {
@@ -48,7 +51,6 @@ export class CustomSupportComponent {
     });
     this.getUsersChats();
     this._chatService.getMessage().subscribe((chats) => {
-      console.log('before ousg', this.chats);
       if (chats.sender_id == chats.admin_id) {
         this.chats.push(chats);
       } else {
@@ -58,7 +60,6 @@ export class CustomSupportComponent {
         }
       }
       this.scrollToBottom();
-      console.log(this.chats);
       this.getUsersChats();
     });
   }
@@ -85,7 +86,7 @@ export class CustomSupportComponent {
       (res: any) => {
         if (res.success) {
           this.alluserData = res.data;
-          this.filteredUsers = [...this.alluserData]; 
+          this.filteredUsers = [...this.alluserData];
           // console.log(this.alluserData);
         } else {
           // this.toastr.warning(res.message)
@@ -114,7 +115,7 @@ export class CustomSupportComponent {
           this.userList = res.userChat;
           console.log(this.userList)
           if (this.isNewChat) {
-            const usernameInfo = { user_name: this.username , unread_count: 0 };
+            const usernameInfo = { user_name: this.username, unread_count: 0 };
             this.userList.unshift(usernameInfo);
           }
         }
@@ -140,30 +141,47 @@ export class CustomSupportComponent {
   sendMessage() {
     this.isNewChat = false;
     this.getUsersChats();
-    if (this.senderMessage.trim().length == 0) {
-      return;
+
+    if (this.files.length > 0) {
+      let formData = new FormData()
+      if (this.files && this.files.length > 0) {
+        for (let i = 0; i < this.files.length; i++) {
+          formData.append('socket_image_message', this.files[i]);
+        }
+      }
+
+      this.apiService.upload('user/socket-imagesend', formData).subscribe((res: any) => {
+        if (res.success) {
+          this.sendNormalMsg(res.data)
+        }
+      })
+    } else {
+
+      if (this.senderMessage.trim().length == 0) {
+        return;
+      }
+      this.sendNormalMsg('')
     }
+  }
+
+  sendNormalMsg(img_path: string) {
     const msg = {
       user_id: this.userId,
       admin_id: this.adminId,
       message: this.senderMessage.trim(),
       sender_id: this.adminId,
+      image_path: img_path
     };
     this._chatService
       .sendMessage(msg)
       .then(() => {
-        // this.openChat()
-        // console.log("not calling");
         this.chats.push(msg);
-        // console.log(this.chats);
-
-        // Close the modal if bid is successful
-        // Assuming you have a closeModal() method to close the modal
       })
       .catch((error) => {
-        // Handle any errors (optional)
       });
     this.senderMessage = '';
+    this.files = [],
+      this.previewFiles = []
   }
 
   // Function to handle keydown events
@@ -203,16 +221,46 @@ export class CustomSupportComponent {
   };
 
 
-  onKeyup(event:any): void {
+  onKeyup(event: any): void {
     const query = this.searchQuery?.toLowerCase().trim();
-    console.log("query" ,query)
-    if(query == ''){
+    console.log("query", query)
+    if (query == '') {
       this.filteredUsers = this.alluserData
-    }else{
+    } else {
       this.filteredUsers = this.alluserData.filter(user =>
         user.user_name.toLowerCase().includes(query)
       );
 
+    }
+  }
+
+
+  files: any[] = [];
+  previewFiles: { name: string; type: string; url: string }[] = [];
+
+  onFileChange(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      Array.from(input.files).forEach((file) => {
+        this.files.push(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.previewFiles.push({
+            name: file.name,
+            type: file.type,
+            url: e.target?.result as string,
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
+
+  removeFile(fileToRemove: any): void {
+    const index = this.previewFiles.indexOf(fileToRemove);
+    if (index > -1) {
+      this.previewFiles.splice(index, 1);
+      this.files.splice(index, 1);
     }
   }
 }

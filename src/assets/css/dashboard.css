@@ -547,9 +547,9 @@ message-area
     height: 100% !important;
 }
 
-.modal-dialog-scrollable .modal-body {
+.chat-area .modal-dialog-scrollable .modal-body {
     overflow-y: auto;
-    height: 380px;
+    height: calc(100vh - 400px);
     /* min-height: 380px; */
     /* max-height: 380px; */
 }
@@ -1078,7 +1078,7 @@ button:focus {
 
 .ct_chat_user {
     border: 1px solid;
-    cursor:pointer
+    cursor: pointer
 }
 
 .ct_chat_user {
