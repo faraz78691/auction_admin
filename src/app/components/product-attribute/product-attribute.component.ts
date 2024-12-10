@@ -21,9 +21,9 @@ export class ProductAttributeComponent {
   attrName: any;
   categoryData: any;
   pro_id: any;
-  attrValue:any;
-  attrMappingID:any
-  constructor(public service: SharedService,private location: Location, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
+  attrValue: any;
+  attrMappingID: any
+  constructor(public service: SharedService, private location: Location, private toastr: ToastrService, private fb: FormBuilder, private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.attr_id = params['attr_id'];
@@ -60,8 +60,7 @@ export class ProductAttributeComponent {
 
   onSubmit(form: any) {
     form.markAllAsTouched()
-    console.log(form.value)
-    if(form.value.attribute_value_name.trim().length == 0){
+    if (form.value.attribute_value_name.trim().length == 0) {
       return
     }
     this.loading = true
@@ -91,12 +90,12 @@ export class ProductAttributeComponent {
     })
   };
 
-  updateAttr(){
-    if(this.attrValue.trim().length == 0){
+  updateAttr() {
+    if (this.attrValue.trim().length == 0) {
       return
     }
     const apiUrl = `admin/updateProductAttributeMapping`
-    
+
     let formData = new URLSearchParams();
     formData.set('id', this.attrMappingID)
     formData.set('attribute_value_name', this.attrValue)
@@ -109,7 +108,7 @@ export class ProductAttributeComponent {
         this.loading = false
       } else {
         this.toastr.error("No Products found")
-        
+
         this.loading = false;
       }
     })
@@ -130,7 +129,7 @@ export class ProductAttributeComponent {
   };
 
 
-  deleteTypeATR(id:number){
+  deleteTypeATR(id: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -141,30 +140,30 @@ export class ProductAttributeComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
- 
+
         const formURlData = new URLSearchParams();
 
         formURlData.set('product_attribute_id', id.toString());
-      
-      this.service.post('admin/deleteProductAttributeMapping', formURlData.toString()).subscribe({
-        next: (resp) => {
-  
-          if (resp.success == true) {
-     this.getProAttributes()
-        }
-      },
-        error: (error) => {
-          //this.loading = false;
-        
-          console.error('Login error:', error.message);
-        }
-      });
+
+        this.service.post('admin/deleteProductAttributeMapping', formURlData.toString()).subscribe({
+          next: (resp) => {
+
+            if (resp.success == true) {
+              this.getProAttributes()
+            }
+          },
+          error: (error) => {
+            //this.loading = false;
+
+            console.error('Login error:', error.message);
+          }
+        });
       }
     })
   };
 
-   // Method to navigate back
-   goBack(): void {
+  // Method to navigate back
+  goBack(): void {
     this.location.back();  // Navigate to the previous page
   }
 }

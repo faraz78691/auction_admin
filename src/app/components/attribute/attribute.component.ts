@@ -61,7 +61,6 @@ export class AttributeComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute
   ) {
-    console.log(this.service.categoryData());
     this.route.params.subscribe((params) => {
       this.cat_id = params['cat_id'];
       this.pro_id = params['pro_id'];
@@ -85,13 +84,13 @@ export class AttributeComponent {
         if (res.success) {
           this.productName = res.product.name;
           this.categoryData = res.category;
-          this.service.setProductData(res.product.id, res.product.name);
           this.attributeData = res.typeAttributes;
+          this.service.setProductData(res.product.id, res.product.name);
         } else {
           this.productName = res.product.name;
           this.categoryData = res.category;
+          this.attributeData = [];
           this.service.setProductData(res.product.id, res.product.name);
-
         }
       },
       (err: any) => {
@@ -101,11 +100,9 @@ export class AttributeComponent {
   }
 
   onSubmit(form: any) {
-    console.log(form)
     this.loading = true;
     form.markAllAsTouched();
     if (form.invalid) {
-      console.log(form.value)
       this.loading = false;
       return;
     }
@@ -121,8 +118,6 @@ export class AttributeComponent {
       if (this.otherType == true) {
         formData.set('heading', this.otherHeading);
       } else {
-        console.log("sfgg");
-
         formData.set('heading', this.mainHeading);
       }
 
@@ -161,7 +156,6 @@ export class AttributeComponent {
   onAttributeChange(event: any) {
     const selectedAttribute = event.target.value;
     this.selectedAttribute = selectedAttribute;
-    console.log(selectedAttribute);
     const selectedOption = this.selectBoxData.find(
       (item) => item.type === selectedAttribute
     );
@@ -172,11 +166,9 @@ export class AttributeComponent {
         input_type: this.selectedInputs[0].type,
       });
     }
-    console.log(this.selectedInputs);
   }
 
   onInputChange(event: any) {
-    console.log(event.target.value);
     this.heading = true;
     if (event.target.value) {
       if (
@@ -191,7 +183,6 @@ export class AttributeComponent {
   }
 
   onHeadingChange(event: any) {
-    console.log(event.target.value)
     if (event.target.value == 'Other') {
       this.otherType = true;
     } else {
@@ -221,6 +212,7 @@ export class AttributeComponent {
           .subscribe({
             next: (resp) => {
               if (resp.success == true) {
+                this.toastr.success(resp.message)
                 this.getAttributes();
               }
             },

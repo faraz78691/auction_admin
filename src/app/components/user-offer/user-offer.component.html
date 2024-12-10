@@ -26,33 +26,37 @@
 
 <div class=" ct_mt_40">
       <div class="card ct_custom_table">
-            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true" [showCurrentPageReport]="true"
-                  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[ 'offer_unique_id','title']"
-                  [tableStyle]="{ 'min-width': '75rem' ,'background-color': 'transparent', }"   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <p-table #dt [value]="userOfferData" dataKey="id" [rows]="10" [rowHover]="true"
+                  [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+                  [globalFilterFields]="[ 'offer_unique_id','title']"
+                  [tableStyle]="{ 'min-width': '75rem' ,'background-color': 'transparent', }"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                   <ng-template pTemplate="caption">
-                      <div class="ms-auto">
-                        <div class="d-flex  ms-auto mb-3 mt-3 justify-content-end ">
-                              <p-iconField iconPosition="right" class="ml-auto">
-                                    <p-inputIcon>
-                                          <i class="fa-solid fa-search ct_srch_top_center"></i>
-                                    </p-inputIcon>
-                                    <input #searchInput pInputText type="text" class="form-control ct_input"
-                                          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                          placeholder="Search keyword" />
-                              </p-iconField>
-                              <p-button class="px-2 ct_clear_btn12" label="Clear" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(dt)" />
+                        <div class="ms-auto">
+                              <div class="d-flex  ms-auto mb-3 mt-3 justify-content-end ">
+                                    <p-iconField iconPosition="right" class="ml-auto">
+                                          <p-inputIcon>
+                                                <i class="fa-solid fa-search ct_srch_top_center"></i>
+                                          </p-inputIcon>
+                                          <input #searchInput pInputText type="text" class="form-control ct_input"
+                                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                                placeholder="Search keyword" />
+                                    </p-iconField>
+                                    <p-button class="px-2 ct_clear_btn12" label="Clear" [outlined]="true"
+                                          icon="pi pi-filter-slash" (onClick)="clear(dt)" />
 
+                              </div>
                         </div>
-                      </div>
                   </ng-template>
                   <ng-template pTemplate="header">
                         <tr>
                               <th style="width:25%" pSortableColumn="id">S.no <p-sortIcon field="code" /></th>
-                              <th pSortableColumn="offer_unique_id">Offer ID 
-                                   
+                              <th pSortableColumn="offer_unique_id">Offer ID
+
                               </th>
                               <th pSortableColumn="title">Title</th>
-                              <th pSortableColumn="is_bid_or_fixed">Auction Type <p-sortIcon field="is_bid_or_fixed" /></th>
+                              <th pSortableColumn="is_bid_or_fixed">Auction Type <p-sortIcon field="is_bid_or_fixed" />
+                              </th>
                               <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
                               <th>Start Price (CHF)</th>
                               <th>Buy it now (CHF)</th>
@@ -60,8 +64,7 @@
                               <th>Start date</th>
                               <th>End Date</th>
                               <th>Seller</th>
-                           
-
+                              <th>Action</th>
                         </tr>
 
                   </ng-template>
@@ -78,13 +81,13 @@
 
                               <td [ngStyle]="{ 'color': customer.status === 'Not Sold' ? 'red' : '' }">
                                     {{ customer.status }}
-                                  </td>
+                              </td>
                               <td>{{customer.is_bid_or_fixed == 1 ? customer.start_price : '-' }}</td>
                               <td>{{customer.is_bid_or_fixed == 1 ? customer.buyto_price : '-'}}</td>
                               <td>{{customer.is_bid_or_fixed == 0 ? customer.fixed_offer_price : '-'}}</td>
                               <td>{{customer.offerStart}}</td>
                               <td>{{ customer.end_date | date :'yyyy-MM-dd HH:mm:ss' : 'UTC'}}</td>
-      
+
                               <td>{{customer.seller_name}}</td>
                               <!-- <td>
                                     <div class="d-flex align-items-center gap-2">
@@ -99,6 +102,12 @@
                                           </a>
                                     </div>
                               </td> -->
+                              <td>
+                                    <button class="ct_edit_btn py-1 ct_border_radius_10"
+                                          (click)="deleteOffer(customer.id)">
+                                          <i class="fa-solid fa-trash text-danger"></i>
+                                    </button>
+                              </td>
                         </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
@@ -108,7 +117,7 @@
                   </ng-template>
             </p-table>
       </div>
-     
+
 
 </div>
 
@@ -326,8 +335,7 @@
                         <div class="modal-footer border-0 justify-content-center">
                               <button type="button" class="ct_blue_btn ct_outline_blue"
                                     data-bs-dismiss="modal">Cancel</button>
-                              <a href="login.html" type="button"
-                                    class=" bg-danger  ct_blue_btn  justify-content-center"
+                              <a href="login.html" type="button" class=" bg-danger  ct_blue_btn  justify-content-center"
                                     style="border-color: rgb(220, 53, 69)">Yes Logout!</a>
                         </div>
                         <div>

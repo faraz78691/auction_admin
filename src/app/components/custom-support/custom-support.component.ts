@@ -47,7 +47,6 @@ export class CustomSupportComponent {
     this._chatService.getOnlineUsers();
     this._chatService.getOnlineStatus().subscribe((onlineUsers) => {
       this.onlineUsers = onlineUsers;
-      console.log(this.onlineUsers)
     });
     this.getUsersChats();
     this._chatService.getMessage().subscribe((chats) => {
@@ -87,7 +86,6 @@ export class CustomSupportComponent {
         if (res.success) {
           this.alluserData = res.data;
           this.filteredUsers = [...this.alluserData];
-          // console.log(this.alluserData);
         } else {
           // this.toastr.warning(res.message)
         }
@@ -113,13 +111,11 @@ export class CustomSupportComponent {
       next: (res) => {
         if (res.success == true) {
           this.userList = res.userChat;
-          console.log(this.userList)
           if (this.isNewChat) {
             const usernameInfo = { user_name: this.username, unread_count: 0 };
             this.userList.unshift(usernameInfo);
           }
         }
-        // console.log(107, res);
       },
     });
   }
@@ -131,9 +127,7 @@ export class CustomSupportComponent {
     this.apiService.post('admin/updateMsgCount', formdata).subscribe({
       next: (res) => {
         if (res.success == true) {
-          // console.log(this.userList);
         }
-        //console.log(res);
       },
     });
   }
@@ -168,7 +162,7 @@ export class CustomSupportComponent {
     const msg = {
       user_id: this.userId,
       admin_id: this.adminId,
-      message: this.senderMessage.trim(),
+      message: this.senderMessage?.trim(),
       sender_id: this.adminId,
       image_path: img_path
     };
@@ -223,7 +217,6 @@ export class CustomSupportComponent {
 
   onKeyup(event: any): void {
     const query = this.searchQuery?.toLowerCase().trim();
-    console.log("query", query)
     if (query == '') {
       this.filteredUsers = this.alluserData
     } else {

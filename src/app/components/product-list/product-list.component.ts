@@ -38,7 +38,6 @@ export class ProductListComponent {
     let apiUrl = `admin/getProductByCategoryId?category_id=${this.cat_id}`
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
-        console.log(res);
         this.categoryName = res.productList.category?.cat_name;
         this.productData = res.productList.products;
         this.service.setCategoryData(res.productList.category.id, res.productList.category.cat_name)

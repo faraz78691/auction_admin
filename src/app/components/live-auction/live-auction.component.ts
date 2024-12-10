@@ -21,7 +21,6 @@ export class LiveAuctionComponent {
   ngOnInit() {
     this.getAllLiveBidding()
     this.webSocketService.onBidUpdate().subscribe((bidData) => {
-      console.log(bidData);
       // Update offerData based on the received bidData
       this.userOfferData = this.userOfferData.map((item) => {
         if (item.id == bidData.offer_id) {
@@ -37,7 +36,6 @@ export class LiveAuctionComponent {
         }
         return item;  // If not the matching offer_id, return the item as is
       });
-      console.log(this.userOfferData);
     });
   };
 
@@ -79,7 +77,6 @@ export class LiveAuctionComponent {
     this.service.get(apiUrl).subscribe({
       next: (res: any) => {
         if (res.success) {
-          console.log(this.offerBids)
           this.offerBids = res.data;
         } else {
           // this.toastr.error(res.message);

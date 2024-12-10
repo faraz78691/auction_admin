@@ -38,13 +38,12 @@ export class UserOfferComponent {
 
 
   getSwitzerlandTime() {
-    this.swissDate = moment.tz("Europe/Zurich").toDate();
+    this.swissDate = moment.tz('Europe/Zurich');
     // Converts to Date object in Switzerland timezone
   }
 
   getUserOffers() {
     const apiUrl = 'admin/getAllUsersOffers';
-
     this.service.get(apiUrl).subscribe((res: any) => {
       if (res.success) {
 
@@ -78,7 +77,6 @@ export class UserOfferComponent {
 
             return item; // Ensure each item is returned after modification
           });
-          console.log(filteredOffer);
           this.searchInput.nativeElement.value = this.offerUniqueId()
         }
       } else {
@@ -92,7 +90,6 @@ export class UserOfferComponent {
 
   getUserOffersByUserId() {
     let apiUrl = `admin/getAllOffersByUserId?user_id=${this.userId}`;
-
     this.service.get(apiUrl).subscribe({
       next: (res: any) => {
         if (res.success) {
@@ -100,7 +97,6 @@ export class UserOfferComponent {
             // Convert end_date to Date if it's a string
             const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
             const swissDate = moment(this.swissDate).format('YYYY-MM-DD HH:mm:ss');
-
             if (endDateUTC <= swissDate) {
               item['status'] = item.offer_buy_status == 1 ? 'Sold' : 'Not Sold';
             } else {
@@ -124,6 +120,7 @@ export class UserOfferComponent {
 
   clear(table: any) {
     if (this.offerUniqueId() != 0) {
+      this.service.resetOfferUniqueSignal()
       this.userOfferData = this.alluserOfferData.map((item: any) => {
         // Convert end_date to Date if it's a string
         const endDateUTC = moment(item.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
@@ -144,6 +141,19 @@ export class UserOfferComponent {
       this.searchInput.nativeElement.value = ''
     }
   };
+
+
+  deleteOffer(id: any) {
+    this.service.delete(`product/offerDeleteById?offerId=${id}`).subscribe((res: any) => {
+      if (res.success) {
+        this.toastr.success(res.message);
+        this.getUserOffers()
+        // this.priceSuggested = res.prices/
+      } else {
+        // this.toastr.error(res.message)
+      }
+    })
+  }
 
   ngOnDestroy() {
     this.service.resetOfferUniqueSignal()

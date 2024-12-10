@@ -42,7 +42,6 @@ export class OrderManagementComponent {
   };
 
   OpenSummaryModal(items: any) {
-    console.log(items);
     let formData = new URLSearchParams()
 
     var apiUrl = `buyer/ordersummary`
@@ -54,7 +53,6 @@ export class OrderManagementComponent {
       if (res.success) {
 
         this.orderSummary = res.data;
-        console.log(this.orderSummary);
       } else {
         // this.toastr.error("No Products found")
       }

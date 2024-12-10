@@ -34,26 +34,25 @@ export class LogInComponent {
 
   onSubmit() {
     this.loading = true;
-  
+
     // Mark all form fields as touched and check validity
     if (this.logInForm.invalid) {
       this.logInForm.markAllAsTouched();
       this.loading = false;
       return;
     }
-  
+
     // Set API endpoint and form data
     const apiUrl = `admin/login`;
     const formData = new URLSearchParams();
     formData.set('email', this.logInForm.value.email);
     formData.set('password', this.logInForm.value.password);
-  
+
     // Make the HTTP request
     this.service.post(apiUrl, formData.toString()).subscribe({
       next: (res: any) => {
         this.loading = false;  // Reset loading state on success
         if (res.success) {
-          console.log(res);
           this.service.setToken(res.token);
           localStorage.setItem('auctionAdminID', res.userinfo.id);
           this.toastr.success(res.message);
@@ -68,7 +67,7 @@ export class LogInComponent {
       }
     });
   }
-  
+
   // onSubmit(form: any) {
   //   this.loading = true
   //   form.markAllAsTouched()
@@ -84,7 +83,6 @@ export class LogInComponent {
   //   this.service.post(apiUrl, formData.toString()).subscribe({
   //     next: res => {
   //     if (res.success) {
-  //       console.log(res);
   //       this.service.setToken(res.token);
   //       localStorage.setItem('auctionAdminID',res.userinfo.id);
   //       this.toastr.success(res.message)
@@ -99,7 +97,7 @@ export class LogInComponent {
   //   }
   // }
   // )
-   
+
   // }
 
   getErrorMessage(field: string) {
@@ -108,7 +106,7 @@ export class LogInComponent {
       return 'This field cannot be empty'
     } else if (control.hasError('email')) {
       return 'Please enter a valid email address'
-    }else if(control.hasError('whitespace')){
+    } else if (control.hasError('whitespace')) {
       return 'Enter valid password'
     }
     return ''
