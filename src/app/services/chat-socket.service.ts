@@ -32,7 +32,6 @@ export class ChatSocketService {
   onBidUpdate(): Observable<any> {
     return new Observable((observer) => {
       this.socket.on('updateBid', (data) => {
-        console.log(data);
         observer.next(data);
       });
     });
@@ -40,7 +39,6 @@ export class ChatSocketService {
 
 
   sendMessage(msg: { user_id: number, admin_id: number, message: string, sender_id: number }): Promise<any> {
-    console.log("sendBid", msg);
     return new Promise((resolve, reject) => {
       this.socket.emit('sendMessage', msg, (response: any) => {
         if (response.success) {
@@ -55,7 +53,6 @@ export class ChatSocketService {
   getMessage(): Observable<any> {
     return new Observable((observer) => {
       this.socket.on('getMessage', (data) => {
-        console.log("get msg", data);
         observer.next(data);
       });
     });
@@ -64,7 +61,6 @@ export class ChatSocketService {
   getMessageCount(): Observable<any> {
     return new Observable((observer) => {
       this.socket.on('getMessages', (data) => {
-        console.log("get msg", data);
         observer.next(data);
       });
     });

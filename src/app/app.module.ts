@@ -40,6 +40,7 @@ import { TermsConditionsComponent } from './components/terms-conditions/terms-co
 import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FeturedProductsComponent } from './components/fetured-products/fetured-products.component';
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -48,6 +48,13 @@ export class SharedService {
     return this.http.get(environment.baseUrl + url, { headers: headers })
   }
 
+  delete(url: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', '*')
+      .set('authorization', `Bearer ${this.authService.getToken()}`)
+    return this.http.delete(environment.baseUrl + url, { headers: headers })
+  }
+
   post(url: any, data: any): Observable<any> {
     const headers = new HttpHeaders()
       .set('content-type', 'application/x-www-form-urlencoded')
@@ -89,7 +96,7 @@ export class SharedService {
   };
 
   resetUserSignal() {
-    this.offer_unique_signal.set(0)
+    this.user_signal.set(0)
   }
 }
 
