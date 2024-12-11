@@ -85,7 +85,7 @@ export class PopularCategoriesComponent {
       formData.append('cat_image', this.uploadImg)
     } else {
       var apiUrl = `admin/updatePopularCategoryById`
-      formData.append('category_id', Number(this.categoryId).toString())
+      formData.append('id', Number(this.categoryId).toString())
       formData.append('cat_image', this.uploadImg)
       formData.append('category_id', form.value.cat_name)
     }
