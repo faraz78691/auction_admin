@@ -40,7 +40,8 @@
                                                       <a class="ct_chat_user ct_user_active mb-2"
                                                             (click)="openChat(item.user_id, item.user_name)">
                                                             <div class="flex-shrink-0 position-relative ct_img_44">
-                                                                  <img class="ct_img_44" src="assets/img/user.png"
+                                                                  <img class="ct_img_44"
+                                                                        [src]=" item.user_profile_image ? imgUrl + item.user_profile_image : 'assets/img/user.png'"
                                                                         alt="user img">
                                                                   <!-- <i class="ct_icon_user_white_44 fa-solid fa-user"></i> -->
                                                                   <!-- <span class="active"></span> -->
