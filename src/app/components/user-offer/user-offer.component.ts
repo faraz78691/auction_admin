@@ -4,6 +4,7 @@ import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment-timezone';
 import { Table } from 'primeng/table';
+import { environment } from '../../../environments/environment.development';
 @Component({
   selector: 'app-user-offer',
   templateUrl: './user-offer.component.html',
@@ -19,7 +20,10 @@ export class UserOfferComponent {
   offerUniqueId = computed(() => {
     return this.service.offer_unique_signal()
   })
+  images: any;
+  imgUrl: any
   constructor(private service: SharedService, private toastr: ToastrService, private route: ActivatedRoute) {
+    this.imgUrl = environment.imageUrl
   }
 
   ngOnInit() {
@@ -151,6 +155,17 @@ export class UserOfferComponent {
         // this.priceSuggested = res.prices/
       } else {
         // this.toastr.error(res.message)
+      }
+    })
+  }
+
+
+  viewImage(id: any) {
+    this.service.get(`admin/getAllOfferImagesById?id=${id}`).subscribe((res: any) => {
+      if (res.success) {
+        this.images = res.data
+      } else {
+        this.images = null
       }
     })
   }

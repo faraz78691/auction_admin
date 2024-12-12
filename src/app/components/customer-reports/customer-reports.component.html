@@ -1,0 +1,99 @@
+<div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+      <div>
+            <h3 class="ct_fs_32 ct_ff_roboto ct_fw_600 mb-3">Fees List</h3>
+            <ul class="d-flex align-items-center gap-3">
+                  <li>
+                        <h6 class="mb-0">Fees Management<i class="fa-solid fa-angle-right ms-2"></i>
+                        </h6>
+                  </li>
+                  <li>
+                        <h6 class="mb-0">Fees list<i class="fa-solid fa-angle-right ms-2"></i>
+                        </h6>
+                  </li>
+            </ul>
+            <!-- <p class="mb-0 ct_fw_600">Category List</p> -->
+      </div>
+</div>
+
+<div class="table-responsive ct_mt_40">
+      <div class="card ct_custom_table px-4">
+            <p-table #dt [value]="reportData" dataKey="id" [rows]="10" [rowHover]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+                  [globalFilterFields]="['offer_unique_id','title', 'seller_name']"
+                  [tableStyle]="{ 'min-width': '75rem' }">
+                  <ng-template pTemplate="caption">
+                        <div class="flex w-25 ms-auto mb-3 mt-3">
+                              <p-iconField iconPosition="right" class="ml-auto">
+                                    <p-inputIcon>
+                                          <i class="fa-solid fa-search ct_srch_top_center"></i>
+                                    </p-inputIcon>
+                                    <input pInputText type="text" class="form-control ct_input"
+                                          (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                          placeholder="Search keyword" />
+                              </p-iconField>
+                        </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                        <tr>
+                              <th style="width:10%" pSortableColumn="offer_unique_id">Offer Id <p-sortIcon
+                                          field="offer_unique_id" /></th>
+                              <th style="width:25%" pSortableColumn="offer_title">Offer Title
+                              </th>
+                              <th style="width:25%">Report By
+                              </th>
+                              <th style="width:25%">Report To
+                              <th style="width:25%">Report Title
+                              </th>
+                              <th style="width:25%">Comment</th>
+                              <th style="width:25%" pSortableColumn="report_date">Report date<p-sortIcon
+                                          field="report_date" /></th>
+                        </tr>
+
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                        <tr>
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See offer details"
+                                          (click)="service.redirectToOffer(customer.offer_unique_id)"> {{
+                                          customer.offer_unique_id
+                                          }}
+                                    </p>
+                              </td>
+
+                              <td>
+                                    {{ customer.offer_title }}
+                              </td>
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer?.reporter_id)"> {{
+                                          customer.reporter_name
+                                          }}
+                                    </p>
+                              </td>
+                              <td>
+                                    <p class="ct_blue_text mb-0" title="See user details"
+                                          (click)="service.redirectToUser(customer?.seller_id)"> {{ customer.seller_name
+                                          }}
+                                    </p>
+                              </td>
+
+                              <td>
+                                    {{ customer.report_title }}
+                              </td>
+                              <td>
+                                    {{ customer.report_description }}
+                              </td>
+
+                              <td>
+                                    {{ customer.report_date | date :'medium' :'UTC' }}
+                              </td>
+                        </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                        <tr>
+                              <td colspan="5">No customers found.</td>
+                        </tr>
+                  </ng-template>
+            </p-table>
+      </div>
+</div>

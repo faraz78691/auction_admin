@@ -1,0 +1,20 @@
+.images_gruop {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+}
+
+.image_div {
+      display: grid;
+      background: #f1f1f1;
+      border-radius: 10px;
+      padding: 5px;
+}
+
+.offer_img {
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+}
