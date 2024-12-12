@@ -23,6 +23,7 @@ import { PopularCategoriesComponent } from './components/popular-categories/popu
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
 import { FeturedProductsComponent } from './components/fetured-products/fetured-products.component';
+import { CustomerReportsComponent } from './components/customer-reports/customer-reports.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,9 @@ const routes: Routes = [
   },
   {
     path: 'fatured-products', component: FeturedProductsComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'customer-reports', component: CustomerReportsComponent, canActivate: [authGuard]
   },
 ];
 

@@ -40,6 +40,7 @@ import { TermsConditionsComponent } from './components/terms-conditions/terms-co
 import { SubHeadingComponent } from './components/terms-conditions/sub-heading/sub-heading.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FeturedProductsComponent } from './components/fetured-products/fetured-products.component';
+import { CustomerReportsComponent } from './components/customer-reports/customer-reports.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { FeturedProductsComponent } from './components/fetured-products/fetured-
     PopularCategoriesComponent,
     TermsConditionsComponent,
     SubHeadingComponent,
-    FeturedProductsComponent
+    FeturedProductsComponent,
+    CustomerReportsComponent
   ],
   imports: [
     BrowserModule,
