@@ -68,9 +68,9 @@ export class PopularCategoriesComponent {
   };
 
   onSubmit(form: any, formType: number) {
-    if (form.value.cat_name.trim().length == 0) {
-      return
-    }
+    // if (form.value.cat_name.trim().length == 0) {
+    //   return
+    // }
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {
